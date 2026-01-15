@@ -14,7 +14,7 @@ java {
 }
 
 application {
-    mainClass.set("your.package.Main")
+    mainClass.set("it.unibo.roguekong.Main")
 }
 
 tasks.jar {
