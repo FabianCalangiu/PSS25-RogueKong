@@ -33,7 +33,11 @@ public class Position {
     }
 
     @Override
-    public boolean equals(Position other) {
+    public boolean equals(Object other) {
+        if(this == other) return true;
 
+        if(!(other instanceof Position otherPosition)) return false;
+
+        return Double.compare(this.x, otherPosition.getX()) == 0 && Double.compare(this.y, otherPosition.getY()) == 0;
     }
 }
