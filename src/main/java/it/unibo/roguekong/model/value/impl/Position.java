@@ -31,4 +31,9 @@ public class Position {
     public double getY() {
         return this.y;
     }
+
+    @Override
+    public boolean equals(Position other) {
+
+    }
 }
