@@ -1,5 +1,7 @@
 package it.unibo.roguekong.model.entity;
 
+import it.unibo.roguekong.model.value.Position;
+
 public interface Platform {
     public Position getPosition();
 

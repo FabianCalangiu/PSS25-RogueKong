@@ -1,5 +1,8 @@
 package it.unibo.roguekong.model.entity;
 
+import it.unibo.roguekong.model.value.Position;
+import it.unibo.roguekong.model.value.Velocity;
+
 import java.util.List;
 
 /**
