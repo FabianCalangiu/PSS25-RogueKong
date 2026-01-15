@@ -1,5 +1,6 @@
 package it.unibo.roguekong.model.entity;
 
+import it.unibo.roguekong.model.value.*;
 /**
  * This interface is going to represent the game enemies
  */
