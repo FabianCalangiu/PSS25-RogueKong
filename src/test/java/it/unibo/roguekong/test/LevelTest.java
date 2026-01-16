@@ -79,4 +79,11 @@ public class LevelTest {
         this.level.update();
         assertFalse(level.isLevelComplete());
     }
+
+    @Test
+    void checkIfLevelIsNotCompleteAfterTheReset() {
+        this.level.init();
+        assertFalse(level.isLevelComplete());
+        assertEquals(this.player.getPosition(), this.level.getSpawnPoint());
+    }
 }
