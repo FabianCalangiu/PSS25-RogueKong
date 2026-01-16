@@ -47,7 +47,7 @@ public class LevelImpl implements Level {
     }
 
     @Override
-    public Position getFinalPoint() {
+    public Position getEndPoint() {
         return this.endPoint;
     }
 

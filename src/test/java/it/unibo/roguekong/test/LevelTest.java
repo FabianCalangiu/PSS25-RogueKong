@@ -72,4 +72,11 @@ public class LevelTest {
         this.level.update();
         assertTrue(level.isLevelComplete());
     }
+
+    @Test
+    void checkIfLevelIsNotCompleteIfPlayerIsNotAtTheStart() {
+        this.player.setPosition(new PositionImpl(5, 5));
+        this.level.update();
+        assertFalse(level.isLevelComplete());
+    }
 }

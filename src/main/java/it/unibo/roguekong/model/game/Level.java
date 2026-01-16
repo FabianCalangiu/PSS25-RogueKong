@@ -13,7 +13,7 @@ public interface Level {
     Player getPlayer();
 
     Position getSpawnPoint();
-    Position getFinalPoint();
+    Position getEndPoint();
     boolean isLevelComplete();
     void update();
 
