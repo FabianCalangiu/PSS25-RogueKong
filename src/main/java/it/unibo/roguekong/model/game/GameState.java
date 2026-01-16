@@ -8,6 +8,6 @@ public interface GameState {
     void pauseGame();
     void resumeGame();
     void gameOver();
-    void backToMenu();
+    void goToMenu();
     GameStatus getState();
 }
