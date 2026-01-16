@@ -5,12 +5,34 @@ import it.unibo.roguekong.model.game.GameState;
 public class GameStateImpl implements GameState {
     private GameStatus status = GameStatus.MENU;
 
-    @Override
-    public void changeState(GameStatus status) {
-        this.status = status;
+    public void startGame(){
+        this.status = GameStatus.PLAYING;
     }
 
-    public GameStatus getStatus(){
+    public void pauseGame(){
+        if(this.status == GameStatus.PLAYING){
+            this.status = GameStatus.PAUSED;
+        }
+    }
+
+    public void resumeGame(){
+        if(this.status == GameStatus.PAUSED){
+            this.status = GameStatus.PLAYING;
+        }
+    }
+
+    public void gameOver(){
+        if(this.status == GameStatus.PLAYING){
+            this.status = GameStatus.GAME_OVER;
+        }
+    }
+
+    public void goToMenu(){
+        this.status = GameStatus.MENU;
+    }
+
+    @Override
+    public GameStatus getState(){
         return this.status;
     }
 }
