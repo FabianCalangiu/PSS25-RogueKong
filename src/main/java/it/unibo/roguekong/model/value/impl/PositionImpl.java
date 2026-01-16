@@ -1,19 +1,21 @@
 package it.unibo.roguekong.model.value.impl;
 
-public class Position {
+import it.unibo.roguekong.model.value.Position;
+
+public class PositionImpl {
 
     private double x=0;
     private double y=0;
 
-    public Position(){
+    public PositionImpl(){
         setX(0);
         setY(0);
     }
-    public Position(double x, double y){
+    public PositionImpl(double x, double y){
         setX(x);
         setY(y);
     }
-    public Position(Position position){
+    public PositionImpl(Position position){
         setX(position.getX());
         setY(position.getY());
     }
