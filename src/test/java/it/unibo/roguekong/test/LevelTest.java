@@ -7,6 +7,7 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.Velocity;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -55,6 +56,6 @@ public class LevelTest {
             }
         };
 
-        //this.spawnPoint = new Position(0, 0);
+        this.spawnPoint = new PositionImpl(0, 0);
     }
 }

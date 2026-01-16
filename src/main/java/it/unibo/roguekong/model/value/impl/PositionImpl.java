@@ -2,7 +2,7 @@ package it.unibo.roguekong.model.value.impl;
 
 import it.unibo.roguekong.model.value.Position;
 
-public class PositionImpl {
+public class PositionImpl implements Position {
 
     private double x=0;
     private double y=0;
@@ -25,6 +25,11 @@ public class PositionImpl {
     }
     public void setY(double y){
         this.y = y;
+    }
+
+    @Override
+    public Position getPosition() {
+        return this;
     }
 
     public double getX(){
