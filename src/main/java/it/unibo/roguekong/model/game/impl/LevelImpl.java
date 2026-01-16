@@ -51,11 +51,11 @@ public class LevelImpl implements Level {
         return this.endPoint;
     }
 
-    boolean isLevelComplete() {
+    public boolean isLevelComplete() {
         return this.levelState;
     }
 
-    void checkLevel() {
+    public void checkLevel() {
         if(this.player.getPosition().equals(this.endPoint)){
             this.levelState = true;
         }
