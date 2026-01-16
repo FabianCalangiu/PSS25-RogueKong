@@ -1,18 +1,19 @@
 package it.unibo.roguekong.model.value.impl;
 
-public class Velocity {
+import it.unibo.roguekong.model.value.Velocity;
+public abstract class VelocityImpl implements Velocity {
     private double velocityX=0;
     private double velocityY=0;
 
-    public Velocity(double x, double y){
+    public VelocityImpl(double x, double y){
         setVelocityX(x);
         setVelocityY(y);
     }
-    public Velocity(){
+    public VelocityImpl(){
         setVelocityX(0);
         setVelocityY(0);
     }
-    public Velocity(Velocity velocity){
+    public VelocityImpl(Velocity velocity){
         setVelocityX(velocity.getVelocityX());
         setVelocityY(velocity.getVelocityY());
     }
@@ -23,9 +24,13 @@ public class Velocity {
     private void setVelocityY(double velocityY){
         this.velocityY = velocityY;
     }
+
+    @Override
     public double getVelocityX(){
         return velocityX;
     }
+
+    @Override
     public double getVelocityY(){
         return velocityY;
     }
