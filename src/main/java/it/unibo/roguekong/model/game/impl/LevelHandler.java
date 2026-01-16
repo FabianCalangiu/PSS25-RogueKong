@@ -7,7 +7,7 @@ import java.util.List;
 public class LevelHandler {
     private final int numberOfLevels = 5;
 
-    private List<Level> levels;
+    private final List<Level> levels;
     private int currentLevel;
 
     public LevelHandler(List<Level> levels) {
