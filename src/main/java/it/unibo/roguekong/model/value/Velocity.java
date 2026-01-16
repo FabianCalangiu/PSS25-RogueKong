@@ -1,5 +1,6 @@
 package it.unibo.roguekong.model.value;
 
 public interface Velocity {
-    double getVelocity();
+    double getVelocityX();
+    double getVelocityY();
 }

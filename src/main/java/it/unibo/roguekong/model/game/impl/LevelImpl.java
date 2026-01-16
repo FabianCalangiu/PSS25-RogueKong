@@ -10,45 +10,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LevelImpl implements Level {
-    private final List<Enemy> enemies;
-    private final List<GamePlatform> platforms;
-    private final Position spawnPoint;
-    private final Position endPoint;
-    private final Player player;
+    private final List<Enemy> ENEMIES;
+    private final List<GamePlatform> PLATFORMS;
+    private final Position SPAWN_POSITION;
+    private final Position END_POINT;
+    private final Player PLAYER;
     private boolean isComplete;
 
     public LevelImpl(final Position spawnPoint, final Position endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final Player player) {
-        this.spawnPoint = spawnPoint;
-        this.endPoint = endPoint;
-        this.platforms = new ArrayList<>(platforms);
-        this.enemies = new ArrayList<>(enemies);
-        this.player = player;
+        this.SPAWN_POSITION = spawnPoint;
+        this.END_POINT = endPoint;
+        this.PLATFORMS = new ArrayList<>(platforms);
+        this.ENEMIES = new ArrayList<>(enemies);
+        this.PLAYER = player;
         this.isComplete = false;
     }
 
     @Override
     public List<GamePlatform> getPlatforms() {
-        return List.copyOf(platforms);
+        return List.copyOf(PLATFORMS);
     }
 
     @Override
     public List<Enemy> getEnemies() {
-        return List.copyOf(enemies);
+        return List.copyOf(ENEMIES);
     }
 
     @Override
     public Player getPlayer() {
-        return this.player;
+        return this.PLAYER;
     }
 
     @Override
     public Position getSpawnPoint() {
-        return this.spawnPoint;
+        return this.SPAWN_POSITION;
     }
 
     @Override
-    public Position getFinalPoint() {
-        return this.endPoint;
+    public Position getEndPoint() {
+        return this.END_POINT;
     }
 
     @Override
@@ -64,11 +64,11 @@ public class LevelImpl implements Level {
     @Override
     public void init() {
         this.isComplete = false;
-        this.player.setPosition(spawnPoint);
+        this.PLAYER.setPosition(SPAWN_POSITION);
     }
 
     private void checkLevel() {
-        if(this.player.getPosition().equals(this.endPoint)){
+        if(this.PLAYER.getPosition().equals(this.END_POINT)){
             this.isComplete = true;
         }
     }
