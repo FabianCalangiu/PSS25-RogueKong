@@ -15,7 +15,7 @@ public class LevelImpl implements Level {
     private final Position spawnPoint;
     private final Position endPoint;
     private final Player player;
-    private boolean levelState;
+    private boolean isComplete;
 
     public LevelImpl(final Position spawnPoint, final Position endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final Player player) {
         this.spawnPoint = spawnPoint;
@@ -23,7 +23,7 @@ public class LevelImpl implements Level {
         this.platforms = new ArrayList<>(platforms);
         this.enemies = new ArrayList<>(enemies);
         this.player = player;
-        this.levelState = false;
+        this.isComplete = false;
     }
 
     @Override
@@ -51,13 +51,25 @@ public class LevelImpl implements Level {
         return this.endPoint;
     }
 
+    @Override
     public boolean isLevelComplete() {
-        return this.levelState;
+        return this.isComplete;
     }
 
-    public void checkLevel() {
+    @Override
+    public void update() {
+        this.checkLevel();
+    }
+
+    @Override
+    public void init() {
+        this.isComplete = false;
+        this.player.setPosition(spawnPoint);
+    }
+
+    private void checkLevel() {
         if(this.player.getPosition().equals(this.endPoint)){
-            this.levelState = true;
+            this.isComplete = true;
         }
     }
 }

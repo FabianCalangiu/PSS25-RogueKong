@@ -18,4 +18,6 @@ public interface Player{
     public boolean isMoving();
 
     public List<PowerUp> getActivePowerUps();
+
+    void setPosition(Position spawnPoint);
 }
