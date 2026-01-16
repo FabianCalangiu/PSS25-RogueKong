@@ -5,13 +5,13 @@ import it.unibo.roguekong.model.game.Level;
 import java.util.List;
 
 public class LevelHandler {
-    private final int numberOfLevels = 5;
+    private static final int TOTAL_NUMBERS_OF_LEVEL = 5;
 
-    private final List<Level> levels;
+    private final List<Level> LEVELS;
     private int currentLevel;
 
     public LevelHandler(List<Level> levels) {
-        this.levels = levels;
+        this.LEVELS = levels;
         this.currentLevel = 0;
     }
 
@@ -19,14 +19,14 @@ public class LevelHandler {
      * Method that returns the current level
      */
     public Level getCurrentLevel() {
-        return levels.get(this.currentLevel);
+        return LEVELS.get(this.currentLevel);
     }
 
     /**
      *Methods that check if there is another level after the current one
      */
     public boolean isThereAnotherLevel() {
-        return this.currentLevel < this.levels.size() - 1;
+        return this.currentLevel < this.LEVELS.size() - 1;
     }
 
     /**
