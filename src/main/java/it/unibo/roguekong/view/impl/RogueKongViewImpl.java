@@ -2,6 +2,8 @@ package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class RogueKongViewImpl implements RogueKongView {
@@ -30,6 +32,20 @@ public class RogueKongViewImpl implements RogueKongView {
     }
 
     /*
-     * ------------ TEST -------------- Ignore
+     * ------------ Sample methods --------------
      */
+
+    public void addTestImage(){
+        Image img = new Image(
+                getClass().getResourceAsStream("/images/sample1.jpg")
+        );
+
+        ImageView iv = new ImageView(img);
+        iv.setX(100);
+        iv.setY(100);
+        iv.setFitWidth(64);
+        iv.setFitHeight(64);
+
+        root.getChildren().add(iv);
+    }
 }
