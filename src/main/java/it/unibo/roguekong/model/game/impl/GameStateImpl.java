@@ -13,7 +13,6 @@ public class GameStateImpl implements GameState {
         if(this.status == GameStatus.PLAYING){
             this.status = GameStatus.PAUSED;
         }
-        System.out.println(status);
     }
 
     public void resumeGame(){
