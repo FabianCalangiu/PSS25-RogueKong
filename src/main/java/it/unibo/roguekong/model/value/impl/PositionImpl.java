@@ -27,11 +27,6 @@ public class PositionImpl implements Position {
         this.y = y;
     }
 
-    @Override
-    public Position getPosition() {
-        return this;
-    }
-
     public double getX(){
         return this.x;
     }

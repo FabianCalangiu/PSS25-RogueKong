@@ -9,7 +9,7 @@ import it.unibo.roguekong.model.value.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelImpl implements Level {
+public class LevelModel implements Level {
     private final List<Enemy> ENEMIES;
     private final List<GamePlatform> PLATFORMS;
     private final Position SPAWN_POSITION;
@@ -17,7 +17,7 @@ public class LevelImpl implements Level {
     private final Player PLAYER;
     private boolean isComplete;
 
-    public LevelImpl(final Position spawnPoint, final Position endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final Player player) {
+    public LevelModel(final Position spawnPoint, final Position endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final Player player) {
         this.SPAWN_POSITION = spawnPoint;
         this.END_POINT = endPoint;
         this.PLATFORMS = new ArrayList<>(platforms);

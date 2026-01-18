@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.Level;
-import it.unibo.roguekong.model.game.impl.LevelImpl;
+import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.Velocity;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -58,7 +58,7 @@ public class LevelTest {
 
         this.spawnPoint = new PositionImpl(0, 0);
         this.endPoint = new PositionImpl(10, 10);
-        this.level = new LevelImpl(this.spawnPoint, this.endPoint, List.of(), List.of(), player);
+        this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), List.of(), player);
     }
 
     @Test
