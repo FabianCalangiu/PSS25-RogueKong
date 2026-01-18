@@ -10,13 +10,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        GameView view = new GameView();
-        view.addTestImage();
+        MenuView menuView = new MenuView();
+        GameView gameView = new GameView();
 
-        MenuView menu = new MenuView();
+        menuView.setOnStart(() -> {
+            stage.setScene(gameView.getScene());
+        });
 
         stage.setTitle("RogueKong");
-        stage.setScene(menu.getScene());
+        stage.setScene(menuView.getScene());
         stage.show();
     }
 

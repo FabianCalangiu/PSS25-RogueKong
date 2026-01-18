@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 
 public class MenuView {
     private final Scene scene;
+    private Runnable onStart, onScore, onExit;
 
     public MenuView(){
         /*
@@ -25,6 +26,10 @@ public class MenuView {
         Button score = new Button("Score");
         Button exit = new Button("Exit");
 
+        start.setOnAction(e -> runIfNotNull(onStart));
+        score.setOnAction(e -> runIfNotNull(onScore));
+        exit.setOnAction(e -> runIfNotNull(onExit));
+
         root.getChildren().addAll(start, score, exit);
         this.scene = new Scene(root, 800, 600);
         this.scene.getStylesheets().add(
@@ -34,5 +39,26 @@ public class MenuView {
 
     public Scene getScene() {
         return scene;
+    }
+
+
+    /*
+     * Reusable methods to set events
+     * They will run in case they are not null, which is the default value
+     */
+    public void setOnStart(Runnable r){
+        this.onStart = r;
+    }
+
+    public void setOnScore(Runnable r){
+        this.onScore = r;
+    }
+
+    public void setOnExit(Runnable r){
+        this.onExit = r;
+    }
+
+    private void runIfNotNull(Runnable r) {
+        if (r != null) r.run();
     }
 }

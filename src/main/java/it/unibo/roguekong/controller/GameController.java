@@ -2,6 +2,7 @@ package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyCode;
 
 /*
  * This is the actual gameloop.
@@ -13,6 +14,12 @@ public class GameController {
     private AnimationTimer gameLoop;
 
     public GameController(GameView view){
+        view.getScene().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ESCAPE) {
+                pause();
+            }
+        });
+
         this.gameLoop = new AnimationTimer(){
             @Override
             public void handle(long now){
@@ -29,6 +36,8 @@ public class GameController {
     public void stop(){
         gameLoop.stop();
     }
+
+    private
 
     private void update(){
         /*
