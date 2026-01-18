@@ -1,7 +1,7 @@
 package it.unibo.roguekong.model.value.impl;
 
 import it.unibo.roguekong.model.value.Velocity;
-public abstract class VelocityImpl implements Velocity {
+public class VelocityImpl implements Velocity {
     private double velocityX=0;
     private double velocityY=0;
 

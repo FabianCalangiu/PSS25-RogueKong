@@ -1,65 +1,103 @@
 package it.unibo.roguekong.model.entity.impl;
 
 import it.unibo.roguekong.model.entity.Enemy;
-import it.unibo.roguekong.model.value.Position;
-import it.unibo.roguekong.model.value.Velocity;
+import it.unibo.roguekong.model.entity.Player;
+import it.unibo.roguekong.model.value.impl.*;
 
 public class EnemyImpl implements Enemy {
-    private double x=0;
-    private double y=0;
+    private PositionImpl position = new PositionImpl();
+    private VelocityImpl velocity = new VelocityImpl();
+    private final LivesImpl lives = new LivesImpl();
+    private boolean isMovable;
+    private boolean isDead;
 
     public EnemyImpl(){
-        setX(0);
-        setY(0);
+        setIsMovable(false);
+        setIsDead(false);
     }
 
-    public EnemyImpl(double x, double y){
-        setX(x);
-        setY(y);
+    public EnemyImpl(PositionImpl position, VelocityImpl velocity, int lives){
+        setPosition(position);
+        setVelocity(velocity);
+        setLives(lives);
+        setIsMovable(true);
+        setIsDead(false);
     }
 
-    public void traslateLinearTo(double x, double y){
-
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    private void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    private void setY(double y) {
-        this.y = y;
+    public EnemyImpl(PositionImpl position){
+        setPosition(position);
+        setVelocity(new VelocityImpl());
+        setIsMovable(false);
+        setIsDead(false);
     }
 
     @Override
-    public Position getPosition() {
-        return null;
+    public PositionImpl getPosition() {
+        return this.position;
     }
 
     @Override
-    public Velocity getVelocity() {
-        return null;
+    public VelocityImpl getVelocity() {
+        if(isDead()){
+            return null;
+        }
+        return this.velocity;
     }
 
     @Override
-    public void hitPlayer() {
-
+    public boolean hitPlayer(PositionImpl player) {
+        return player.equals(this.position);
     }
 
     @Override
     public boolean isMovable() {
-        return false;
+        if(isDead()){
+            return false;
+        }
+        return this.isMovable;
+    }
+
+    @Override
+    public void setIsDead(boolean isDead){
+        if(getLives() <= 0){
+            this.isDead = true;
+        }
+        this.isDead = isDead;
     }
 
     @Override
     public boolean isDead() {
-        return false;
+        return this.isDead;
+    }
+
+    @Override
+    public int getLives(){
+        return this.lives.getLives();
+    }
+
+    @Override
+    public void setIsMovable(boolean isMovable){
+        if(isDead()){
+            this.isMovable = false;
+        }
+        this.isMovable = isMovable;
+    }
+
+    private void setVelocity(VelocityImpl velocity){
+        if(!isMovable()){
+            this.velocity = new VelocityImpl();
+        }
+        this.velocity = velocity;
+    }
+
+    private void setLives(int lives){
+        if(lives < 0) {
+            this.lives.setLivesByValue(0);
+        }
+        this.lives.setLivesByValue(lives);
+    }
+
+    private void setPosition(PositionImpl position){
+        this.position = position;
     }
 }

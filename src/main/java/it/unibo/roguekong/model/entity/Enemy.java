@@ -1,6 +1,8 @@
 package it.unibo.roguekong.model.entity;
 
 import it.unibo.roguekong.model.value.*;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
+
 /**
  * This interface is going to represent the game enemies
  */
@@ -10,9 +12,15 @@ public interface Enemy {
 
     public Velocity getVelocity();
 
-    public void hitPlayer();
+    public boolean hitPlayer(PositionImpl player);
 
     public boolean isMovable();
 
+    public void setIsDead(boolean isDead);
+
+    public int getLives();
+
     public boolean isDead();
+
+    public void setIsMovable(boolean isMovable);
 }

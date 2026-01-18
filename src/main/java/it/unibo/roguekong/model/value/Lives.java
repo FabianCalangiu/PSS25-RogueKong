@@ -1,9 +1,7 @@
 package it.unibo.roguekong.model.value;
 
 public interface Lives {
-    int getValue();
+    public int getLives();
 
-    void decrementLives();
-    void incrementLives();
-    void setLivesByValue();
+    public void setLivesByValue(int lives);
 }
