@@ -1,7 +1,7 @@
 package it.unibo.roguekong;
 
 import it.unibo.roguekong.view.impl.MenuView;
-import it.unibo.roguekong.view.impl.RogueKongViewImpl;
+import it.unibo.roguekong.view.impl.GameView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        RogueKongViewImpl view = new RogueKongViewImpl();
+        GameView view = new GameView();
         view.addTestImage();
 
         MenuView menu = new MenuView();

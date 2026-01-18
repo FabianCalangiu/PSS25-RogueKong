@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class RogueKongViewImpl implements RogueKongView {
+public class GameView implements RogueKongView {
     /*
      * 1. This implementation defines a container (Pane) and a Scene where
      * all its contents are rendered
@@ -17,7 +17,7 @@ public class RogueKongViewImpl implements RogueKongView {
     private final Pane root;
     private final Scene scene;
 
-    public RogueKongViewImpl(){
+    public GameView(){
         this.root = new Pane();
         this.scene = new Scene(root, 800, 600);
     }
