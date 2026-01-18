@@ -27,6 +27,9 @@ public class MenuView {
 
         root.getChildren().addAll(start, score, exit);
         this.scene = new Scene(root, 800, 600);
+        this.scene.getStylesheets().add(
+                getClass().getResource("/css/menu.css").toExternalForm()
+        );
     }
 
     public Scene getScene() {
