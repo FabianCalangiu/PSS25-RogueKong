@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.value.Position;
@@ -15,47 +16,14 @@ import org.junit.jupiter.api.BeforeEach;
 import java.util.List;
 
 public class LevelTest {
-    Level level;
-    Position spawnPoint;
-    Position endPoint;
-    Player player;
+    LevelModel level;
+    PositionImpl spawnPoint;
+    PositionImpl endPoint;
+    PlayerImpl player;
 
     @BeforeEach
     void setUp() {
-        this.player = new Player() {
-            Position position = new PositionImpl(0, 0);
-
-            @Override
-            public Position getPosition() {
-                return this.position;
-            }
-
-            @Override
-            public Velocity getVelocity() {
-                return null;
-            }
-
-            @Override
-            public boolean isMidAir() {
-                return false;
-            }
-
-            @Override
-            public boolean isMoving() {
-                return false;
-            }
-
-            @Override
-            public List<PowerUp> getActivePowerUps() {
-                return List.of();
-            }
-
-            @Override
-            public void setPosition(Position spawnPoint) {
-                this.position = spawnPoint;
-            }
-        };
-
+        this.player = new PlayerImpl();
         this.spawnPoint = new PositionImpl(0, 0);
         this.endPoint = new PositionImpl(10, 10);
         this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), List.of(), player);
@@ -68,14 +36,14 @@ public class LevelTest {
 
     @Test
     void checkIfLevelIsCompleteAtEnd() {
-        this.player.setPosition(endPoint);
+        this.player.setXandY(endPoint);
         this.level.update();
         assertTrue(level.isLevelComplete());
     }
 
     @Test
     void checkIfLevelIsNotCompleteIfPlayerIsNotAtTheStart() {
-        this.player.setPosition(new PositionImpl(5, 5));
+        this.player.setXandY(spawnPoint);
         this.level.update();
         assertFalse(level.isLevelComplete());
     }

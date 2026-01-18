@@ -8,12 +8,11 @@ public class PositionImpl implements Position {
     private double y=0;
 
     public PositionImpl(){
-        setX(0);
-        setY(0);
+        this(0, 0);
     }
     public PositionImpl(double x, double y){
-        setX(x);
-        setY(y);
+        this.x = x;
+        this.y = y;
     }
     public PositionImpl(Position position){
         setX(position.getX());

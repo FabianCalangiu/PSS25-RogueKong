@@ -1,10 +1,12 @@
 package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.entity.Enemy;
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.GamePlatform;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.value.Position;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +14,12 @@ import java.util.List;
 public class LevelModel implements Level {
     private final List<Enemy> ENEMIES;
     private final List<GamePlatform> PLATFORMS;
-    private final Position SPAWN_POSITION;
-    private final Position END_POINT;
-    private final Player PLAYER;
+    private final PositionImpl SPAWN_POSITION;
+    private final PositionImpl END_POINT;
+    private final PlayerImpl PLAYER;
     private boolean isComplete;
 
-    public LevelModel(final Position spawnPoint, final Position endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final Player player) {
+    public LevelModel(final PositionImpl spawnPoint, final PositionImpl endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final PlayerImpl player) {
         this.SPAWN_POSITION = spawnPoint;
         this.END_POINT = endPoint;
         this.PLATFORMS = new ArrayList<>(platforms);
@@ -64,7 +66,7 @@ public class LevelModel implements Level {
     @Override
     public void init() {
         this.isComplete = false;
-        this.PLAYER.setPosition(SPAWN_POSITION);
+        this.PLAYER.setXandY(SPAWN_POSITION);
     }
 
     private void checkLevel() {

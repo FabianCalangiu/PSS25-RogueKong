@@ -85,7 +85,7 @@ public class PlayerImpl implements Player {
         this.jump = jump;
     }
 
-    private void setPosition(double x, double y) {
+    public void setPosition(double x, double y) {
 
         PositionImpl pos = new PositionImpl(position.getX(), position.getY());
 
@@ -109,6 +109,11 @@ public class PlayerImpl implements Player {
 
         this.position = pos;
     }
+
+    public void setXandY(PositionImpl position) {
+        this.position = position;
+    }
+
 
     private void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;
