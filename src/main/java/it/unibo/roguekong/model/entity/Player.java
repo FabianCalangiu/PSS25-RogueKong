@@ -15,9 +15,11 @@ public interface Player{
 
     public boolean isMidAir();
 
-    public boolean isMoving();
-
     public List<PowerUp> getActivePowerUps();
 
-    void setPosition(Position spawnPoint);
+    public boolean canJump();
+    public boolean canMoveRight();
+    public boolean canMoveLeft();
+    public boolean canMoveUp();
+    public void addPowerUp(PowerUp powerUp);
 }
