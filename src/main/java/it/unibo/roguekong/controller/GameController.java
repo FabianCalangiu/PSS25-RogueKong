@@ -24,7 +24,8 @@ public class GameController {
         /*
          * Insert input handles from here ->>
          */
-        view.getScene().setOnKeyPressed(e -> {
+        view.getRoot().setOnKeyPressed(e -> {
+            System.out.println("ESC");
             if (e.getCode() == KeyCode.ESCAPE) {
                 if (gameState.getState() == GameStatus.PLAYING) {
                     gameState.pauseGame();
@@ -50,6 +51,7 @@ public class GameController {
     }
 
     public void start(){
+        gameState.startGame();
         gameLoop.start();
     }
 
@@ -58,10 +60,12 @@ public class GameController {
     }
 
     private void pause(){
+        gameState.pauseGame();
         gameLoop.stop();
+        if(onPause != null) onPause.run();
     }
 
-    private void resume(){
+    public void resume(){
         gameState.resumeGame();
         gameLoop.start();
     }
@@ -84,6 +88,7 @@ public class GameController {
         /*
          * Add game logic here
          */
+        System.out.println(gameState.getState());
     }
 
     private void render(){
