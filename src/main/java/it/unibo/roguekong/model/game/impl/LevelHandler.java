@@ -36,7 +36,7 @@ public class LevelHandler {
         this.currentLevel = 0;
     }
 
-    public void nextLevel(){
+    /*public void nextLevel(){
         Level level = getCurrentLevel();
 
         if(level.isLevelComplete() && isThereAnotherLevel()){
@@ -44,5 +44,5 @@ public class LevelHandler {
             Level newLevel = getCurrentLevel();
             newLevel.init();
         }
-    }
+    }*/
 }

@@ -8,6 +8,14 @@ import javafx.scene.layout.VBox;
 
 public class MenuView {
     private final Scene scene;
+
+    /*
+     * Runnable is an interface defined as follows:
+     * interface Runnable{
+     *  void run();
+     * }
+     * It simply executes a series of user written instructions
+     */
     private Runnable onStart, onScore, onExit;
 
     public MenuView(){

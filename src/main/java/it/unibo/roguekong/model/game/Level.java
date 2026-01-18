@@ -16,5 +16,5 @@ public interface Level {
     boolean isLevelComplete();
     void update();
 
-    void init();
+    // void init();
 }
