@@ -27,7 +27,6 @@ public class RogueKongViewImpl implements RogueKongView {
         return scene;
     }
 
-    @Override
     public Pane getRoot(){
         return root;
     }
@@ -54,6 +53,12 @@ public class RogueKongViewImpl implements RogueKongView {
                 TILE_SIZE
         ));
 
+        System.out.println(
+                "Image size: " + tileset.getWidth() + " x " + tileset.getHeight()
+        );
+
+        tile.setFitWidth(TILE_SIZE);
+        tile.setFitHeight(TILE_SIZE);
         tile.setX(50);
         tile.setY(50);
 
