@@ -6,10 +6,6 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Map {
-
-    //private Position spawnPosition;
-    //private Position endPosition;
-
     Tile[] tile;
     int [][] gameMap;
 }

@@ -10,12 +10,10 @@ public class Tile implements GamePlatform {
 
     private final BufferedImage image;
     private final boolean isCollidable;
-    private final boolean canHit;
 
-    public Tile(BufferedImage image, boolean isCollidable, boolean canHit) {
+    public Tile(BufferedImage image, boolean isCollidable) {
         this.image = image;
         this.isCollidable = isCollidable;
-        this.canHit = canHit;
     }
 
     @Override
