@@ -4,7 +4,7 @@ import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 
 public class IncreasePlayerLives implements PowerUp {
-    private final static int NUMBEROFLIVES = 1;
+    private final static int NUMBER_OF_LIVES = 1;
 
     @Override
     public void applyEffect(Player player){
