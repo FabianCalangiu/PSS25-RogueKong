@@ -1,6 +1,7 @@
 package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.view.RogueKongView;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,16 +37,26 @@ public class RogueKongViewImpl implements RogueKongView {
      */
 
     public void addTestImage(){
-        Image img = new Image(
-                getClass().getResourceAsStream("/images/sample1.jpg")
+        Image tileset = new Image(
+                getClass().getResourceAsStream("/assets/sprites/world_tileset.png")
         );
 
-        ImageView iv = new ImageView(img);
-        iv.setX(100);
-        iv.setY(100);
-        iv.setFitWidth(64);
-        iv.setFitHeight(64);
+        ImageView tile = new ImageView(tileset);
 
-        root.getChildren().add(iv);
+        int TILE_SIZE = 16;
+        int col = 0;
+        int row = 0;
+
+        tile.setViewport(new Rectangle2D(
+                col * TILE_SIZE,
+                row * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE
+        ));
+
+        tile.setX(50);
+        tile.setY(50);
+
+        root.getChildren().add(tile);
     }
 }
