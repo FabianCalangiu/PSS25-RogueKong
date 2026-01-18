@@ -28,4 +28,8 @@ public class RogueKongViewImpl implements RogueKongView {
     public Pane getRoot(){
         return root;
     }
+
+    /*
+     * ------------ TEST -------------- Ignore
+     */
 }
