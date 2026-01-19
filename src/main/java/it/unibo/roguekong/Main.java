@@ -10,6 +10,7 @@ import it.unibo.roguekong.view.impl.GameView;
 import it.unibo.roguekong.view.impl.MenuView;
 import it.unibo.roguekong.view.impl.PauseView;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -37,6 +38,10 @@ public class Main extends Application {
             controller.start();
             stage.setScene(gameView.getScene());
             gameView.getRoot().requestFocus();
+        });
+
+        menuView.setOnExit(() -> {
+            Platform.exit();
         });
 
         controller.setOnPause(() -> {
