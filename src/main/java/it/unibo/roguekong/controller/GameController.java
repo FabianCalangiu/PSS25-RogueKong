@@ -24,6 +24,10 @@ public class GameController {
         /*
          * Insert inputs from here (They're outside the main loop because its EVENT DRIVEN) ->>
          */
+
+        /*
+         * Press ESC to open Pause Menu while playing
+         */
         view.getRoot().setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 if (gameState.getState() == GameStatus.PLAYING) {

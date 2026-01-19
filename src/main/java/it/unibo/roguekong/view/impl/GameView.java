@@ -1,5 +1,6 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.model.game.impl.Map;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -33,6 +34,10 @@ public class GameView implements RogueKongView {
 
     public Pane getRoot(){
         return root;
+    }
+
+    public void loadMap(Map map){
+
     }
 
     /*
