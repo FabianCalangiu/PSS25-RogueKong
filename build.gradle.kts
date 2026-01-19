@@ -29,6 +29,12 @@ application {
     mainClass.set("it.unibo.roguekong.Main")
 }
 
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "it.unibo.roguekong.Main"
+    }
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
