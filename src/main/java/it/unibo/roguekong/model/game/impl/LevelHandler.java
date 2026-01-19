@@ -5,7 +5,6 @@ import it.unibo.roguekong.model.game.Level;
 import java.util.List;
 
 public class LevelHandler {
-    private static final int TOTAL_NUMBERS_OF_LEVEL = 5;
 
     private final List<Level> LEVELS;
     private int currentLevel;
@@ -34,9 +33,11 @@ public class LevelHandler {
      */
     public void reset(){
         this.currentLevel = 0;
+        Level newLevel = getCurrentLevel();
+        newLevel.init();
     }
 
-    /*public void nextLevel(){
+    public void nextLevel(){
         Level level = getCurrentLevel();
 
         if(level.isLevelComplete() && isThereAnotherLevel()){
@@ -44,5 +45,5 @@ public class LevelHandler {
             Level newLevel = getCurrentLevel();
             newLevel.init();
         }
-    }*/
+    }
 }
