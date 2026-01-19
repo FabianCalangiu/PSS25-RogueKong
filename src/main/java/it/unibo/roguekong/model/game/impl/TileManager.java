@@ -11,7 +11,8 @@ public class TileManager {
         this.tileSet = new Tile[numTiles];
         this.gameMap = new int[height][width];
 
-        Tile tile1 = new Tile("/assets/sprites/wall.png", true, TileType.LADDER);
+        Tile tile1 = new Tile("/assets/sprites/wall.png", true, TileType.PLATFORM);
+        Tile tile2 = new Tile("/assets/sprites/wall.png", true, TileType.LADDER);
         Tile[] tiles = {tile1};
     }
 

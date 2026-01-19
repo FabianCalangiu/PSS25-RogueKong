@@ -2,6 +2,7 @@ package it.unibo.roguekong;
 
 import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
+import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.view.impl.GameView;
 import it.unibo.roguekong.view.impl.MenuView;
 import it.unibo.roguekong.view.impl.PauseView;
@@ -21,6 +22,8 @@ public class Main extends Application {
 
         GameController controller = new GameController(gameView, gameState);
 
+        TileManager tileManager = new TileManager(16, 10, 2);
+        gameView.loadMap(tileManager);
 
         menuView.setOnStart(() -> {
             controller.start();
