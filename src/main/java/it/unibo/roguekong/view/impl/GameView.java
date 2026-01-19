@@ -1,6 +1,7 @@
 package it.unibo.roguekong.view.impl;
 
-import it.unibo.roguekong.model.game.impl.Map;
+import it.unibo.roguekong.model.game.impl.Tile;
+import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -36,8 +37,24 @@ public class GameView implements RogueKongView {
         return root;
     }
 
-    public void loadMap(Map map){
+    public void loadMap(TileManager tileManager){
+        int[][] mapMatrix = tileManager.getGameMap();
+        Tile[] tileSet = tileManager.getTileSet();
 
+        final int TILE_SIZE = 16;
+
+        root.getChildren().clear();
+
+        for(int i = 0; i < mapMatrix.length; i++){
+            for(int j = 0; j < mapMatrix.length; j++){
+                int tileIndex = mapMatrix[i][j];
+                Tile tile = tileSet[tileIndex];
+
+                Image image = new Image(
+                        getClass().getResourceAsStream(tile.getImage());
+                );
+            }
+        }
     }
 
     /*
