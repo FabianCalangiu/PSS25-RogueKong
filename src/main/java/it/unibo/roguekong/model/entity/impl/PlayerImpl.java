@@ -20,6 +20,9 @@ public class PlayerImpl implements Player {
     private boolean jump = false;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
 
+    public PlayerImpl() {
+    }
+
     @Override
     public Position getPosition() {
         return this.position;
@@ -107,13 +110,12 @@ public class PlayerImpl implements Player {
             pos.setY(y);
         }
 
-        this.position = pos;
+        setXandY(pos);
     }
 
-    public void setXandY(PositionImpl position) {
+    private void setXandY(PositionImpl position) {
         this.position = position;
     }
-
 
     private void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;

@@ -66,7 +66,7 @@ public class LevelModel implements Level {
     @Override
     public void init() {
         this.isComplete = false;
-        this.PLAYER.setXandY(SPAWN_POSITION);
+        this.PLAYER.setPosition(SPAWN_POSITION.getX(), SPAWN_POSITION.getY());
     }
 
     private void checkLevel() {
