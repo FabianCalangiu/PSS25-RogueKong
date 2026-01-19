@@ -21,6 +21,7 @@ public class Main extends Application {
 
         GameController controller = new GameController(gameView, gameState);
 
+
         menuView.setOnStart(() -> {
             controller.start();
             stage.setScene(gameView.getScene());

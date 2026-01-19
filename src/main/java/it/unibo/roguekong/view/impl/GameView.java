@@ -51,8 +51,18 @@ public class GameView implements RogueKongView {
                 Tile tile = tileSet[tileIndex];
 
                 Image image = new Image(
-                        getClass().getResourceAsStream(tile.getImage());
+                        getClass().getResourceAsStream(tile.getImage())
                 );
+
+                ImageView tileView = new ImageView(image);
+
+                tileView.setFitWidth(TILE_SIZE);
+                tileView.setFitHeight(TILE_SIZE);
+
+                tileView.setX(j * TILE_SIZE);
+                tileView.setY(i * TILE_SIZE);
+
+                root.getChildren().add(tileView);
             }
         }
     }
