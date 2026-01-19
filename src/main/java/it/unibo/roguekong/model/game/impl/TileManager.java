@@ -16,7 +16,11 @@ public class TileManager {
         this.fillGameMap();
     }
 
+    /**
+     * This method fill the matrix, soon it will be passed a file.txt with inside the map
+     */
     public void fillGameMap(){
+        // must be complete in the future, when it will be implemented the file reader map
         for(int i = 0; i < this.gameMap.length; i++){
             for(int j = 0; j < this.gameMap[0].length; j++){
                 if(i == gameMap.length - 1){
@@ -36,24 +40,16 @@ public class TileManager {
         return gameMap;
     }
 
-    private boolean checkTileOutOfBounds(int col, int row) {
-        if(row >= 0 && row < this.gameMap.length &&
-                col >= 0 && col < this.gameMap[0].length) {
-            return true;
-        } else{
-            return false;
-        }
-    }
-
+    /**
+     * Get the tile by the player's x and y
+     * @param pos Position player. Usefully to check collisions
+     * @return Must return the kind of tile is the player on
+     */
     public Tile getTileAtPosition(PositionImpl pos) {
         int col = (int) pos.getX() / this.size;
         int row = (int) pos.getY() / this.size;
 
-        if(checkTileOutOfBounds(col, row)) {
-            int index = gameMap[row][col];
-            return tileSet[index];
-        }
-
-        return null;
+        int index = gameMap[row][col];
+        return tileSet[index];
     }
 }

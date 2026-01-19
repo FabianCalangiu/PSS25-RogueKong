@@ -18,7 +18,7 @@ public class LevelModel implements Level {
     private final PositionImpl END_POINT;
     private final PlayerImpl PLAYER;
     private boolean isComplete;
-    private TileManager tileManager;
+    private final TileManager tileManager;
 
     public LevelModel(final PositionImpl spawnPoint, final PositionImpl endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final PlayerImpl player, final TileManager tileManager) {
         this.SPAWN_POSITION = spawnPoint;
