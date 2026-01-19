@@ -22,7 +22,7 @@ public class Main extends Application {
 
         GameController controller = new GameController(gameView, gameState);
 
-        TileManager tileManager = new TileManager(16, 10, 2);
+        TileManager tileManager = new TileManager(32, 20, 2);
         gameView.loadMap(tileManager);
 
         menuView.setOnStart(() -> {

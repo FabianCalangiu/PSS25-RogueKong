@@ -8,12 +8,12 @@ public class TileManager {
     int [][] gameMap; // This represents the matrix map. It will be filled
 
     public TileManager(int width, int height, int numTiles) {
-        this.tileSet = new Tile[numTiles];
         this.gameMap = new int[height][width];
 
-        Tile tile1 = new Tile("/assets/sprites/wall.png", true, TileType.PLATFORM);
+        Tile tile1 = new Tile("/assets/sprites/sand.png", true, TileType.PLATFORM);
         Tile tile2 = new Tile("/assets/sprites/wall.png", true, TileType.LADDER);
-        Tile[] tiles = {tile1};
+        this.tileSet = new Tile[] { tile1, tile2 };
+        this.fillTile();
     }
 
     /**
