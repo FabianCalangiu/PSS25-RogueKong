@@ -1,18 +1,25 @@
 package it.unibo.roguekong;
 
 import it.unibo.roguekong.controller.GameController;
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
+import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.TileManager;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import it.unibo.roguekong.view.impl.MenuView;
 import it.unibo.roguekong.view.impl.PauseView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setTitle("RogueKong");
+        stage.setResizable(false);
 
         GameStateImpl gameState = new GameStateImpl();
 
@@ -22,8 +29,9 @@ public class Main extends Application {
 
         GameController controller = new GameController(gameView, gameState);
 
-        TileManager tileManager = new TileManager(32, 20, 2);
-        gameView.loadMap(tileManager);
+        // TileManager tileManager = new TileManager(32, 20, 2);
+        LevelModel level = new LevelModel(new PositionImpl(0, 0), new PositionImpl(10, 10), List.of(), List.of(), new PlayerImpl(), new TileManager(32, 20, 2));
+        gameView.loadMap(level.getTileManager());
 
         menuView.setOnStart(() -> {
             controller.start();

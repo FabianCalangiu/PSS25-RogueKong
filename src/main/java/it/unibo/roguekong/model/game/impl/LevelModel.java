@@ -18,14 +18,16 @@ public class LevelModel implements Level {
     private final PositionImpl END_POINT;
     private final PlayerImpl PLAYER;
     private boolean isComplete;
+    private TileManager tileManager;
 
-    public LevelModel(final PositionImpl spawnPoint, final PositionImpl endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final PlayerImpl player) {
+    public LevelModel(final PositionImpl spawnPoint, final PositionImpl endPoint, final List<GamePlatform> platforms, final List<Enemy> enemies, final PlayerImpl player, final TileManager tileManager) {
         this.SPAWN_POSITION = spawnPoint;
         this.END_POINT = endPoint;
         this.PLATFORMS = new ArrayList<>(platforms);
         this.ENEMIES = new ArrayList<>(enemies);
         this.PLAYER = player;
         this.isComplete = false;
+        this.tileManager = tileManager;
     }
 
     @Override
@@ -67,6 +69,10 @@ public class LevelModel implements Level {
     public void init() {
         this.isComplete = false;
         this.PLAYER.setPosition(SPAWN_POSITION.getX(), SPAWN_POSITION.getY());
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
     }
 
     private void checkLevel() {

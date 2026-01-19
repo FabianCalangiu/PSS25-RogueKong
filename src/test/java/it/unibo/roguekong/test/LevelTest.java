@@ -7,6 +7,7 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.game.impl.LevelModel;
+import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.Velocity;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -20,13 +21,15 @@ public class LevelTest {
     PositionImpl spawnPoint;
     PositionImpl endPoint;
     PlayerImpl player;
+    TileManager tileManager;
 
     @BeforeEach
     void setUp() {
         this.player = new PlayerImpl();
         this.spawnPoint = new PositionImpl(0, 0);
         this.endPoint = new PositionImpl(10, 10);
-        this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), List.of(), player);
+        this.tileManager = new TileManager(960, 640, 2);
+        this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), List.of(), this.player, this.tileManager);
     }
 
     @Test
