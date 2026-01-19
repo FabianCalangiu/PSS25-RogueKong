@@ -73,8 +73,10 @@ public class GameController {
      */
     private void update(){
         /*
-         * Add game logic here
+         * Add game logic here, also, add below here the input user handler
          */
+
+
     }
 
     private void render(){
