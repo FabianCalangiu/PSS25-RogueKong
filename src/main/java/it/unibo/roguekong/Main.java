@@ -9,6 +9,7 @@ import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import it.unibo.roguekong.view.impl.MenuView;
 import it.unibo.roguekong.view.impl.PauseView;
+import it.unibo.roguekong.view.impl.ScoreView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -25,6 +26,7 @@ public class Main extends Application {
         GameStateImpl gameState = new GameStateImpl();
 
         MenuView menuView = new MenuView();
+        ScoreView scoreView = new ScoreView();
         PauseView pauseView = new PauseView();
         GameView gameView = new GameView();
 
@@ -38,6 +40,14 @@ public class Main extends Application {
             controller.start();
             stage.setScene(gameView.getScene());
             gameView.getRoot().requestFocus();
+        });
+
+        menuView.setOnScore(() -> {
+            stage.setScene(scoreView.getScene());
+        });
+
+        scoreView.setOnReturn(() -> {
+            stage.setScene(menuView.getScene());
         });
 
         menuView.setOnExit(() -> {
