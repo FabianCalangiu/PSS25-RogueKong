@@ -23,7 +23,7 @@ public class GameView implements RogueKongView {
          * setFocusTraversable makes the user input readable
          */
         this.root.setFocusTraversable(true);
-        this.scene = new Scene(root, 800, 600);
+        this.scene = new Scene(root, 960, 640);
     }
 
     @Override

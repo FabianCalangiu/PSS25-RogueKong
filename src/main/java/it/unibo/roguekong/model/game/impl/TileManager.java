@@ -3,7 +3,7 @@ package it.unibo.roguekong.model.game.impl;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 public class TileManager {
-    int size = 16; // The size of each pixel
+    int size = 32; // The size of each pixel
     Tile[] tileSet; // The length of the array depends on how many kind of tiles we are going to use
     int [][] gameMap; // This represents the matrix map. It will be filled
 
