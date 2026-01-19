@@ -10,16 +10,13 @@ public class TileManager {
     public TileManager(int width, int height, int numTiles) {
         this.gameMap = new int[height][width];
 
-        Tile tile1 = new Tile("/assets/sprites/sand.png", true, TileType.PLATFORM);
-        Tile tile2 = new Tile("/assets/sprites/wall.png", true, TileType.LADDER);
+        Tile tile1 = new Tile("/assets/sprites/Sand.png", true, TileType.PLATFORM);
+        Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.LADDER);
         this.tileSet = new Tile[] { tile1, tile2 };
-        this.fillTile();
+        this.fillGameMap();
     }
 
-    /**
-     * This is a try
-     */
-    public void fillTile(){
+    public void fillGameMap(){
         for(int i = 0; i < this.gameMap.length; i++){
             for(int j = 0; j < this.gameMap[0].length; j++){
                 if(i == gameMap.length - 1){
@@ -29,9 +26,7 @@ public class TileManager {
                 }
             }
         }
-    }
-
-    public void fillGameMap(){};
+    };
 
     public Tile[] getTileSet() {
         return tileSet;
