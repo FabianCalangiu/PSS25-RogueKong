@@ -49,7 +49,6 @@ public class GameView implements RogueKongView {
             for(int j = 0; j < mapMatrix[i].length; j++){
                 int tileIndex = mapMatrix[i][j];
                 Tile tile = tileSet[tileIndex];
-                System.out.println(tile.getImage());
 
                 Image image = new Image(
                         getClass().getResourceAsStream(tile.getImage())
