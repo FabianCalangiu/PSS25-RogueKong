@@ -3,7 +3,7 @@ package it.unibo.roguekong.model.game.impl;
 public enum TileType {
     PLATFORM,
     LADDER,
-    WATER,
+    VOID,
     START,
     END
 }
