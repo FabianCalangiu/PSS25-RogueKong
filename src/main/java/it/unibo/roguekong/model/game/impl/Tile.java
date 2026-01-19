@@ -9,10 +9,10 @@ public class Tile implements GamePlatform {
     private static final int HEIGHT = 16;
 
     private TileType tileType;
-    private final BufferedImage image;
+    private final String  image;
     private final boolean isCollidable;
 
-    public Tile(BufferedImage image, boolean isCollidable, TileType tileType) {
+    public Tile(String image, boolean isCollidable, TileType tileType) {
         this.image = image;
         this.isCollidable = isCollidable;
         this.tileType = tileType;
@@ -28,7 +28,7 @@ public class Tile implements GamePlatform {
         return HEIGHT;
     }
 
-    public BufferedImage getImage() {
+    public String getImage() {
         return image;
     }
 
