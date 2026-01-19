@@ -1,15 +1,15 @@
-package it.unibo.roguekong.model.game.impl;
+package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.model.game.Level;
 
 import java.util.List;
 
-public class LevelHandler {
+public class LevelController {
 
     private final List<Level> LEVELS;
     private int currentLevel;
 
-    public LevelHandler(List<Level> levels) {
+    public LevelController(List<Level> levels) {
         this.LEVELS = levels;
         this.currentLevel = 0;
     }
@@ -37,6 +37,9 @@ public class LevelHandler {
         newLevel.init();
     }
 
+    /**
+     * Method that set and init the next level once the previous one is completed
+     */
     public void nextLevel(){
         Level level = getCurrentLevel();
 
