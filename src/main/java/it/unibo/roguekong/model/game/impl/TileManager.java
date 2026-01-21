@@ -16,7 +16,7 @@ public class TileManager {
         Tile tile1 = new Tile("/assets/sprites/Sand.png", true, TileType.PLATFORM);
         Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.PLATFORM);
         Tile tile3 = new Tile("/assets/sprites/Dirt.png", true, TileType.PLATFORM);
-        Tile tile4 = new Tile("/assets/sprites/Water.png", false, TileType.PLATFORM);
+        Tile tile4 = new Tile("/assets/sprites/Water.png", false, TileType.VOID);
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4 };
         this.fillGameMap();
     }
