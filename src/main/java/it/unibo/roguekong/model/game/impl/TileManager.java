@@ -3,16 +3,21 @@ package it.unibo.roguekong.model.game.impl;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 public class TileManager {
-    int size = 32; // The size of each pixel
-    Tile[] tileSet; // The length of the array depends on how many kind of tiles we are going to use
-    int [][] gameMap; // This represents the matrix map. It will be filled
+    private final static int ROWS = 20; //The Y of the map
+    private final static int COLS = 32; //The X of the map
+    private final static int TILE_SIZE = 32;
 
-    public TileManager(int width, int height, int numTiles) {
-        this.gameMap = new int[height][width];
+    private final Tile[] tileSet;
+    private final int [][] gameMap;
 
+    public TileManager() {
+        this.gameMap = new int[ROWS][COLS];
+        Tile tile0 = new Tile("", false, TileType.VOID);
         Tile tile1 = new Tile("/assets/sprites/Sand.png", true, TileType.PLATFORM);
-        Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.LADDER);
-        this.tileSet = new Tile[] { tile1, tile2 };
+        Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.PLATFORM);
+        Tile tile3 = new Tile("/assets/sprites/Dirt.png", true, TileType.PLATFORM);
+        Tile tile4 = new Tile("/assets/sprites/Water.png", false, TileType.VOID);
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4 };
         this.fillGameMap();
     }
 
@@ -21,12 +26,12 @@ public class TileManager {
      */
     public void fillGameMap(){
         // must be complete in the future, when it will be implemented the file reader map
-        for(int i = 0; i < this.gameMap.length; i++){
-            for(int j = 0; j < this.gameMap[0].length; j++){
-                if(i == gameMap.length - 1){
-                    gameMap[i][j] = 1;
+        for(int i = 0; i < ROWS; i++){
+            for(int j = 0; j < COLS; j++){
+                if(i == ROWS - 1){
+                    gameMap[i][j] = 4;
                 } else{
-                    gameMap[i][j] = 0;
+                    gameMap[i][j] = 1;
                 }
             }
         }
@@ -46,8 +51,14 @@ public class TileManager {
      * @return Must return the kind of tile is the player on
      */
     public Tile getTileAtPosition(PositionImpl pos) {
-        int col = (int) pos.getX() / this.size;
-        int row = (int) pos.getY() / this.size;
+        int row = (int) pos.getY() / TILE_SIZE;
+        int col = (int) pos.getX() / TILE_SIZE;
+
+        /*
+         * Check if the positions are in or out of bounds. If it's outside, return the tiletype void
+         */
+        if(row < 0 || row >= ROWS
+                || col < 0 || col >= COLS){ return this.tileSet[0]; }
 
         int index = gameMap[row][col];
         return tileSet[index];
