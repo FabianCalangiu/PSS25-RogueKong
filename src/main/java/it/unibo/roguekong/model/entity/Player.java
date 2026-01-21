@@ -22,4 +22,7 @@ public interface Player{
     public boolean canMoveLeft();
     public boolean canMoveUp();
     public void addPowerUp(PowerUp powerUp);
+    public void setPosition(double x, double y);
+    public void moveX(double x);
+    public void moveY(double y);
 }

@@ -21,6 +21,11 @@ public class PlayerImpl implements Player {
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
 
     public PlayerImpl() {
+        setJump(true);
+        setMoveRight(true);
+        setMoveLeft(true);
+        setMoveUp(false);
+        setMidAir(false);
     }
 
     @Override
@@ -88,6 +93,17 @@ public class PlayerImpl implements Player {
         this.jump = jump;
     }
 
+    @Override
+    public void moveX(double x) {
+        setPosition(x, getPosition().getY());
+    }
+
+    @Override
+    public void moveY(double y) {
+        setPosition(getPosition().getX(), y);
+    }
+
+    @Override
     public void setPosition(double x, double y) {
 
         PositionImpl pos = new PositionImpl(position.getX(), position.getY());
