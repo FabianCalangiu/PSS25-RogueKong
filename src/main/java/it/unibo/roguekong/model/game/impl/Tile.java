@@ -24,9 +24,7 @@ public class Tile implements GamePlatform {
     }
 
     @Override
-    public int getHeight() {
-        return HEIGHT;
-    }
+    public int getHeight() { return HEIGHT; }
 
     public String getImage() {
         return image;
