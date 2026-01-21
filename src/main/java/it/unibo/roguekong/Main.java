@@ -6,10 +6,7 @@ import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
-import it.unibo.roguekong.view.impl.GameView;
-import it.unibo.roguekong.view.impl.MenuView;
-import it.unibo.roguekong.view.impl.PauseView;
-import it.unibo.roguekong.view.impl.ScoreView;
+import it.unibo.roguekong.view.impl.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -29,6 +26,7 @@ public class Main extends Application {
         ScoreView scoreView = new ScoreView();
         PauseView pauseView = new PauseView();
         GameView gameView = new GameView();
+        GameOverView gameOverView = new GameOverView();
 
         GameController controller = new GameController(gameView, gameState);
 
@@ -61,6 +59,10 @@ public class Main extends Application {
             stage.setScene(pauseView.getScene());
         });
 
+        gameView.setOnKill(() -> {
+            stage.setScene(gameOverView.getScene());
+        });
+
         pauseView.setOnResume(() -> {
             controller.resume();
             stage.setScene(gameView.getScene());
@@ -69,6 +71,10 @@ public class Main extends Application {
 
         pauseView.setOnMenu(() -> {
             controller.goToMenu();
+            stage.setScene(menuView.getScene());
+        });
+
+        gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
         });
 

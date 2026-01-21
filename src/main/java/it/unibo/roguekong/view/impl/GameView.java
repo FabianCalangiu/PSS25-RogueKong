@@ -3,11 +3,13 @@ package it.unibo.roguekong.view.impl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.view.RogueKongView;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+
+import java.awt.*;
 
 public class GameView implements RogueKongView {
     /*
@@ -21,15 +23,30 @@ public class GameView implements RogueKongView {
     private final static int TILE_SIZE = 32;
 
     private final Pane root;
+    private final Pane map;
+    private final Pane ui;
     private final Scene scene;
+    private Runnable onKill;
 
     public GameView(){
         this.root = new Pane();
+
+        this.map = new Pane();
+        this.ui = new Pane();
         /*
          * setFocusTraversable makes the user input readable
          */
+
+        Button sampleKill = new Button("Kill");
+        sampleKill.setOnAction(e -> runIfNotNull(onKill));
+
+        root.getChildren().addAll(map, ui);
+        ui.getChildren().addAll(sampleKill);
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
+        this.scene.getStylesheets().add(
+                getClass().getResource("/css/menu.css").toExternalForm()
+        );
     }
 
     @Override
@@ -45,7 +62,7 @@ public class GameView implements RogueKongView {
         int[][] mapMatrix = tileManager.getGameMap();
         Tile[] tileSet = tileManager.getTileSet();
 
-        root.getChildren().clear();
+        map.getChildren().clear();
 
         for(int i = 0; i < tileManager.getRows(); i++){
             for(int j = 0; j < tileManager.getCols(); j++){
@@ -64,9 +81,17 @@ public class GameView implements RogueKongView {
                 tileView.setX(j * TILE_SIZE);
                 tileView.setY(i * TILE_SIZE);
 
-                root.getChildren().add(tileView);
+                map.getChildren().add(tileView);
             }
         }
+    }
+
+    public void setOnKill(Runnable r){
+        this.onKill = r;
+    }
+
+    private void runIfNotNull(Runnable r) {
+        if (r != null) r.run();
     }
 
     /*
