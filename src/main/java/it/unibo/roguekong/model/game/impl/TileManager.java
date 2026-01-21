@@ -14,8 +14,10 @@ public class TileManager {
         this.gameMap = new int[ROWS][COLS];
         Tile tile0 = new Tile("", false, TileType.VOID);
         Tile tile1 = new Tile("/assets/sprites/Sand.png", true, TileType.PLATFORM);
-        Tile tile2 = new Tile("/assets/sprites/Wall.png", false, TileType.PLATFORM);
-        this.tileSet = new Tile[] { tile1, tile2 };
+        Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.PLATFORM);
+        Tile tile3 = new Tile("/assets/sprites/Dirt.png", true, TileType.PLATFORM);
+        Tile tile4 = new Tile("/assets/sprites/Water.png", false, TileType.PLATFORM);
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4 };
         this.fillGameMap();
     }
 
@@ -27,9 +29,9 @@ public class TileManager {
         for(int i = 0; i < ROWS; i++){
             for(int j = 0; j < COLS; j++){
                 if(i == ROWS - 1){
-                    gameMap[i][j] = 1;
+                    gameMap[i][j] = 4;
                 } else{
-                    gameMap[i][j] = 0;
+                    gameMap[i][j] = 1;
                 }
             }
         }
@@ -52,8 +54,11 @@ public class TileManager {
         int row = (int) pos.getY() / TILE_SIZE;
         int col = (int) pos.getX() / TILE_SIZE;
 
-        if(row < 0 || row > ROWS
-            || col < 0 || col > COLS){ return null; }
+        /*
+         * Check if the positions are in or out of bounds. If it's outside, return the tiletype void
+         */
+        if(row < 0 || row >= ROWS
+                || col < 0 || col >= COLS){ return this.tileSet[0]; }
 
         int index = gameMap[row][col];
         return tileSet[index];

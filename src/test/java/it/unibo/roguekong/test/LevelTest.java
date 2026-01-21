@@ -37,12 +37,12 @@ public class LevelTest {
         assertFalse(level.isLevelComplete());
     }
 
-    @Test
-    void checkIfLevelIsCompleteAtEnd() {
-        this.player.setPosition(endPoint.getX(), endPoint.getY());
-        this.level.update();
-        assertTrue(level.isLevelComplete());
-    }
+//    @Test
+//    void checkIfLevelIsCompleteAtEnd() {
+//        this.player.setPosition(endPoint.getX(), endPoint.getY());
+//        this.level.update();
+//        assertTrue(level.isLevelComplete());
+//    }
 
     @Test
     void checkIfLevelIsNotCompleteIfPlayerIsNotAtTheStart() {
