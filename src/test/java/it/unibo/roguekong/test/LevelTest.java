@@ -24,7 +24,7 @@ public class LevelTest {
         this.player = new PlayerImpl();
         this.spawnPoint = new PositionImpl(0, 0);
         this.endPoint = new PositionImpl(10, 10);
-        this.tileManager = new TileManager();
+        this.tileManager = new TileManager("ciao");
         this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), List.of(), this.player, this.tileManager);
     }
 
