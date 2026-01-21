@@ -23,11 +23,16 @@ public class GameView implements RogueKongView {
     private final static int TILE_SIZE = 32;
 
     private final Pane root;
+    private final Pane map;
+    private final Pane ui;
     private final Scene scene;
     private Runnable onKill;
 
     public GameView(){
         this.root = new Pane();
+
+        this.map = new Pane();
+        this.ui = new Pane();
         /*
          * setFocusTraversable makes the user input readable
          */
@@ -35,9 +40,13 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        root.getChildren().addAll(sampleKill);
+        root.getChildren().addAll(map, ui);
+        ui.getChildren().addAll(sampleKill);
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
+        this.scene.getStylesheets().add(
+                getClass().getResource("/css/menu.css").toExternalForm()
+        );
     }
 
     @Override
@@ -53,7 +62,7 @@ public class GameView implements RogueKongView {
         int[][] mapMatrix = tileManager.getGameMap();
         Tile[] tileSet = tileManager.getTileSet();
 
-        root.getChildren().clear();
+        map.getChildren().clear();
 
         for(int i = 0; i < mapMatrix.length; i++){
             for(int j = 0; j < mapMatrix[i].length; j++){
@@ -72,7 +81,7 @@ public class GameView implements RogueKongView {
                 tileView.setX(j * TILE_SIZE);
                 tileView.setY(i * TILE_SIZE);
 
-                root.getChildren().add(tileView);
+                map.getChildren().add(tileView);
             }
         }
     }

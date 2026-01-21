@@ -9,3 +9,13 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
 }
+
+.game-over-title{
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.game-title{
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}

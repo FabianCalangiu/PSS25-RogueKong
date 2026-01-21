@@ -3,6 +3,7 @@ package it.unibo.roguekong.view.impl;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 
@@ -30,6 +31,8 @@ public class MenuView {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
 
+        Label title = new Label("Rogue Kong");
+        title.getStyleClass().add("game-title");
         Button start = new Button("Start");
         Button score = new Button("Score");
         Button exit = new Button("Exit");
@@ -38,7 +41,7 @@ public class MenuView {
         score.setOnAction(e -> runIfNotNull(onScore));
         exit.setOnAction(e -> runIfNotNull(onExit));
 
-        root.getChildren().addAll(start, score, exit);
+        root.getChildren().addAll(title, start, score, exit);
         this.scene = new Scene(root, 800, 600);
         this.scene.getStylesheets().add(
                 getClass().getResource("/css/menu.css").toExternalForm()
