@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     private final static int ROWS = 20; //The Y of the map
-    private final static int COLS = 32; //The X of the map
+    private final static int COLS = 30; //The X of the map
     private final static int TILE_SIZE = 32;
 
     private final Tile[] tileSet;
@@ -94,4 +94,7 @@ public class TileManager {
         int index = gameMap[row][col];
         return tileSet[index];
     }
+
+    public int getRows() { return ROWS; }
+    public int getCols() { return COLS; }
 }

@@ -47,8 +47,8 @@ public class GameView implements RogueKongView {
 
         root.getChildren().clear();
 
-        for(int i = 0; i < mapMatrix.length; i++){
-            for(int j = 0; j < mapMatrix[i].length; j++){
+        for(int i = 0; i < tileManager.getRows(); i++){
+            for(int j = 0; j < tileManager.getCols(); j++){
                 int tileIndex = mapMatrix[i][j];
                 Tile tile = tileSet[tileIndex];
 
