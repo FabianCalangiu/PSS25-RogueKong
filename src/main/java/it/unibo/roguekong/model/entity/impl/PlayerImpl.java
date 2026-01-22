@@ -27,7 +27,7 @@ public class PlayerImpl implements Player {
         setMoveLeft(true);
         setMoveUp(false);
         setMidAir(false);
-        setSprite("./file_path_inesistente");
+        setSprite("standing-mario.png");
     }
 
     @Override
