@@ -14,7 +14,6 @@ public interface Level {
     Position getSpawnPoint();
     Position getEndPoint();
     boolean isLevelComplete();
-    void update();
-
+    void checkLevel();
     void init();
 }

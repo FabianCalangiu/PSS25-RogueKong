@@ -51,17 +51,17 @@ public class LevelModel implements Level {
     }
 
     @Override
-    public Player getPlayer() {
+    public PlayerImpl getPlayer() {
         return this.player;
     }
 
     @Override
-    public Position getSpawnPoint() {
+    public PositionImpl getSpawnPoint() {
         return this.spawnPosition;
     }
 
     @Override
-    public Position getEndPoint() {
+    public PositionImpl getEndPoint() {
         return this.endPoint;
     }
 
@@ -71,28 +71,28 @@ public class LevelModel implements Level {
     }
 
     @Override
-    public void update() {
-        this.checkLevel();
+    public void init() {
+        this.isComplete = false;
+        this.setPlayerOnSpawn();
+        this.setGravityOnPlayer();
     }
 
     @Override
-    public void init() {
-        this.isComplete = false;
-        this.player.setPosition(this.spawnPosition.getX(), this.spawnPosition.getY());
-        this.setGravityOnPlayer();
+    public void checkLevel() {
+        if(this.player.getPosition().equals(this.endPoint)){
+            this.isComplete = true;
+        }
     }
 
     public TileManager getTileManager() {
         return tileManager;
     }
 
-    private void checkLevel() {
-        if(this.player.getPosition().equals(this.endPoint)){
-            this.isComplete = true;
-        }
+    private void setGravityOnPlayer() {
+        this.player.setVelocity(new VelocityImpl(this.player.getVelocity().getVelocityX(), this.player.getVelocity().getVelocityY() * this.gravity));
     }
 
-    private void setGravityOnPlayer() {
-        this.player.setVelocity(new VelocityImpl(1, 1 * this.gravity));
+    private void setPlayerOnSpawn() {
+        this.player.setPosition(this.spawnPosition.getX(), this.spawnPosition.getY());
     }
 }
