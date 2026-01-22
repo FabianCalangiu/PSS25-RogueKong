@@ -1,7 +1,6 @@
 package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.view.RogueKongView;
@@ -118,8 +117,7 @@ public class GameView implements RogueKongView {
         }
     }
 
-    private void renderPlayer(LevelModel level){
-        PlayerImpl player = level.getPlayer();
+    public void renderPlayer(PlayerImpl player){
         Image playerSprite = new Image(
                 getClass().getResourceAsStream(player.getSprite())
         );
