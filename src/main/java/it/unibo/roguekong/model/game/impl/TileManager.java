@@ -19,10 +19,10 @@ public class TileManager {
         this.gameMap = new int[ROWS][COLS];
 
         Tile tile0 = new Tile("", false, TileType.VOID);
-        Tile tile1 = new Tile("/assets/sprites/Sand.png", true, TileType.PLATFORM);
-        Tile tile2 = new Tile("/assets/sprites/Wall.png", true, TileType.PLATFORM);
-        Tile tile3 = new Tile("/assets/sprites/Dirt.png", true, TileType.PLATFORM);
-        Tile tile4 = new Tile("/assets/sprites/Water.png", false, TileType.VOID);
+        Tile tile1 = new Tile("/assets/sprites/brick_wall.png", true, TileType.PLATFORM);
+        Tile tile2 = new Tile("/assets/sprites/grassy_soil.png", true, TileType.PLATFORM);
+        Tile tile3 = new Tile("/assets/sprites/soil.png", true, TileType.PLATFORM);
+        Tile tile4 = new Tile("/assets/sprites/water.png", false, TileType.VOID);
 
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4 };
 
