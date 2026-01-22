@@ -23,9 +23,10 @@ public class GameView implements RogueKongView {
     private final static int TILE_SIZE = 32;
 
     private final Pane root;
-    private final Pane map;
     private final Pane background;
     private final Pane ui;
+    private final Pane map;
+    private final Pane playerRender;
     private final Scene scene;
     private Runnable onKill;
 
@@ -35,6 +36,7 @@ public class GameView implements RogueKongView {
         this.map = new Pane();
         this.background = new Pane();
         this.ui = new Pane();
+        this.playerRender = new Pane();
         /*
          * setFocusTraversable makes the user input readable
          */
@@ -42,7 +44,7 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        root.getChildren().addAll(sampleKill, background, map, ui);
+        root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
         ui.getChildren().addAll(sampleKill);
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
@@ -118,6 +120,19 @@ public class GameView implements RogueKongView {
 
     private void renderPlayer(LevelModel level){
         PlayerImpl player = level.getPlayer();
+        Image playerSprite = new Image(
+                getClass().getResourceAsStream(player.getSprite())
+        );
+
+        ImageView playerSpriteView = new ImageView(playerSprite);
+
+        playerSpriteView.setFitWidth(TILE_SIZE);
+        playerSpriteView.setFitHeight(TILE_SIZE);
+
+        playerSpriteView.setX(player.getPosition().getX());
+        playerSpriteView.setY(player.getPosition().getY());
+
+        playerRender.getChildren().add(playerSpriteView);
     }
 
     public void setOnKill(Runnable r){
