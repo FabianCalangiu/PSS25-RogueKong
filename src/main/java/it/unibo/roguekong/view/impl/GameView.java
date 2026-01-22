@@ -40,7 +40,11 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        root.getChildren().addAll(map, ui);
+        ImageView background = new ImageView(new Image(ClassLoader.getSystemResourceAsStream("backgrounds/level1.jpg")));
+        background.setFitWidth(WIDTH);
+        background.setFitHeight(HEIGTH);
+
+        root.getChildren().addAll(background, map, ui);
         ui.getChildren().addAll(sampleKill);
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
