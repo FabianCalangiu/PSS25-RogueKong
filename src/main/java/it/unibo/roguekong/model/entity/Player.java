@@ -27,4 +27,5 @@ public interface Player{
     public void moveX(double x);
     public void moveY(double y);
     public void setVelocity(VelocityImpl velocity);
+    public String getSprite();
 }

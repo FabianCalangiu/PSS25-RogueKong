@@ -19,6 +19,7 @@ public class PlayerImpl implements Player {
     private boolean moveUp = false;
     private boolean jump = false;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
+    private String sprite = "";
 
     public PlayerImpl() {
         setJump(true);
@@ -26,6 +27,12 @@ public class PlayerImpl implements Player {
         setMoveLeft(true);
         setMoveUp(false);
         setMidAir(false);
+        setSprite("./file_path_inesistente");
+    }
+
+    @Override
+    public String getSprite() {
+        return this.sprite;
     }
 
     @Override
@@ -71,6 +78,10 @@ public class PlayerImpl implements Player {
     @Override
     public void addPowerUp(PowerUp powerUp) {
         this.activePowerUps.add(powerUp);
+    }
+
+    private void setSprite(String sprite) {
+        this.sprite = sprite;
     }
 
     private void setMidAir(boolean midAir) {
