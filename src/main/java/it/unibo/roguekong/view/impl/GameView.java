@@ -1,15 +1,15 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
+import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.Button;
-
-import java.awt.*;
 
 public class GameView implements RogueKongView {
     /*
@@ -114,6 +114,10 @@ public class GameView implements RogueKongView {
                 background.getChildren().add(tileView);
             }
         }
+    }
+
+    private void renderPlayer(LevelModel level){
+        PlayerImpl player = level.getPlayer();
     }
 
     public void setOnKill(Runnable r){
