@@ -89,7 +89,7 @@ public class GameView implements RogueKongView {
     }
 
     public void loadBackground(TileManager tileManager){
-        int[][] mapMatrix = tileManager.getGameMap();
+        int[][] mapMatrix = tileManager.getBackgroundMap();
         Tile[] tileSet = tileManager.getTileSet();
 
         background.getChildren().clear();

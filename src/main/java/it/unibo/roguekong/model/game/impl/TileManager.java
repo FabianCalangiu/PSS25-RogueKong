@@ -14,9 +14,11 @@ public class TileManager {
 
     private final Tile[] tileSet;
     private final int [][] gameMap;
+    private final int [][] backgroundMap;
 
-    public TileManager(String mapPath) {
+    public TileManager(String mapPath, String backgroundPath) {
         this.gameMap = new int[ROWS][COLS];
+        this.backgroundMap = new int[ROWS][COLS];
 
         Tile tile0 = new Tile("", false, TileType.VOID);
         Tile tile1 = new Tile("/assets/sprites/brick_wall.png", true, TileType.PLATFORM);
@@ -24,8 +26,13 @@ public class TileManager {
         Tile tile3 = new Tile("/assets/sprites/soil.png", true, TileType.PLATFORM);
         Tile tile4 = new Tile("/assets/sprites/water.png", false, TileType.VOID);
 
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4 };
+        Tile tile5 = new Tile("/backgrounds/cloud.png", false, TileType.VOID);
+        Tile tile6 = new Tile("/backgrounds/foggy_cloud.png", false, TileType.VOID);
+        Tile tile7 = new Tile("/backgrounds/sky.png", false, TileType.VOID);
 
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7 };
+
+        this.fillGameBackground(backgroundPath);
         this.fillGameMap(mapPath);
     }
 
@@ -68,7 +75,7 @@ public class TileManager {
         }
     };
 
-    public void fillGameBackground(String mapPath){
+    public void fillGameBackground(String backgroundPath){
         // must be complete in the future, when it will be implemented the file reader map
 //        for(int i = 0; i < ROWS; i++){
 //            for(int j = 0; j < COLS; j++){
@@ -79,8 +86,8 @@ public class TileManager {
 //                }
 //            }
 //        }
-        try(final InputStream mapFile = ClassLoader.getSystemResourceAsStream(mapPath)) {
-            BufferedReader mapReader = new BufferedReader(new InputStreamReader(mapFile));
+        try(final InputStream backgroundFile = ClassLoader.getSystemResourceAsStream(backgroundPath)) {
+            BufferedReader mapReader = new BufferedReader(new InputStreamReader(backgroundFile));
 
             int row = 0;
             int col = 0;
@@ -91,7 +98,7 @@ public class TileManager {
                 while(col < COLS) {
                     String values[] = line.split(" ");
                     int n = Integer.parseInt(values[col]);
-                    this.gameMap[row][col] = n;
+                    this.backgroundMap[row][col] = n;
                     col++;
                 }
                 if(col == COLS) {
@@ -110,6 +117,10 @@ public class TileManager {
 
     public int[][] getGameMap() {
         return gameMap;
+    }
+
+    public int[][] getBackgroundMap() {
+        return backgroundMap;
     }
 
     /**
