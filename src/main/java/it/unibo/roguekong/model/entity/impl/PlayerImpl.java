@@ -133,7 +133,8 @@ public class PlayerImpl implements Player {
         this.position = position;
     }
 
-    private void setVelocity(VelocityImpl velocity) {
+    @Override
+    public void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;
     }
 }

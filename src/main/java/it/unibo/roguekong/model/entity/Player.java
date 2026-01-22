@@ -2,6 +2,7 @@ package it.unibo.roguekong.model.entity;
 
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.Velocity;
+import it.unibo.roguekong.model.value.impl.VelocityImpl;
 import java.util.List;
 
 /**
@@ -25,4 +26,5 @@ public interface Player{
     public void setPosition(double x, double y);
     public void moveX(double x);
     public void moveY(double y);
+    public void setVelocity(VelocityImpl velocity);
 }
