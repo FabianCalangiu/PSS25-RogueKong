@@ -14,7 +14,6 @@ import java.util.List;
 
 public class LevelModel implements Level {
     private final List<Enemy> enemies;
-    private final List<GamePlatform> platforms;
     private final PositionImpl spawnPosition;
     private final PositionImpl endPoint;
     private final PlayerImpl player;
@@ -25,24 +24,17 @@ public class LevelModel implements Level {
     public LevelModel(
             final PositionImpl spawnPoint,
             final PositionImpl endPoint,
-            final List<GamePlatform> platforms,
             final List<Enemy> enemies,
             final PlayerImpl player,
             final TileManager tileManager,
             final int gravity) {
         this.spawnPosition = spawnPoint;
         this.endPoint = endPoint;
-        this.platforms = new ArrayList<>(platforms);
         this.enemies = new ArrayList<>(enemies);
         this.player = player;
         this.isComplete = false;
         this.tileManager = tileManager;
         this.gravity = gravity;
-    }
-
-    @Override
-    public List<GamePlatform> getPlatforms() {
-        return List.copyOf(platforms);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Main extends Application {
         GameController controller = new GameController(gameView, gameState);
 
         // TileManager tileManager = new TileManager(32, 20, 2);
-        LevelModel level = new LevelModel(new PositionImpl(0, 0), new PositionImpl(10, 10), List.of(), List.of(), new PlayerImpl(), new TileManager("maps/map1.txt"), 1);
+        LevelModel level = new LevelModel(new PositionImpl(0, 0), new PositionImpl(10, 10), List.of(), new PlayerImpl(), new TileManager("maps/map1.txt"), 1);
         gameView.loadMap(level.getTileManager());
 
         menuView.setOnStart(() -> {
