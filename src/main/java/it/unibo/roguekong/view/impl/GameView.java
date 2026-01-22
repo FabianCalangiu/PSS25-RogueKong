@@ -24,6 +24,7 @@ public class GameView implements RogueKongView {
 
     private final Pane root;
     private final Pane map;
+    private final Pane background;
     private final Pane ui;
     private final Scene scene;
     private Runnable onKill;
@@ -32,6 +33,7 @@ public class GameView implements RogueKongView {
         this.root = new Pane();
 
         this.map = new Pane();
+        this.background = new Pane();
         this.ui = new Pane();
         /*
          * setFocusTraversable makes the user input readable
@@ -40,11 +42,7 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        ImageView background = new ImageView(new Image(ClassLoader.getSystemResourceAsStream("backgrounds/level1.jpg")));
-        background.setFitWidth(WIDTH);
-        background.setFitHeight(HEIGTH);
-
-        root.getChildren().addAll(background, map, ui);
+        root.getChildren().addAll(sampleKill, background, map, ui);
         ui.getChildren().addAll(sampleKill);
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
@@ -86,6 +84,34 @@ public class GameView implements RogueKongView {
                 tileView.setY(i * TILE_SIZE);
 
                 map.getChildren().add(tileView);
+            }
+        }
+    }
+
+    public void loadBackground(TileManager tileManager){
+        int[][] mapMatrix = tileManager.getGameMap();
+        Tile[] tileSet = tileManager.getTileSet();
+
+        background.getChildren().clear();
+
+        for(int i = 0; i < tileManager.getRows(); i++){
+            for(int j = 0; j < tileManager.getCols(); j++){
+                int tileIndex = mapMatrix[i][j];
+                Tile tile = tileSet[tileIndex];
+
+                Image image = new Image(
+                        getClass().getResourceAsStream(tile.getImage())
+                );
+
+                ImageView tileView = new ImageView(image);
+
+                tileView.setFitWidth(TILE_SIZE);
+                tileView.setFitHeight(TILE_SIZE);
+
+                tileView.setX(j * TILE_SIZE);
+                tileView.setY(i * TILE_SIZE);
+
+                background.getChildren().add(tileView);
             }
         }
     }

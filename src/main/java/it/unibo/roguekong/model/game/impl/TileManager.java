@@ -68,6 +68,42 @@ public class TileManager {
         }
     };
 
+    public void fillGameBackground(String mapPath){
+        // must be complete in the future, when it will be implemented the file reader map
+//        for(int i = 0; i < ROWS; i++){
+//            for(int j = 0; j < COLS; j++){
+//                if(i == ROWS - 1){
+//                    gameMap[i][j] = 4;
+//                } else{
+//                    gameMap[i][j] = 1;
+//                }
+//            }
+//        }
+        try(final InputStream mapFile = ClassLoader.getSystemResourceAsStream(mapPath)) {
+            BufferedReader mapReader = new BufferedReader(new InputStreamReader(mapFile));
+
+            int row = 0;
+            int col = 0;
+
+            while (row < ROWS && col < COLS) {
+                String line = mapReader.readLine();
+
+                while(col < COLS) {
+                    String values[] = line.split(" ");
+                    int n = Integer.parseInt(values[col]);
+                    this.gameMap[row][col] = n;
+                    col++;
+                }
+                if(col == COLS) {
+                    col = 0;
+                    row++;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    };
+
     public Tile[] getTileSet() {
         return tileSet;
     }
