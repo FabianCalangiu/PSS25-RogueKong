@@ -1,5 +1,7 @@
 package it.unibo.roguekong.model.game;
 
-public interface LevelBuilder {
+import it.unibo.roguekong.model.game.impl.LevelModel;
 
+public interface LevelBuilder {
+    public LevelModel build();
 }

@@ -3,6 +3,7 @@ package it.unibo.roguekong;
 import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
+import it.unibo.roguekong.model.game.impl.LevelBuilderImpl;
 import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -29,15 +30,24 @@ public class Main extends Application {
         GameOverView gameOverView = new GameOverView();
 
         // TileManager tileManager = new TileManager(32, 20, 2);
-        LevelModel level = new LevelModel(
-                new PositionImpl(960-32, 640-32),
-                new PositionImpl(10, 10),
-                List.of(),
-                new PlayerImpl(),
-                new TileManager("maps/map1.txt", "maps/background1.txt"),
-                1
-        );
+//        LevelModel level = new LevelModel(
+//                new PositionImpl(960-32, 640-32),
+//                new PositionImpl(10, 10),
+//                List.of(),
+//                new PlayerImpl(),
+//                new TileManager("maps/map1.txt", "maps/background1.txt"),
+//                1
+//        );
+        LevelModel level = new LevelBuilderImpl()
+                .setSpawnPosition(new PositionImpl(960-32, 640-32))
+                .setEndPoint(new PositionImpl(10, 10))
+                .setEnemiesList(List.of())
+                .setPlayer(new PlayerImpl())
+                .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
+                .setGravity(1)
+                .build();
         level.init();
+
         GameController controller = new GameController(gameView, gameState, level.getPlayer());
         gameView.loadMap(level.getTileManager());
         gameView.loadBackground(level.getTileManager());
