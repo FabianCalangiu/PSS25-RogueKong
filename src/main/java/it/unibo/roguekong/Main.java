@@ -28,8 +28,6 @@ public class Main extends Application {
         GameView gameView = new GameView();
         GameOverView gameOverView = new GameOverView();
 
-        GameController controller = new GameController(gameView, gameState);
-
         // TileManager tileManager = new TileManager(32, 20, 2);
         LevelModel level = new LevelModel(
                 new PositionImpl(960-32, 640-32),
@@ -40,6 +38,7 @@ public class Main extends Application {
                 1
         );
         level.init();
+        GameController controller = new GameController(gameView, gameState, level.getPlayer());
         gameView.loadMap(level.getTileManager());
         gameView.loadBackground(level.getTileManager());
         gameView.renderPlayer(level.getPlayer());

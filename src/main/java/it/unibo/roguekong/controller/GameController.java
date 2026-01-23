@@ -1,5 +1,6 @@
 package it.unibo.roguekong.controller;
 
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
 import it.unibo.roguekong.view.impl.GameView;
@@ -18,7 +19,7 @@ public class GameController {
     Runnable onMenu;
     Runnable onPause;
 
-    public GameController(GameView view, GameStateImpl gameState){
+    public GameController(GameView view, GameStateImpl gameState, PlayerImpl player){
         this.gameState = gameState;
 
         /*
@@ -75,8 +76,6 @@ public class GameController {
         /*
          * Add game logic here, also, add below here the input user handler
          */
-
-
     }
 
     private void render(){
