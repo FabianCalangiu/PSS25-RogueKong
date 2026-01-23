@@ -84,7 +84,7 @@ public class GameController {
         }
 
         if(gameView.isKeyPressed(KeyCode.D) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX() + 1, player.getPosition().getY());
+            this.player.setPosition(player.getPosition().getX() + (1 * 2), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
         }
 
         if(gameView.isKeyPressed(KeyCode.W) && gameState.getState() == GameStatus.PLAYING) {
