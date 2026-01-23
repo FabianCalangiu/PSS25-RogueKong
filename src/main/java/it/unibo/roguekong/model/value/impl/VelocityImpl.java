@@ -18,10 +18,10 @@ public class VelocityImpl implements Velocity {
         setVelocityY(velocity.getVelocityY());
     }
 
-    private void setVelocityX(double velocityX){
+    public void setVelocityX(double velocityX){
         this.velocityX = velocityX;
     }
-    private void setVelocityY(double velocityY){
+    public void setVelocityY(double velocityY){
         this.velocityY = velocityY;
     }
 

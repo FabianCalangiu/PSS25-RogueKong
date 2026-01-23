@@ -1,7 +1,8 @@
 package it.unibo.roguekong.model.entity.impl.powerup;
 
-import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
+import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
 public class ChangePlayerSpeed implements PowerUp {
     private final double multiplier;
@@ -11,14 +12,14 @@ public class ChangePlayerSpeed implements PowerUp {
     }
 
     @Override
-    public void applyEffect(Player player){
-        /*
-        Add body after player implementation!!
-         */
+    public void applyEffect(PlayerImpl player){
+        VelocityImpl velocity = player.getVelocity();
+        velocity.setVelocityX(multiplier);
+        player.setVelocity(velocity);
     }
 
     @Override
-    public void removeEffect(Player player){
+    public void removeEffect(PlayerImpl player){
         /*
         Add body after player implementation!!
          */
