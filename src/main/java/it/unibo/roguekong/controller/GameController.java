@@ -47,7 +47,7 @@ public class GameController {
 
         /*
          * Everything that is called inside handle()'s body
-         * is executed continously.
+         * is executed continuously.
          * That does not mean you should change its body, but update's and render's.
          */
         this.gameLoop = new AnimationTimer(){

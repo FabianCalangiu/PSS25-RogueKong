@@ -8,7 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameView implements RogueKongView {
     /*
@@ -28,25 +32,33 @@ public class GameView implements RogueKongView {
     private final Pane playerRender;
     private final Scene scene;
     private Runnable onKill;
+    private final Set<KeyCode> keysPressed = new HashSet<>();
 
     public GameView(){
         this.root = new Pane();
-
         this.map = new Pane();
         this.background = new Pane();
         this.ui = new Pane();
         this.playerRender = new Pane();
-        /*
-         * setFocusTraversable makes the user input readable
-         */
 
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
         root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
         ui.getChildren().addAll(sampleKill);
+        /*
+         * setFocusTraversable makes the user input readable
+         */
         this.root.setFocusTraversable(true);
         this.scene = new Scene(root, WIDTH, HEIGTH);
+
+        /*
+         * Events needed for user keys input.
+         * All the registered input are inserted into a Queue (the hashset declared above) and removed when released.
+         */
+        this.scene.setOnKeyPressed(e -> keysPressed.add(e.getCode()));
+        this.scene.setOnKeyReleased(e -> keysPressed.remove(e.getCode()));
+
         this.scene.getStylesheets().add(
                 getClass().getResource("/css/menu.css").toExternalForm()
         );
@@ -131,6 +143,13 @@ public class GameView implements RogueKongView {
         playerSpriteView.setY(player.getPosition().getY());
 
         playerRender.getChildren().add(playerSpriteView);
+    }
+
+    /*
+     * Returns if key is in the input queue
+     */
+    public boolean isKeyPressed(KeyCode key){
+        return keysPressed.contains(key);
     }
 
     public void setOnKill(Runnable r){
