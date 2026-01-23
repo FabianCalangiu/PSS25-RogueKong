@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class GameView implements RogueKongView {
     /*
-     * 1. This implementation defines a container (Pane) and a Scene where
+     * 1. This implementation defines several layers (Panes) and a Scene where
      * all its contents are rendered
      * 2. The scene renders said root Pane and takes as input widthxheight
      * n pixels
@@ -31,8 +31,10 @@ public class GameView implements RogueKongView {
     private final Pane map;
     private final Pane playerRender;
     private final Scene scene;
+
     private Runnable onKill;
     private final Set<KeyCode> keysPressed = new HashSet<>();
+
     private ImageView playerSpriteView;
 
     public GameView(){
@@ -74,58 +76,51 @@ public class GameView implements RogueKongView {
         return root;
     }
 
+    /*
+     * The loaders beneath load both the map and the background.
+     * Background and map are loaded on different layers, but are both Tile types
+     */
     public void loadMap(TileManager tileManager){
         int[][] mapMatrix = tileManager.getGameMap();
+        int[][] backgroundMatrix = tileManager.getBackgroundMap();
+
         Tile[] tileSet = tileManager.getTileSet();
 
         map.getChildren().clear();
-
-        for(int i = 0; i < tileManager.getRows(); i++){
-            for(int j = 0; j < tileManager.getCols(); j++){
-                int tileIndex = mapMatrix[i][j];
-                Tile tile = tileSet[tileIndex];
-
-                Image image = new Image(
-                        getClass().getResourceAsStream(tile.getImage())
-                );
-
-                ImageView tileView = new ImageView(image);
-
-                tileView.setFitWidth(TILE_SIZE);
-                tileView.setFitHeight(TILE_SIZE);
-
-                tileView.setX(j * TILE_SIZE);
-                tileView.setY(i * TILE_SIZE);
-
-                map.getChildren().add(tileView);
-            }
-        }
-    }
-
-    public void loadBackground(TileManager tileManager){
-        int[][] mapMatrix = tileManager.getBackgroundMap();
-        Tile[] tileSet = tileManager.getTileSet();
-
         background.getChildren().clear();
 
         for(int i = 0; i < tileManager.getRows(); i++){
             for(int j = 0; j < tileManager.getCols(); j++){
-                int tileIndex = mapMatrix[i][j];
-                Tile tile = tileSet[tileIndex];
+                int mapTileIndex = mapMatrix[i][j];
+                int backgroundTileIndex = backgroundMatrix[i][j];
 
-                Image image = new Image(
-                        getClass().getResourceAsStream(tile.getImage())
+                Tile mapTile = tileSet[mapTileIndex];
+                Tile backgroundTile = tileSet[backgroundTileIndex];
+
+
+                Image mapTileImage = new Image(
+                        getClass().getResourceAsStream(mapTile.getImage())
                 );
 
-                ImageView tileView = new ImageView(image);
+                Image backgroundTileImage = new Image(
+                        getClass().getResourceAsStream(backgroundTile.getImage())
+                );
 
-                tileView.setFitWidth(TILE_SIZE);
-                tileView.setFitHeight(TILE_SIZE);
+                ImageView mapTileView = new ImageView(mapTileImage);
+                ImageView backgroundTileView = new ImageView(backgroundTileImage);
 
-                tileView.setX(j * TILE_SIZE);
-                tileView.setY(i * TILE_SIZE);
+                mapTileView.setFitWidth(TILE_SIZE);
+                mapTileView.setFitHeight(TILE_SIZE);
+                backgroundTileView.setFitWidth(TILE_SIZE);
+                backgroundTileView.setFitHeight(TILE_SIZE);
 
-                background.getChildren().add(tileView);
+                mapTileView.setX(j * TILE_SIZE);
+                mapTileView.setY(i * TILE_SIZE);
+                backgroundTileView.setX(j * TILE_SIZE);
+                backgroundTileView.setY(i * TILE_SIZE);
+
+                background.getChildren().add(backgroundTileView);
+                map.getChildren().add(mapTileView);
             }
         }
     }
@@ -148,7 +143,7 @@ public class GameView implements RogueKongView {
     }
 
     /*
-     * Returns if key is in the input queue
+     * Returns true if key is in the input queue
      */
     public boolean isKeyPressed(KeyCode key){
         return keysPressed.contains(key);

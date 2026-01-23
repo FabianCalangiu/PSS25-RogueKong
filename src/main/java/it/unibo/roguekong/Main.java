@@ -40,7 +40,6 @@ public class Main extends Application {
         level.init();
         GameController controller = new GameController(gameView, gameState, level.getPlayer());
         gameView.loadMap(level.getTileManager());
-        gameView.loadBackground(level.getTileManager());
         gameView.renderPlayer(level.getPlayer());
 
         menuView.setOnStart(() -> {
