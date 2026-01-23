@@ -34,7 +34,7 @@ public class Main extends Application {
                 new PositionImpl(10, 10),
                 List.of(),
                 new PlayerImpl(),
-                new TileManager("maps/map1.txt", "maps/background1.txt"),
+                new TileManager("maps/sampleMap.txt", "maps/background1.txt"),
                 1
         );
         level.init();
