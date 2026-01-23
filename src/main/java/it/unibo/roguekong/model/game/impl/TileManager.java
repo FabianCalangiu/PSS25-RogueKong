@@ -26,12 +26,13 @@ public class TileManager {
         Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, TileType.PLATFORM);
         Tile tile3 = new Tile(Assets.SOIL, true, TileType.PLATFORM);
         Tile tile4 = new Tile(Assets.WATER, false, TileType.VOID);
+        Tile tile5 = new Tile(Assets.WATER_RIPPLE, false, TileType.VOID);
 
-        Tile tile5 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
-        Tile tile6 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
-        Tile tile7 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
+        Tile tile6 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
+        Tile tile7 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
+        Tile tile8 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
 
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7 };
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8 };
 
         this.fillGameBackground(backgroundPath);
         this.fillGameMap(mapPath);
