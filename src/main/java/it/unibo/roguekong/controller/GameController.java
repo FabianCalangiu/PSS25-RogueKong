@@ -18,10 +18,13 @@ public class GameController {
     private final GameStateImpl gameState;
     Runnable onMenu;
     Runnable onPause;
+    private GameView gameView;
+    private PlayerImpl player;
 
     public GameController(GameView view, GameStateImpl gameState, PlayerImpl player){
         this.gameState = gameState;
-
+        this.gameView = view;
+        this.player = player;
         /*
          * Insert inputs from here (They're outside the main loop because its EVENT DRIVEN) ->>
          */
@@ -76,12 +79,33 @@ public class GameController {
         /*
          * Add game logic here, also, add below here the input user handler
          */
+        if(gameView.isKeyPressed(KeyCode.A) && gameState.getState() == GameStatus.PLAYING) {
+            this.player.setPosition(player.getPosition().getX() - 1, player.getPosition().getY());
+        }
+
+        if(gameView.isKeyPressed(KeyCode.D) && gameState.getState() == GameStatus.PLAYING) {
+            this.player.setPosition(player.getPosition().getX() + 1, player.getPosition().getY());
+        }
+
+        if(gameView.isKeyPressed(KeyCode.W) && gameState.getState() == GameStatus.PLAYING) {
+            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
+        }
+
+        if(gameView.isKeyPressed(KeyCode.S) && gameState.getState() == GameStatus.PLAYING) {
+            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
+        }
+
+        if(gameView.isKeyPressed(KeyCode.SPACE) && gameState.getState() == GameStatus.PLAYING) {
+            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
+        }
+
     }
 
     private void render(){
         /*
          * Add render here
          */
+        gameView.renderPlayer(this.player);
     }
 
     public void stop(){

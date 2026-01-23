@@ -81,10 +81,12 @@ public class Main extends Application {
         pauseView.setOnMenu(() -> {
             controller.goToMenu();
             stage.setScene(menuView.getScene());
+            level.init();
         });
 
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
+            level.init();
         });
 
         stage.setScene(menuView.getScene());
