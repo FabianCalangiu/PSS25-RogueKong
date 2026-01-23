@@ -79,26 +79,49 @@ public class GameController {
         /*
          * Add game logic here, also, add below here the input user handler
          */
-        if(gameView.isKeyPressed(KeyCode.A) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX() - 1, player.getPosition().getY());
-        }
+//        if(gameView.isKeyPressed(KeyCode.A)) {
+//            this.player.setPosition(player.getPosition().getX() - 1, player.getPosition().getY());
+//        }
+//
+//        if(gameView.isKeyPressed(KeyCode.D)) {
+//            this.player.setPosition(player.getPosition().getX() + (1 * 2), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
+//        }
+//
+//        if(gameView.isKeyPressed(KeyCode.W)) {
+//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
+//        }
+//
+//        if(gameView.isKeyPressed(KeyCode.S)) {
+//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
+//        }
+//
+//        if(gameView.isKeyPressed(KeyCode.SPACE)) {
+//            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
+//        }
+        if(gameState.getState() != GameStatus.PLAYING) {
+            return;
+        } else {
 
-        if(gameView.isKeyPressed(KeyCode.D) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX() + (1 * 2), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
-        }
+            if(gameView.isKeyPressed(KeyCode.A)) {
+                this.player.setPosition(player.getPosition().getX() - (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
+            }
 
-        if(gameView.isKeyPressed(KeyCode.W) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
-        }
+            if(gameView.isKeyPressed(KeyCode.D)) {
+                this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
+            }
 
-        if(gameView.isKeyPressed(KeyCode.S) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
-        }
+            if(gameView.isKeyPressed(KeyCode.W)) {
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1); // It will be deleted soon. Keep It to try the player movement around the map
+            }
 
-        if(gameView.isKeyPressed(KeyCode.SPACE) && gameState.getState() == GameStatus.PLAYING) {
-            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
-        }
+            if(gameView.isKeyPressed(KeyCode.S)) {
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1); // It will be deleted soon. Keep It to try the player movement around the map
+            }
 
+            if(gameView.isKeyPressed(KeyCode.SPACE)) {
+                this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
+            }
+        }
     }
 
     private void render(){

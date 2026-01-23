@@ -10,8 +10,8 @@ public class VelocityImpl implements Velocity {
         setVelocityY(y);
     }
     public VelocityImpl(){
-        setVelocityX(0);
-        setVelocityY(0);
+        setVelocityX(1);
+        setVelocityY(1);
     }
     public VelocityImpl(Velocity velocity){
         setVelocityX(velocity.getVelocityX());
