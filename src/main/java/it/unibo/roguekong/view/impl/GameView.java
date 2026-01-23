@@ -33,6 +33,7 @@ public class GameView implements RogueKongView {
     private final Scene scene;
     private Runnable onKill;
     private final Set<KeyCode> keysPressed = new HashSet<>();
+    private ImageView playerSpriteView;
 
     public GameView(){
         this.root = new Pane();
@@ -130,19 +131,20 @@ public class GameView implements RogueKongView {
     }
 
     public void renderPlayer(PlayerImpl player){
-        Image playerSprite = new Image(
-                getClass().getResourceAsStream(player.getSprite())
-        );
+        if (playerSpriteView == null) {
+            Image playerSprite = new Image(
+                    getClass().getResourceAsStream(player.getSprite())
+            );
 
-        ImageView playerSpriteView = new ImageView(playerSprite);
+            playerSpriteView = new ImageView(playerSprite);
+            playerSpriteView.setFitWidth(TILE_SIZE);
+            playerSpriteView.setFitHeight(TILE_SIZE);
 
-        playerSpriteView.setFitWidth(TILE_SIZE);
-        playerSpriteView.setFitHeight(TILE_SIZE);
+            playerRender.getChildren().add(playerSpriteView);
+        }
 
         playerSpriteView.setX(player.getPosition().getX());
         playerSpriteView.setY(player.getPosition().getY());
-
-        playerRender.getChildren().add(playerSpriteView);
     }
 
     /*
