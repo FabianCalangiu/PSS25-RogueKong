@@ -44,7 +44,7 @@ public class LevelController {
     public void nextLevel() {
         LevelModel level = getCurrentLevel();
 
-        if(level.isLevelComplete() && isThereAnotherLevel()){
+        if(isThereAnotherLevel()){
             this.currentLevel++;
             Level newLevel = getCurrentLevel();
             newLevel.init();

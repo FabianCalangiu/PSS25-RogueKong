@@ -1,6 +1,7 @@
 package it.unibo.roguekong;
 
 import it.unibo.roguekong.controller.GameController;
+import it.unibo.roguekong.controller.LevelController;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.LevelBuilderImpl;
@@ -29,7 +30,7 @@ public class Main extends Application {
         GameView gameView = new GameView();
         GameOverView gameOverView = new GameOverView();
 
-        // TileManager tileManager = new TileManager(32, 20, 2);
+//        TileManager tileManager = new TileManager(32, 20, 2);
 //        LevelModel level = new LevelModel(
 //                new PositionImpl(960-32, 640-32),
 //                new PositionImpl(10, 10),
@@ -46,11 +47,30 @@ public class Main extends Application {
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
-        level.init();
 
-        GameController controller = new GameController(gameView, gameState, level.getPlayer());
-        gameView.loadMap(level.getTileManager());
-        gameView.renderPlayer(level.getPlayer());
+        LevelModel level2 = new LevelBuilderImpl()
+                .setSpawnPosition(new PositionImpl(960-32, 640-32))
+                .setEndPoint(new PositionImpl(10, 10))
+                .setEnemiesList(List.of())
+                .setPlayer(new PlayerImpl())
+                .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
+                .setGravity(1)
+                .build();
+
+        /**
+         * Creation of the LevelController, which contains LevelModel implementation for each levels
+         */
+        List<LevelModel> levels = List.of(level, level2);
+        LevelController levelController = new LevelController(levels);
+
+        /**
+         * Set up the first level
+         */
+        levelController.setUpLevel();
+
+        GameController controller = new GameController(gameView, gameState, levelController.getCurrentLevel().getPlayer());
+        gameView.loadMap(levelController.getCurrentLevel().getTileManager());
+        gameView.renderPlayer(levelController.getCurrentLevel().getPlayer());
 
         menuView.setOnStart(() -> {
             controller.start();
@@ -90,12 +110,12 @@ public class Main extends Application {
         pauseView.setOnMenu(() -> {
             controller.goToMenu();
             stage.setScene(menuView.getScene());
-            level.init();
+            levelController.reset();
         });
 
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
-            level.init();
+            levelController.reset();
         });
 
         stage.setScene(menuView.getScene());
