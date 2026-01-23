@@ -1,6 +1,8 @@
 package it.unibo.roguekong.model.entity;
 
+import it.unibo.roguekong.model.entity.impl.PlayerImpl;
+
 public interface PowerUp {
-    public void applyEffect(Player player);
-    public void removeEffect(Player player);
+    public void applyEffect(PlayerImpl player);
+    public void removeEffect(PlayerImpl player);
 }

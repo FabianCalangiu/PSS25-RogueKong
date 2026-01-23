@@ -3,11 +3,11 @@ package it.unibo.roguekong.model.entity.impl;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.value.Position;
-import it.unibo.roguekong.model.value.Velocity;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerImpl implements Player {
 
@@ -41,7 +41,7 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public Velocity getVelocity() {
+    public VelocityImpl getVelocity() {
         return this.velocity;
     }
 
