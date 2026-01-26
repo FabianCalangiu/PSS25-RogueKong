@@ -5,8 +5,8 @@ import it.unibo.roguekong.model.game.GamePlatform;
 import java.awt.image.BufferedImage;
 
 public class Tile implements GamePlatform {
-    private static final int WIDTH = 16;
-    private static final int HEIGHT = 16;
+    private static final int WIDTH = 32;
+    private static final int HEIGHT = 32;
 
     private TileType tileType;
     private final String  image;
