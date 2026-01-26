@@ -4,44 +4,70 @@ import it.unibo.roguekong.model.game.Hitbox;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 public class HitboxImpl implements Hitbox {
-    private PositionImpl pos = new PositionImpl();
-    private double minX = pos.getX()+0;
-    private double maxX = pos.getX()+0;
-    private double minY = pos.getY()+0;
-    private double maxY = pos.getY()+0;
+    private PositionImpl tl = new PositionImpl();
+    private PositionImpl tr = new PositionImpl();
+    private PositionImpl bl = new PositionImpl();
+    private PositionImpl br = new PositionImpl();
 
-    public HitboxImpl() {
-
+    public HitboxImpl(PositionImpl tl, double width, double height) {
+        setHitBox(tl, width, height);
     }
 
-    private void setHitBoxX(double length) {
-        this.minX = pos.getX()+(length/2);
-        this.maxX = pos.getX()-(length/2);
+    public HitboxImpl(PositionImpl tl){
+        setHitBox(tl, 32, 32);
     }
 
-    private void setHitBoxY(double height) {
-        this.minY = pos.getY()+(height/2);
-        this.maxY = pos.getY()-(height/2);
+    public void setHitBox(PositionImpl tl, double width, double height) {
+        PositionImpl topLeft = getTl();
+        PositionImpl topRight = getTr();
+        PositionImpl bottomLeft = getBl();
+        PositionImpl bottomRight = getBr();
+
+        try{
+            this.tl = tl;
+            this.tr = new PositionImpl(getTl().getX()+width, getTl().getY());
+            this.bl = new PositionImpl(getTl().getX(), getTl().getY()+height);
+            this.br = new PositionImpl(getTr().getX(), getBl().getY());
+        }catch(IllegalArgumentException e){
+            this.tl = getTl();
+            this.tr = getTr();
+            this.bl = getBl();
+            this.br = getBr();
+        }
     }
 
-    private void setHitBox(double length,  double height) {
-        setHitBoxX(length);
-        setHitBoxY(height);
+    public void moveHitBox(double x, double y) {
+        PositionImpl topLeft = getTl();
+        PositionImpl topRight = getTr();
+        PositionImpl bottomLeft = getBl();
+        PositionImpl bottomRight = getBr();
+
+        try{
+            this.tl = new PositionImpl(getTl().getX()+x, getTl().getY()+y);
+            this.tr = new PositionImpl(getTr().getX()+x, getTr().getY()+y);
+            this.bl = new PositionImpl(getBl().getX()+x, getBl().getY()+y);
+            this.br = new PositionImpl(getBr().getX()+x, getBr().getY()+y);
+        }catch(IllegalArgumentException e){
+            this.tl = getTl();
+            this.tr = getTr();
+            this.bl = getBl();
+            this.br = getBr();
+        }
     }
 
-    public double getMinX() {
-        return minX;
+    public PositionImpl getTl() {
+        return tl;
     }
 
-    public double getMaxX() {
-        return maxX;
+    public PositionImpl getTr() {
+        return tr;
     }
 
-    public double getMinY() {
-        return minY;
+    public PositionImpl getBl() {
+        return bl;
     }
 
-    public double getMaxY() {
-        return maxY;
+    public PositionImpl getBr() {
+        return br;
     }
 }
