@@ -24,6 +24,7 @@ public class PositionImpl implements Position{
         }
         this.x = x;
     }
+
     public void setY(double y)throws IllegalArgumentException{
         if(y>640 || y<0){
             throw new IllegalArgumentException("y out of range");

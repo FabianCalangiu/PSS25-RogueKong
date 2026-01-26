@@ -102,11 +102,11 @@ public class GameController {
             return;
         } else {
 
-            if(gameView.isKeyPressed(KeyCode.A) && this.player.getPosition().getX() > 0) {
+            if(gameView.isKeyPressed(KeyCode.A)) {
                 this.player.setPosition(player.getPosition().getX() - (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
             }
 
-            if(gameView.isKeyPressed(KeyCode.D) && this.player.getPosition().getX() + 32 < 960) {
+            if(gameView.isKeyPressed(KeyCode.D)) {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
 

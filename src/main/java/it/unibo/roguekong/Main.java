@@ -40,11 +40,11 @@ public class Main extends Application {
 //                1
 //        );
         LevelModel level = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(960-32, 640-32))
+                .setSpawnPosition(new PositionImpl(340, 260))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
-                .setTileManager(new TileManager("sampleMap.txt", "maps/background1.txt"))
+                .setTileManager(new TileManager("maps/sampleMap.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
 
