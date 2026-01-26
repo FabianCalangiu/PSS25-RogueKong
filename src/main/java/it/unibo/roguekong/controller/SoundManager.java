@@ -11,12 +11,20 @@ import javax.sound.sampled.FloatControl;
 
 public class SoundManager {
     private static final float SOUND_VOLUME = -40.0f;
+    private static Clip clip;
 
     public static void play(String musicPath) {
         try{
+            /**
+             * Check if the sound is already running
+             */
+            if (clip != null && clip.isRunning()) {
+                return;
+            }
+
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SoundManager.class.getResource(musicPath));
 
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
 
             /**
