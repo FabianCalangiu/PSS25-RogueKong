@@ -10,7 +10,7 @@ import javax.sound.sampled.FloatControl;
  */
 
 public class SoundManager {
-    private static final float SOUND_VOLUME = -40.0f;
+    private static final float SOUND_VOLUME = -20.0f;
     private static Clip clip;
 
     public static void play(String musicPath) {

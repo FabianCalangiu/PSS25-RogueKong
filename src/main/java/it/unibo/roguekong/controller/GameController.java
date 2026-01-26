@@ -98,6 +98,13 @@ public class GameController {
 //        if(gameView.isKeyPressed(KeyCode.SPACE)) {
 //            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
 //        }
+
+        /**
+         * Start background music
+         */
+        SoundManager.play("/assets/sound/musicBackground.wav");
+
+
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
         } else {
