@@ -17,6 +17,7 @@ public class HitboxImpl implements Hitbox {
         setHitBox(tl, 32, 32);
     }
 
+    @Override
     public void setHitBox(PositionImpl tl, double width, double height) {
         PositionImpl topLeft = getTl();
         PositionImpl topRight = getTr();
@@ -53,6 +54,11 @@ public class HitboxImpl implements Hitbox {
             this.bl = getBl();
             this.br = getBr();
         }
+    }
+
+    public boolean destra(Hitbox hb){
+        //se colpisce destra torna false
+        return false;
     }
 
     public PositionImpl getTl() {
