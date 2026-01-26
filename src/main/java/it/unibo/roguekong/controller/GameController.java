@@ -120,7 +120,7 @@ public class GameController {
 
             if(gameView.isKeyPressed(KeyCode.SPACE)) {
                 this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
-                SoundManager.play("");
+                SoundManager.play("/assets/sound/Jump.wav");
             }
         }
     }
