@@ -44,7 +44,7 @@ public class Main extends Application {
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
-                .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
+                .setTileManager(new TileManager("sampleMap.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
 
