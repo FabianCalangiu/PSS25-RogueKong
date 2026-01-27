@@ -87,6 +87,7 @@ public class Main extends Application {
         controller.setOnPause(() -> {
             controller.setOnPause(() -> {
                 stage.setScene(pauseView.getScene());
+                BACKGROUND_MUSIC.stop();
             });
             stage.setScene(pauseView.getScene());
             BACKGROUND_MUSIC.stop();
