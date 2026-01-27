@@ -52,14 +52,18 @@ public class SoundManager {
      * When the game loop is set on pause, even the music need to be set on pause
      */
     public void stop() {
-        this.clip.stop();
+        if(this.clip != null && this.clip.isRunning()) {
+            this.clip.stop();
+        }
     }
 
     /**
      * When the game loop is set on resume, even the music need to be set on resume. So restart the sound where it got interrupted
      */
     public void restart() {
-        this.clip.start();
+        if(this.clip != null && !this.clip.isRunning()) {
+            this.clip.start();
+        }
     }
 
     /**
@@ -67,6 +71,6 @@ public class SoundManager {
      */
     public void loop() {
         this.play();
-        this.clip.loop(-1);
+        this.clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }
