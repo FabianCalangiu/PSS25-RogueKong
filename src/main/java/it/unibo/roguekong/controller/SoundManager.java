@@ -62,7 +62,11 @@ public class SoundManager {
         this.clip.start();
     }
 
+    /**
+     * When a sound must be repeated continuously, call this method it will loop till the game will be set on pause or quit
+     */
     public void loop() {
-        //this.clip.loop(100);
+        this.play();
+        this.clip.loop(-1);
     }
 }

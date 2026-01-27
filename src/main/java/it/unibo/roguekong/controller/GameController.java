@@ -74,7 +74,7 @@ public class GameController {
     public void start(){
         gameState.startGame();
         gameLoop.start();
-        //BACKGROUND_MUSIC.loop();
+        BACKGROUND_MUSIC.loop();
     }
 
     /*
@@ -82,11 +82,6 @@ public class GameController {
      * gets updated every 60fps
      */
     private void update(){
-//        /**
-//         * Start background music. If it hasn’t finished yet, it won’t restart until it’s done.
-//         */
-//        BACKGROUND_MUSIC.play();
-
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
         } else {
