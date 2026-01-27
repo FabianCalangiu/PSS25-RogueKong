@@ -2,7 +2,9 @@ package it.unibo.roguekong.model.entity.impl;
 
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.value.Lives;
 import it.unibo.roguekong.model.value.Position;
+import it.unibo.roguekong.model.value.impl.LivesImpl;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
@@ -20,14 +22,26 @@ public class PlayerImpl implements Player {
     private boolean jump = false;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
+    private LivesImpl lives = new LivesImpl();
 
-    public PlayerImpl() {
+    public PlayerImpl(LivesImpl lives, String sprite) {
         setJump(true);
         setMoveRight(true);
         setMoveLeft(true);
         setMoveUp(true);
         setMidAir(true);
+        setLives(lives);
         setSprite("/assets/sprites/standing-mario.png");
+    }
+
+    @Override
+    public LivesImpl getLives() {
+        return lives;
+    }
+
+    @Override
+    public void setLives(LivesImpl lives) {
+        this.lives = lives;
     }
 
     @Override
