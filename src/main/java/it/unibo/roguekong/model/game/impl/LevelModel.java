@@ -80,8 +80,8 @@ public class LevelModel implements Level {
         return tileManager;
     }
 
-    private void setGravityOnPlayer() {
-        this.player.setVelocity(new VelocityImpl(this.player.getVelocity().getVelocityX(), this.player.getVelocity().getVelocityY() * this.gravity));
+    public void setGravityOnPlayer() {
+        this.player.setVelocity(new VelocityImpl(this.player.getVelocity().getVelocityX(), this.player.getVelocity().getVelocityY() + (1 * this.gravity)));
     }
 
     private void setPlayerOnSpawn() {
