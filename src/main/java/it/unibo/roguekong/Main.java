@@ -33,7 +33,7 @@ public class Main extends Application {
         GameOverView gameOverView = new GameOverView();
 
         LevelModel level = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(960-32, 640-32))
+                .setSpawnPosition(new PositionImpl(100, 200))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())

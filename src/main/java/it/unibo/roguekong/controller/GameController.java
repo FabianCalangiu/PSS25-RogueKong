@@ -107,11 +107,6 @@ public class GameController {
                 showPowerUpPanel();
             }
 
-            /*
-             * Gravity
-             */
-
-            player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1 * player.getVelocity().getVelocityY());
         }
     }
 
