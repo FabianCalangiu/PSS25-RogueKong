@@ -163,7 +163,7 @@ public class GameView implements RogueKongView {
          * Inline CSS style
          */
         powerUpLayer.setStyle("""
-                -fx-background-color: rbga(0, 0, 0, 0.6);
+                -fx-background-color: rgba(0, 0, 0, 0.6);
                 """);
 
         powerUpBox = new VBox(15);
@@ -188,7 +188,24 @@ public class GameView implements RogueKongView {
 
         for(PowerUp p : powerUps){
             Button button = new Button(p.getName());
+            button.setPrefWidth(260);
+
+            button.setOnAction(e -> {
+                p.applyEffect(player);
+                hidePowerUpPanel();
+                if(onChoice != null){
+                    onChoice.run();
+                }
+            });
+
+            powerUpBox.getChildren().add(button);
         }
+
+        powerUpLayer.setVisible(true);
+    }
+
+    public void hidePowerUpPanel(){
+        powerUpLayer.setVisible(false);
     }
 
     /*
