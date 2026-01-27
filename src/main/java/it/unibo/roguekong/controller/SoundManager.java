@@ -61,4 +61,8 @@ public class SoundManager {
     public void restart() {
         this.clip.start();
     }
+
+    public void loop() {
+        //this.clip.loop(100);
+    }
 }

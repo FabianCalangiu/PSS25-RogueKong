@@ -23,14 +23,15 @@ public class PlayerImpl implements Player {
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
+    private static final int LIVES_AT_START = 3;
 
-    public PlayerImpl(LivesImpl lives, String sprite) {
+    public PlayerImpl() {
         setJump(true);
         setMoveRight(true);
         setMoveLeft(true);
         setMoveUp(true);
         setMidAir(true);
-        setLives(lives);
+        setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
     }
 
