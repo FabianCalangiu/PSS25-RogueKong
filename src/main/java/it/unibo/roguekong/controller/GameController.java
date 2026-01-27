@@ -7,8 +7,6 @@ import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 
-import javax.sound.SoundClip;
-
 /*
  * This is the actual gameloop handler.
  * From javafx docs: The class AnimationTimer allows to create a timer, that is called in each frame while it is active.
