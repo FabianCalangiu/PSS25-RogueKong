@@ -6,9 +6,13 @@ import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
 public class ChangePlayerSpeed implements PowerUp {
     private final double multiplier;
+    private String name;
+    private String description;
 
     ChangePlayerSpeed(double multiplier){
         this.multiplier = multiplier;
+        this.name = "Speed Power Up";
+        this.description = "Changes the player's speed.";
     }
 
     @Override
@@ -23,5 +27,15 @@ public class ChangePlayerSpeed implements PowerUp {
         /*
         Add body after player implementation!!
          */
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 }

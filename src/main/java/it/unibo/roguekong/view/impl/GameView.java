@@ -1,5 +1,6 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
@@ -13,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GameView implements RogueKongView {
@@ -179,6 +181,14 @@ public class GameView implements RogueKongView {
         powerUpLayer.setVisible(false);
 
         ui.getChildren().add(powerUpLayer);
+    }
+
+    public void showPowerUpPanel(PlayerImpl player, List<PowerUp> powerUps, Runnable onChoice){
+        powerUpBox.getChildren().clear();
+
+        for(PowerUp p : powerUps){
+            Button button = new Button(p.getName());
+        }
     }
 
     /*

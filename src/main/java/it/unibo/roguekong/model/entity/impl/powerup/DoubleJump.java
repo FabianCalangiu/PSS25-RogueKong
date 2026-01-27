@@ -4,6 +4,14 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 
 public class DoubleJump implements PowerUp {
+    private String name;
+    private String description;
+
+    DoubleJump(){
+        this.name = "Double Jump";
+        this.description = "Grants a second jump to the player.";
+    }
+
     @Override
     public void applyEffect(PlayerImpl player){
         /*
@@ -16,5 +24,15 @@ public class DoubleJump implements PowerUp {
         /*
         Add body after player implementation!!
          */
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 }
