@@ -8,7 +8,7 @@ public class IncreasePlayerLives implements PowerUp {
     private String name;
     private String description;
 
-    IncreasePlayerLives(){
+    public IncreasePlayerLives(){
         this.name = "Life up";
         this.description = "Increases player's lives.";
     }

@@ -7,7 +7,7 @@ public class DoubleJump implements PowerUp {
     private String name;
     private String description;
 
-    DoubleJump(){
+    public DoubleJump(){
         this.name = "Double Jump";
         this.description = "Grants a second jump to the player.";
     }
