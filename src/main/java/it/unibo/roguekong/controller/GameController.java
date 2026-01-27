@@ -106,6 +106,7 @@ public class GameController {
             if(gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
             }
+
         }
     }
 
