@@ -7,6 +7,8 @@ import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 
+import javax.sound.SoundClip;
+
 /*
  * This is the actual gameloop handler.
  * From javafx docs: The class AnimationTimer allows to create a timer, that is called in each frame while it is active.
@@ -14,6 +16,9 @@ import javafx.scene.input.KeyCode;
  */
 
 public class GameController {
+    private static final SoundManager BACKGROUND_MUSIC = new SoundManager("/assets/sound/musicBackground.wav", -20.0f);
+    private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
+
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
     Runnable onMenu;
@@ -76,34 +81,10 @@ public class GameController {
      * gets updated every 60fps
      */
     private void update(){
-        /*
-         * Add game logic here, also, add below here the input user handler
-         */
-//        if(gameView.isKeyPressed(KeyCode.A)) {
-//            this.player.setPosition(player.getPosition().getX() - 1, player.getPosition().getY());
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.D)) {
-//            this.player.setPosition(player.getPosition().getX() + (1 * 2), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.W)) {
-//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.S)) {
-//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.SPACE)) {
-//            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
-//        }
-
         /**
-         * Start background music
+         * Start background music. If it hasn’t finished yet, it won’t restart until it’s done.
          */
-        SoundManager.play("/assets/sound/musicBackground.wav");
-
+        BACKGROUND_MUSIC.play();
 
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
@@ -127,7 +108,7 @@ public class GameController {
 
             if(gameView.isKeyPressed(KeyCode.SPACE)) {
                 this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
-                SoundManager.play("/assets/sound/jump.wav");
+                JUMP_SOUND.play();
             }
         }
     }
@@ -140,21 +121,25 @@ public class GameController {
     }
 
     public void stop(){
+        BACKGROUND_MUSIC.stop();
         gameLoop.stop();
     }
 
     private void pause(){
+        BACKGROUND_MUSIC.stop();
         gameState.pauseGame();
         gameLoop.stop();
         if(onPause != null) onPause.run();
     }
 
     public void resume(){
+        BACKGROUND_MUSIC.restart();
         gameState.resumeGame();
         gameLoop.start();
     }
 
     public void goToMenu() {
+        BACKGROUND_MUSIC.stop();
         gameLoop.stop();
         gameState.goToMenu();
         if (onMenu != null) onMenu.run();

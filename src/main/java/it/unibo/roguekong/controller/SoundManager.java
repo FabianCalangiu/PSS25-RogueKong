@@ -1,19 +1,24 @@
 package it.unibo.roguekong.controller;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 
 /**
  * This class will be used to play sounds in the game loop
  */
-
 public class SoundManager {
-    private static final float SOUND_VOLUME = -20.0f;
-    private static Clip clip;
+    private final float volume;
+    private Clip clip;
+    private final String soundPath;
 
-    public static void play(String musicPath) {
+    public SoundManager(final String musicPath, final float volume) {
+        this.soundPath = musicPath;
+        this.volume = volume;
+    }
+
+    /**
+     * Use this to play the music for the first time
+     */
+    public void play() {
         try{
             /**
              * Check if the sound is already running
@@ -22,7 +27,7 @@ public class SoundManager {
                 return;
             }
 
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SoundManager.class.getResource(musicPath));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SoundManager.class.getResource(this.soundPath));
 
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
@@ -32,17 +37,28 @@ public class SoundManager {
              */
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gain.setValue(SOUND_VOLUME);
+                gain.setValue(this.volume);
             }
 
-            /**
-             * Restart every each call, the sound to zero
-             */
             clip.setFramePosition(0);
 
             clip.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * When the game loop is set on pause, even the music need to be set on pause
+     */
+    public void stop() {
+        this.clip.stop();
+    }
+
+    /**
+     * When the game loop is set on resume, even the music need to be set on resume. So restart the sound where it got interrupted
+     */
+    public void restart() {
+        this.clip.start();
     }
 }
