@@ -16,7 +16,6 @@ import javax.sound.SoundClip;
  */
 
 public class GameController {
-    private static final SoundManager BACKGROUND_MUSIC = new SoundManager("/assets/sound/musicBackground.wav", -20.0f);
     private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
 
     private AnimationTimer gameLoop;
@@ -74,7 +73,6 @@ public class GameController {
     public void start(){
         gameState.startGame();
         gameLoop.start();
-        BACKGROUND_MUSIC.loop();
     }
 
     /*
@@ -117,25 +115,21 @@ public class GameController {
     }
 
     public void stop(){
-        BACKGROUND_MUSIC.stop();
         gameLoop.stop();
     }
 
     private void pause(){
-        BACKGROUND_MUSIC.stop();
         gameState.pauseGame();
         gameLoop.stop();
         if(onPause != null) onPause.run();
     }
 
     public void resume(){
-        BACKGROUND_MUSIC.restart();
         gameState.resumeGame();
         gameLoop.start();
     }
 
     public void goToMenu() {
-        BACKGROUND_MUSIC.stop();
         gameLoop.stop();
         gameState.goToMenu();
         if (onMenu != null) onMenu.run();
