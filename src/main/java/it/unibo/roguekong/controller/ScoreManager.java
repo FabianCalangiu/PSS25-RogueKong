@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Comparator;
+import java.util.List;
 
 public class ScoreManager {
     /*
@@ -29,7 +31,7 @@ public class ScoreManager {
     }
 
     /*
-     * Writes on the given file the score entry
+     * Writes on the given file the score entry through append
      */
     public void saveScore(ScoreRecord entry){
         try {
@@ -42,5 +44,45 @@ public class ScoreManager {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    /*
+     * Format file is as follows:
+     * 1 Player;number1
+     * 2 Player:number2
+     * 3 ...
+     *
+     * This reads the provided lines and splits it using the ';' separator
+     */
+    private ScoreRecord parseLine(String line){
+        String[] lineParts = line.split(";");
+        return new ScoreRecord(lineParts[0], Integer.parseInt(lineParts[1]));
+     }
+
+    /*
+     * Loads all score ordered DESCENDING in a list
+     */
+    public List<ScoreRecord> loadScores(){
+        if(!Files.exists(SCORE_FILE)){
+            return List.of();
+        }
+
+        try {
+            return Files.readAllLines(SCORE_FILE)
+                    .stream()
+                    .map(line -> this.parseLine(line))
+                    .sorted(Comparator.comparingInt((ScoreRecord entry) -> entry.score()).reversed())
+                    .toList();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    /*
+     * Loads only top records
+     */
+    public List<ScoreRecord> loadTopScores(int limit){
+        return loadScores().stream().limit(limit).toList();
     }
 }
