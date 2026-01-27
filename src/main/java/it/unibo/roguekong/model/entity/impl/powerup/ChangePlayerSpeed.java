@@ -9,7 +9,7 @@ public class ChangePlayerSpeed implements PowerUp {
     private String name;
     private String description;
 
-    ChangePlayerSpeed(double multiplier){
+    public ChangePlayerSpeed(double multiplier){
         this.multiplier = multiplier;
         this.name = "Speed Power Up";
         this.description = "Changes the player's speed.";

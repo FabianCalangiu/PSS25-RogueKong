@@ -7,8 +7,6 @@ import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 
-import javax.sound.SoundClip;
-
 /*
  * This is the actual gameloop handler.
  * From javafx docs: The class AnimationTimer allows to create a timer, that is called in each frame while it is active.
@@ -30,7 +28,7 @@ public class GameController {
         this.gameView = view;
         this.player = player;
         /*
-         * Insert inputs from here (They're outside the main loop because its EVENT DRIVEN) ->>
+         * Insert inputs from here (They're outside the main loop because they're EVENT DRIVEN) ->>
          */
 
         /*
@@ -104,6 +102,10 @@ public class GameController {
                 this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
                 JUMP_SOUND.play();
             }
+
+            if(gameView.isKeyPressed(KeyCode.P)){
+                showPowerUpPanel();
+            }
         }
     }
 
@@ -133,6 +135,22 @@ public class GameController {
         gameLoop.stop();
         gameState.goToMenu();
         if (onMenu != null) onMenu.run();
+    }
+
+    private void showPowerUpPanel(){
+        gameLoop.stop();
+        gameState.pauseGame();
+
+        var powerUps = PowerUpController.getRandomPowerUps(2);
+
+        gameView.showPowerUpPanel(
+                player,
+                powerUps,
+                () -> {
+                    gameState.resumeGame();
+                    gameLoop.start();
+                }
+        );
     }
 
     public void setOnPause(Runnable r) {
