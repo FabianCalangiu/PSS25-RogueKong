@@ -17,6 +17,12 @@ public class HitboxImpl implements Hitbox {
         moveHitBox(tl.getX(), tl.getY());
     }
 
+    public void moveHitBox(double x, double y, HitboxImpl hitbox) {
+        if(!isColliding(hitbox)) {
+            moveHitBox(x, y);
+        }
+    }
+
     public void moveHitBox(double x, double y) {
         PositionImpl topLeft = getTl();
         PositionImpl topRight = getTr();
@@ -41,8 +47,17 @@ public class HitboxImpl implements Hitbox {
         }
     }
 
-    public boolean hitCheckRight(Hitbox hb){
-        return getBr().getX() > hb.getBl().getX() || getTr().getX() > hb.getTr().getX();
+    public boolean isColliding(HitboxImpl hb) { //return true when the other hitbox is toutching this one
+        if((getTl().getX() > hb.getTl().getX()   &&   getTl().getX() < hb.getTr().getX()) && (getTl().getY() > hb.getTl().getY()   &&   getTl().getY() < hb.getBl().getY())) {
+            return true;
+        }if((getTr().getX() > hb.getTl().getX()   &&   getTr().getX() < hb.getTr().getX()) && (getTr().getY() > hb.getTl().getY()   &&   getTr().getY() < hb.getBl().getY())) {
+            return true;
+        }if((getBl().getX() > hb.getTl().getX()   &&   getBl().getX() < hb.getTr().getX()) && (getBl().getY() > hb.getTl().getY()   &&   getBl().getY() < hb.getBl().getY())) {
+            return true;
+        }if((getBr().getX() > hb.getTl().getX()   &&   getBr().getX() < hb.getTr().getX()) && (getBr().getY() > hb.getTl().getY()   &&   getBr().getY() < hb.getBl().getY())) {
+            return true;
+        }
+        return false;
     }
 
     public PositionImpl getTl() {
