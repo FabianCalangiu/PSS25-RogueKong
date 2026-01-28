@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LevelTest {
     LevelModel level;
@@ -33,12 +32,12 @@ public class LevelTest {
         assertFalse(level.isLevelComplete());
     }
 
-//    @Test
-//    void checkIfLevelIsCompleteAtEnd() {
-//        this.player.setPosition(endPoint.getX(), endPoint.getY());
-//        this.level.update();
-//        assertTrue(level.isLevelComplete());
-//    }
+    @Test
+    void checkIfLevelIsCompleteAtEnd() {
+        this.player.setPosition(endPoint.getX(), endPoint.getY());
+        this.level.checkLevel();
+        assertTrue(level.isLevelComplete());
+    }
 
     @Test
     void checkIfLevelIsNotCompleteIfPlayerIsNotAtTheStart() {
