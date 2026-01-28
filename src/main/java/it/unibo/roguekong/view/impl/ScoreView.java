@@ -3,29 +3,45 @@ package it.unibo.roguekong.view.impl;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class ScoreView {
     private final Scene scene;
     private Runnable onReturn;
 
+    private Label score1;
+    private Label score2;
+    private Label score3;
+
     public ScoreView() {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
 
+        this.score1 = new Label("-");
+        this.score2 = new Label("-");
+        this.score3 = new Label("-");
 
+        score1.getStyleClass().add("box1");
+        score2.getStyleClass().add("box2");
+        score3.getStyleClass().add("box3");
+
+        score1.setMinSize(150, 50);
+        score2.setMinSize(150, 50);
+        score3.setMinSize(150, 50);
 
         Button returnButton = new Button("Return");
 
         returnButton.setOnAction(e -> runIfNotNull(onReturn));
 
-        root.getChildren().addAll(box1, box2, box3, returnButton);
+        root.getChildren().addAll(score1, score2, score3, returnButton);
         this.scene = new Scene(root, 800, 600);
         this.scene.getStylesheets().add(
                 getClass().getResource("/css/menu.css").toExternalForm()
         );
     }
+
+
 
     public Scene getScene() {
         return scene;
