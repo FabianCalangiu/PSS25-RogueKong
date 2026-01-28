@@ -22,14 +22,18 @@ public class GameController {
     Runnable onPause;
     private GameView gameView;
     private PlayerImpl player;
+    private LevelController levelController;
+    private ScoreManager scoreManager;
 
     private int score = 1000;
     private long lastScoreUpdate = 0;
 
-    public GameController(GameView view, GameStateImpl gameState, PlayerImpl player){
+    public GameController(GameView view, GameStateImpl gameState, PlayerImpl player, LevelController levelController, ScoreManager scoreManager) {
         this.gameState = gameState;
         this.gameView = view;
         this.player = player;
+        this.levelController = levelController;
+        this.scoreManager = scoreManager;
         /*
          * Insert inputs from here (They're outside the main loop because they're EVENT DRIVEN) ->>
          */
@@ -179,5 +183,9 @@ public class GameController {
 
     public void setOnMenu(Runnable r) {
         this.onMenu = r;
+    }
+
+    public int getScoreManager() {
+        return this.score;
     }
 }

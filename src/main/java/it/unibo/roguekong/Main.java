@@ -65,7 +65,7 @@ public class Main extends Application {
          */
         levelController.setUpLevel();
 
-        GameController controller = new GameController(gameView, gameState, levelController.getCurrentLevel().getPlayer());
+        GameController controller = new GameController(gameView, gameState, levelController.getCurrentLevel().getPlayer(), levelController, scoreManager);
         gameView.loadMap(levelController.getCurrentLevel().getTileManager());
         gameView.renderPlayer(levelController.getCurrentLevel().getPlayer());
 
