@@ -2,6 +2,7 @@ package it.unibo.roguekong;
 
 import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.controller.LevelController;
+import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.controller.SoundManager;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
@@ -31,6 +32,9 @@ public class Main extends Application {
         PauseView pauseView = new PauseView();
         GameView gameView = new GameView();
         GameOverView gameOverView = new GameOverView();
+        ScoreManager scoreManager = new ScoreManager();
+
+        scoreView.setScores(scoreManager.loadTopScores(3));
 
         LevelModel level = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(100, 200))
