@@ -2,10 +2,7 @@ package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.entity.Enemy;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.GamePlatform;
-import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.game.Level;
-import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
@@ -19,7 +16,7 @@ public class LevelModel implements Level {
     private final PlayerImpl player;
     private boolean isComplete;
     private final TileManager tileManager;
-    private final int gravity;
+    private int gravity;
 
     public LevelModel(
             final PositionImpl spawnPoint,
@@ -78,6 +75,14 @@ public class LevelModel implements Level {
 
     public TileManager getTileManager() {
         return tileManager;
+    }
+
+    public int getGravity(){
+        return this.gravity;
+    }
+
+    public void setGravity(int gravity){
+        this.gravity = gravity;
     }
 
     public void setGravityOnPlayer() {
