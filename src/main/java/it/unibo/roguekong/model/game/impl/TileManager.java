@@ -14,6 +14,7 @@ public class TileManager {
     private final static int TILE_SIZE = 32;
 
     private Tile[] tileSet;
+    private Tile[] tileBackGround;
     private final int [][] gameMap;
     private final int [][] backgroundMap;
 
@@ -52,12 +53,14 @@ public class TileManager {
         Tile tile3 = new Tile(Assets.SOIL, true, TileType.PLATFORM);
         Tile tile4 = new Tile(Assets.WATER, true, TileType.VOID);
         Tile tile5 = new Tile(Assets.WATER_RIPPLE, true, TileType.VOID);
+        Tile tile6 = new Tile(Assets.LADDER, false, TileType.LADDER);
 
-        Tile tile6 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
-        Tile tile7 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
-        Tile tile8 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
 
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8 };
+        Tile tile7 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
+        Tile tile8 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
+        Tile tile9 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
+
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9 };
     }
 
     /**
