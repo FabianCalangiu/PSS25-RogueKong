@@ -8,6 +8,10 @@
 .box1, .box2, .box3{
     -fx-border-color: black;
     -fx-border-width: 1px;
+    -fx-font-size: larger;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-alignment: center;
 }
 
 .game-over-title{
