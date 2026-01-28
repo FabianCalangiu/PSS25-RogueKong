@@ -7,7 +7,7 @@ import it.unibo.roguekong.model.value.impl.VelocityImpl;
 public class ModifyGravity implements PowerUp {
     private final double multiplier;
 
-    ModifyGravity(int multiplier){
+    public ModifyGravity(double multiplier){
         this.multiplier = multiplier;
     }
 
