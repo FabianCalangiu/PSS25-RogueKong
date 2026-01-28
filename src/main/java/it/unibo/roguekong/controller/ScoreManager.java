@@ -85,4 +85,20 @@ public class ScoreManager {
     public List<ScoreRecord> loadTopScores(int limit){
         return loadScores().stream().limit(limit).toList();
     }
+
+    /*
+     * Clears all registered scores
+     */
+    public void clearScores(){
+        try{
+            Files.writeString(
+                    SCORE_FILE,
+                    "",
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING
+            );
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

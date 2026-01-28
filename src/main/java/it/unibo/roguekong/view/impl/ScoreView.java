@@ -14,18 +14,7 @@ public class ScoreView {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
 
-        Pane box1 = new Pane(); box1.getStyleClass().add("box1");
-        Pane box2 = new Pane(); box2.getStyleClass().add("box2");
-        Pane box3 = new Pane(); box3.getStyleClass().add("box3");
 
-        box1.setMinSize(150, 50);
-        box1.setMaxSize(150, 50);
-
-        box2.setMinSize(150, 50);
-        box2.setMaxSize(150, 50);
-
-        box3.setMinSize(150, 50);
-        box3.setMaxSize(150, 50);
 
         Button returnButton = new Button("Return");
 
