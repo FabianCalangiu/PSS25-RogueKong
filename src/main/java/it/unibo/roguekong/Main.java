@@ -5,10 +5,7 @@ import it.unibo.roguekong.controller.LevelController;
 import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.controller.SoundManager;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.GameStateImpl;
-import it.unibo.roguekong.model.game.impl.LevelBuilderImpl;
-import it.unibo.roguekong.model.game.impl.LevelModel;
-import it.unibo.roguekong.model.game.impl.TileManager;
+import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.*;
 import javafx.application.Application;
@@ -121,6 +118,7 @@ public class Main extends Application {
             stage.setScene(menuView.getScene());
             levelController.reset();
             BACKGROUND_MUSIC.stop();
+            scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
 
         stage.setScene(menuView.getScene());
