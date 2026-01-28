@@ -23,6 +23,9 @@ public class GameController {
     private GameView gameView;
     private PlayerImpl player;
 
+    private int score = 1000;
+    private long lastScoreUpdate = 0;
+
     public GameController(GameView view, GameStateImpl gameState, PlayerImpl player){
         this.gameState = gameState;
         this.gameView = view;
@@ -106,7 +109,6 @@ public class GameController {
             if(gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
             }
-
         }
     }
 
@@ -152,6 +154,23 @@ public class GameController {
                     gameLoop.start();
                 }
         );
+    }
+
+    private void updateScore(){
+        long now = System.nanoTime();
+
+        if(lastScoreUpdate == 0){
+            lastScoreUpdate = now;
+            return;
+        }
+
+        long elapsed = now - lastScoreUpdate;
+
+        if(elapsed >= 1_000_000_000L){
+            score = Math.max(0, score - 2);
+            lastScoreUpdate = now;
+            System.out.println("Score: " + score);
+        }
     }
 
     public void setOnPause(Runnable r) {

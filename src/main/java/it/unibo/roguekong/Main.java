@@ -99,6 +99,7 @@ public class Main extends Application {
 
         gameView.setOnKill(() -> {
             stage.setScene(gameOverView.getScene());
+            controller.stop();
             BACKGROUND_MUSIC.stop();
         });
 
