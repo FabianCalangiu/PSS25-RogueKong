@@ -51,7 +51,7 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public Position getPosition() {
+    public PositionImpl getPosition() {
         return this.position;
     }
 

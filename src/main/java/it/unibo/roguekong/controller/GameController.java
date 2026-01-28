@@ -3,6 +3,9 @@ package it.unibo.roguekong.controller;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
+import it.unibo.roguekong.model.game.impl.TileType;
+import it.unibo.roguekong.model.value.Position;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
@@ -96,13 +99,27 @@ public class GameController {
             if(gameView.isKeyPressed(KeyCode.D) && this.player.getPosition().getX() + 32 < 960) {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
+            /**
+             * Must be improved soon
+             */
+            PositionImpl tileBelow = new PositionImpl(
+                    this.player.getPosition().getX() + 16,
+                    this.player.getPosition().getY()
+            );
 
-            if(gameView.isKeyPressed(KeyCode.W)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1); // It will be deleted soon. Keep It to try the player movement around the map
+            if(gameView.isKeyPressed(KeyCode.W) &&
+                    (levelController.getCurrentLevel()
+                            .getTileManager()
+                            .getTileAtPosition(tileBelow)
+                            .getTileType() == TileType.LADDER)) {
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
             }
 
+            /**
+             * Must be improved soon
+             */
             if(gameView.isKeyPressed(KeyCode.S)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1); // It will be deleted soon. Keep It to try the player movement around the map
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
             }
 
             if(gameView.isKeyPressed(KeyCode.SPACE)) {
