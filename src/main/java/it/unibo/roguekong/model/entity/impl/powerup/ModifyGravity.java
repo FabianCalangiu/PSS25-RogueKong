@@ -2,30 +2,32 @@ package it.unibo.roguekong.model.entity.impl.powerup;
 
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.Level;
-import it.unibo.roguekong.model.game.impl.LevelModel;
+import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
 public class ModifyGravity implements PowerUp {
-    private double multiplier;
+    private final double multiplier;
 
+    ModifyGravity(int multiplier){
+        this.multiplier = multiplier;
+    }
 
     @Override
-    public void applyEffect(LevelModel levelModel) {
-        levelModel.setGravityOnPlayer();
+    public void applyEffect(PlayerImpl player) {
+        player.setVelocity(new VelocityImpl(player.getVelocity().getVelocityX(), player.getVelocity().getVelocityY() * multiplier));
     }
 
     @Override
     public void removeEffect(PlayerImpl player) {
-
+        player.setVelocity(new VelocityImpl(player.getVelocity().getVelocityX(), player.getVelocity().getVelocityY() / multiplier));
     }
 
     @Override
     public String getName() {
-        return "";
+        return "Low gravity";
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return "Lowers level gravity";
     }
 }

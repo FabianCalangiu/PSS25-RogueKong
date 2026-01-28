@@ -16,7 +16,7 @@ public class LevelModel implements Level {
     private final PlayerImpl player;
     private boolean isComplete;
     private final TileManager tileManager;
-    private int gravity;
+    private double gravity;
 
     public LevelModel(
             final PositionImpl spawnPoint,
@@ -77,11 +77,11 @@ public class LevelModel implements Level {
         return tileManager;
     }
 
-    public int getGravity(){
+    public double getLevelGravity(){
         return this.gravity;
     }
 
-    public void setGravity(int gravity){
+    public void setLevelGravity(double gravity){
         this.gravity = gravity;
     }
 
