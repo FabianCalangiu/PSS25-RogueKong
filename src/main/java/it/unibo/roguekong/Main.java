@@ -75,6 +75,7 @@ public class Main extends Application {
         });
 
         menuView.setOnScore(() -> {
+            scoreView.setScores(scoreManager.loadTopScores(3));
             stage.setScene(scoreView.getScene());
         });
 
