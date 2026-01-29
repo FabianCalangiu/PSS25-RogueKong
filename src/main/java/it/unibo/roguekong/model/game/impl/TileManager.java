@@ -53,7 +53,7 @@ public class TileManager {
         Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, TileType.PLATFORM);
         Tile tile3 = new Tile(Assets.SOIL, true, TileType.PLATFORM);
         Tile tile4 = new Tile(Assets.WATER, true, TileType.VOID);
-        Tile tile5 = new Tile(Assets.WATER_RIPPLE, true, TileType.VOID);
+        Tile tile5 = new Tile(Assets.WATER_RIPPLES, true, TileType.VOID);
         Tile tile6 = new Tile(Assets.LADDER, false, TileType.LADDER);
         Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, false, TileType.TREE);
         Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, TileType.TREE);
