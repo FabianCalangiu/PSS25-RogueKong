@@ -1,5 +1,6 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.model.game.impl.ScoreRecord;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,11 +34,17 @@ public class ScoreView {
         score2.setMinSize(150, 50);
         score3.setMinSize(150, 50);
 
+        Button clearScoreButton = new Button("Clear score");
+        clearScoreButton.setStyle("""
+                -fx-background-color: red;
+                """
+        );
         Button returnButton = new Button("Return");
 
+        clearScoreButton.setOnAction(e -> ScoreManager.clearScores());
         returnButton.setOnAction(e -> runIfNotNull(onReturn));
 
-        root.getChildren().addAll(score1, score2, score3, returnButton);
+        root.getChildren().addAll(score1, score2, score3, clearScoreButton, returnButton);
         this.scene = new Scene(root, 800, 600);
         this.scene.getStylesheets().add(
                 getClass().getResource("/css/menu.css").toExternalForm()

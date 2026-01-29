@@ -1,5 +1,1 @@
-Player;1000
-Player;1000
-Player;1000
-Player;1000
-Player;884
+Player;996

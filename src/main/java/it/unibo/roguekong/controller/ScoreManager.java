@@ -62,7 +62,7 @@ public class ScoreManager {
     /*
      * Loads all score ordered DESCENDING in a list
      */
-    public List<ScoreRecord> loadScores(){
+    private List<ScoreRecord> loadScores(){
         if(!Files.exists(SCORE_FILE)){
             return List.of();
         }
@@ -89,7 +89,7 @@ public class ScoreManager {
     /*
      * Clears all registered scores
      */
-    public void clearScores(){
+    public static void clearScores(){
         try{
             Files.writeString(
                     SCORE_FILE,
