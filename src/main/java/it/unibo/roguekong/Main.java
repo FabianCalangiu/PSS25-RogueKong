@@ -90,7 +90,7 @@ public class Main extends Application {
 
         scoreView.setOnClearScores(() -> {
             scoreManager.clearScores();
-            scoreManager.loadTopScores(3);
+            scoreView.setScores(scoreManager.loadTopScores(3));
         });
         /* ---------------------------------------*/
 
