@@ -54,13 +54,16 @@ public class TileManager {
         Tile tile4 = new Tile(Assets.WATER, true, TileType.VOID);
         Tile tile5 = new Tile(Assets.WATER_RIPPLE, true, TileType.VOID);
         Tile tile6 = new Tile(Assets.LADDER, false, TileType.LADDER);
+        Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, false, TileType.TREE);
+        Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, TileType.TREE);
+        Tile tile9 = new Tile(Assets.TREE_LOG, false, TileType.TREE);
 
 
-        Tile tile7 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
-        Tile tile8 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
-        Tile tile9 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
+        Tile tile10 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
+        Tile tile11 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
+        Tile tile12 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
 
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9 };
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11, tile12 };
     }
 
     /**

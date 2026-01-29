@@ -4,6 +4,7 @@ public enum TileType {
     PLATFORM,
     LADDER,
     VOID,
+    TREE,
     START,
     END
 }
