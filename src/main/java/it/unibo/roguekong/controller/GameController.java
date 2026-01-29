@@ -4,7 +4,6 @@ import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
 import it.unibo.roguekong.model.game.impl.TileType;
-import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
@@ -88,6 +87,7 @@ public class GameController {
      * gets updated every 60fps
      */
     private void update(){
+        /* --------------------------- USER INPUT ----------------------------------*/
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
         } else {
@@ -131,6 +131,9 @@ public class GameController {
                 showPowerUpPanel();
             }
         }
+        /* -------------------------------------------------------------*/
+
+        updateScore();
     }
 
     private void render(){
