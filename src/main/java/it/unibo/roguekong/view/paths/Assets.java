@@ -9,6 +9,9 @@ public final class Assets {
     public static final String WATER = ROOT + "sprites/water.png";
     public static final String WATER_RIPPLE = ROOT + "sprites/water_ripples.png";
     public static final String LADDER = ROOT + "sprites/ladder.png";
+    public static final String TOP_TREE_BUSH = ROOT + "sprites/top_tree_bush.png";
+    public static final String MIDDLE_TREE_BUSH = ROOT + "sprites/middle_tree_bush.png";
+    public static final String TREE_LOG = ROOT + "sprites/tree_log.png";
     public static final String DARK_CLOUD = ROOT + "backgrounds/dark_cloud.png";
     public static final String DARK_FOGGY_SKY = ROOT + "backgrounds/dark_foggy_sky.png";
     public static final String DARK_SKY = ROOT + "backgrounds/dark_sky.png";
