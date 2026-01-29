@@ -6,4 +6,7 @@ public enum TileType {
     VOID,
     TREE,
     PORTAL,
+    WATER,
+    LAVA,
+    SPIKE
 }

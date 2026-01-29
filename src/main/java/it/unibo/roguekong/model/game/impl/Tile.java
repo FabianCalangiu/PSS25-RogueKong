@@ -11,11 +11,13 @@ public class Tile implements GamePlatform {
     private TileType tileType;
     private final String  image;
     private final boolean isCollidable;
+    private final boolean canDealDamage;
 
-    public Tile(String image, boolean isCollidable, TileType tileType) {
+    public Tile(String image, boolean isCollidable, boolean canDealDamage, TileType tileType) {
         this.image = image;
         this.isCollidable = isCollidable;
         this.tileType = tileType;
+        this.canDealDamage = canDealDamage;
     }
 
     @Override

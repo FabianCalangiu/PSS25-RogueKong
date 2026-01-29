@@ -15,6 +15,7 @@ public final class Assets {
     public static final String BRIDGE = ROOT + "sprites/bridge.png";
     public static final String LAVA = ROOT + "sprites/lava.png";
     public static final String LAVA_RIPPLES = ROOT + "sprites/lava_ripples.png";
+    public static final String SPIKES = ROOT + "sprites/spikes.png";
     public static final String UPPER_PURPLE_PORTAL = ROOT + "sprites/upper_purple_portal.png";
     public static final String LOWER_PURPLE_PORTAL = ROOT + "sprites/lower_purple_portal.png";
     public static final String UPPER_ORANGE_PORTAL = ROOT + "sprites/upper_orange_portal.png";
