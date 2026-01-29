@@ -5,6 +5,5 @@ public enum TileType {
     LADDER,
     VOID,
     TREE,
-    START,
-    END
+    PORTAL,
 }

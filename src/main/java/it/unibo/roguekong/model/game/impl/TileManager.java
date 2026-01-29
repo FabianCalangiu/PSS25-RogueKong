@@ -58,13 +58,17 @@ public class TileManager {
         Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, false, TileType.TREE);
         Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, TileType.TREE);
         Tile tile9 = new Tile(Assets.TREE_LOG, false, TileType.TREE);
+        Tile tile10 = new Tile(Assets.LOWER_ORANGE_PORTAL, false, TileType.PORTAL);
+        Tile tile11 = new Tile(Assets.UPPER_ORANGE_PORTAL, false, TileType.PORTAL);
+        Tile tile12 = new Tile(Assets.LOWER_PURPLE_PORTAL, false, TileType.PORTAL);
+        Tile tile13 = new Tile(Assets.UPPER_PURPLE_PORTAL, false, TileType.PORTAL);
 
         // Background tiles
-        Tile tile10 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
-        Tile tile11 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
-        Tile tile12 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
+        Tile tile14 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
+        Tile tile15 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
+        Tile tile16 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
 
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11, tile12 };
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile16 };
     }
 
     /**
