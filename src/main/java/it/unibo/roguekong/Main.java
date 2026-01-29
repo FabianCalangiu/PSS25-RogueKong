@@ -66,6 +66,7 @@ public class Main extends Application {
         gameView.loadMap(levelController.getCurrentLevel().getTileManager());
         gameView.renderPlayer(levelController.getCurrentLevel().getPlayer());
 
+        /* ------------ MENU BUTTONS -------------*/
         menuView.setOnStart(() -> {
             controller.start();
             stage.setScene(gameView.getScene());
@@ -77,14 +78,23 @@ public class Main extends Application {
             stage.setScene(scoreView.getScene());
         });
 
+        menuView.setOnExit(() -> {
+            Platform.exit();
+        });
+        /* ---------------------------------------*/
+
+        /* ------------ SCORE BUTTONS -------------*/
         scoreView.setOnReturn(() -> {
             stage.setScene(menuView.getScene());
         });
 
-        menuView.setOnExit(() -> {
-            Platform.exit();
+        scoreView.setOnClearScores(() -> {
+            scoreManager.clearScores();
+            scoreManager.loadTopScores(3);
         });
+        /* ---------------------------------------*/
 
+        /* ------------ CONTROLLER BUTTONS -------------*/
         controller.setOnPause(() -> {
             controller.setOnPause(() -> {
                 stage.setScene(pauseView.getScene());
@@ -93,13 +103,17 @@ public class Main extends Application {
             stage.setScene(pauseView.getScene());
             BACKGROUND_MUSIC.stop();
         });
+        /* ---------------------------------------*/
 
+        /* ------------ GAME BUTTONS -------------*/
         gameView.setOnKill(() -> {
             stage.setScene(gameOverView.getScene());
             controller.stop();
             BACKGROUND_MUSIC.stop();
         });
+        /* ---------------------------------------*/
 
+        /* ------------ PAUSE BUTTONS -------------*/
         pauseView.setOnResume(() -> {
             controller.resume();
             stage.setScene(gameView.getScene());
@@ -113,17 +127,21 @@ public class Main extends Application {
             levelController.reset();
             BACKGROUND_MUSIC.stop();
         });
+        /* ---------------------------------------*/
 
+        /* ------------ GAME OVER BUTTONS -------------*/
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
             levelController.reset();
             BACKGROUND_MUSIC.stop();
             scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
+        /* -----------------------------------------------*/
 
         stage.setScene(menuView.getScene());
         stage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);

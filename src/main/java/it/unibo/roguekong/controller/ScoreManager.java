@@ -89,7 +89,7 @@ public class ScoreManager {
     /*
      * Clears all registered scores
      */
-    public static void clearScores(){
+    public void clearScores(){
         try{
             Files.writeString(
                     SCORE_FILE,

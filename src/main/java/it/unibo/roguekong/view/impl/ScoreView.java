@@ -1,6 +1,5 @@
 package it.unibo.roguekong.view.impl;
 
-import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.model.game.impl.ScoreRecord;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +12,7 @@ import java.util.List;
 public class ScoreView {
     private final Scene scene;
     private Runnable onReturn;
+    private Runnable onClearScores;
 
     private Label score1;
     private Label score2;
@@ -41,7 +41,7 @@ public class ScoreView {
         );
         Button returnButton = new Button("Return");
 
-        clearScoreButton.setOnAction(e -> ScoreManager.clearScores());
+        clearScoreButton.setOnAction(e -> runIfNotNull(onClearScores));
         returnButton.setOnAction(e -> runIfNotNull(onReturn));
 
         root.getChildren().addAll(score1, score2, score3, clearScoreButton, returnButton);
@@ -67,6 +67,10 @@ public class ScoreView {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public void setOnClearScores(Runnable r){
+        this.onClearScores = r;
     }
 
     public void setOnReturn(Runnable r) {
