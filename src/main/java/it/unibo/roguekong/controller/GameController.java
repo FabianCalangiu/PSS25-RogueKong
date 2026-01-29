@@ -67,6 +67,7 @@ public class GameController {
         this.gameLoop = new AnimationTimer(){
             @Override
             public void handle(long now){
+                userInput();
                 update();
                 render();
             }
@@ -86,7 +87,7 @@ public class GameController {
      * Update and render are the body of the main game loop. Everything in their body
      * gets updated every 60fps
      */
-    private void update(){
+    private void userInput(){
         /* --------------------------- USER INPUT ----------------------------------*/
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
@@ -132,7 +133,9 @@ public class GameController {
             }
         }
         /* -------------------------------------------------------------*/
+    }
 
+    private void update(){
         updateScore();
     }
 
