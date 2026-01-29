@@ -48,13 +48,17 @@ public class HitboxImpl implements Hitbox {
     }
 
     public boolean isColliding(HitboxImpl hb) { //return true when the other hitbox is toutching this one
-        if((getTl().getX() > hb.getTl().getX()   &&   getTl().getX() < hb.getTr().getX()) && (getTl().getY() > hb.getTl().getY()   &&   getTl().getY() < hb.getBl().getY())) {
+        if((getTl().getX() > hb.getTl().getX()   &&   getTl().getX() < hb.getTr().getX())
+                && (getTl().getY() > hb.getTl().getY()   &&   getTl().getY() < hb.getBl().getY())) {
             return true;
-        }if((getTr().getX() > hb.getTl().getX()   &&   getTr().getX() < hb.getTr().getX()) && (getTr().getY() > hb.getTl().getY()   &&   getTr().getY() < hb.getBl().getY())) {
+        }if((getTr().getX() > hb.getTl().getX()   &&   getTr().getX() < hb.getTr().getX())
+                && (getTr().getY() > hb.getTl().getY()   &&   getTr().getY() < hb.getBl().getY())) {
             return true;
-        }if((getBl().getX() > hb.getTl().getX()   &&   getBl().getX() < hb.getTr().getX()) && (getBl().getY() > hb.getTl().getY()   &&   getBl().getY() < hb.getBl().getY())) {
+        }if((getBl().getX() > hb.getTl().getX()   &&   getBl().getX() < hb.getTr().getX())
+                && (getBl().getY() > hb.getTl().getY()   &&   getBl().getY() < hb.getBl().getY())) {
             return true;
-        }if((getBr().getX() > hb.getTl().getX()   &&   getBr().getX() < hb.getTr().getX()) && (getBr().getY() > hb.getTl().getY()   &&   getBr().getY() < hb.getBl().getY())) {
+        }if((getBr().getX() > hb.getTl().getX()   &&   getBr().getX() < hb.getTr().getX())
+                && (getBr().getY() > hb.getTl().getY()   &&   getBr().getY() < hb.getBl().getY())) {
             return true;
         }
         return false;

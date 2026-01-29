@@ -1,5 +1,6 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
@@ -10,8 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GameView implements RogueKongView {
@@ -30,6 +33,8 @@ public class GameView implements RogueKongView {
     private final Pane ui;
     private final Pane map;
     private final Pane playerRender;
+    private Pane powerUpLayer;
+    private VBox powerUpBox;
     private final Scene scene;
 
     private Runnable onKill;
@@ -53,6 +58,9 @@ public class GameView implements RogueKongView {
          * setFocusTraversable makes the user input readable
          */
         this.root.setFocusTraversable(true);
+
+        createPowerUpLayer();
+
         this.scene = new Scene(root, WIDTH, HEIGTH);
 
         /*
@@ -140,6 +148,64 @@ public class GameView implements RogueKongView {
 
         playerSpriteView.setX(player.getPosition().getX());
         playerSpriteView.setY(player.getPosition().getY());
+    }
+
+
+    /*
+     * Creates the powerup Overlay where the player can choose the random
+     * powerups the game picks.
+     */
+    private void createPowerUpLayer(){
+        powerUpLayer = new Pane();
+        powerUpLayer.setPrefSize(WIDTH, HEIGTH);
+
+        /*
+         * Inline CSS style
+         */
+        powerUpLayer.setStyle("""
+                -fx-background-color: rgba(0, 0, 0, 0.6);
+                """);
+
+        powerUpBox = new VBox(15);
+        powerUpBox.setStyle("""
+                -fx-padding: 20;
+                """);
+
+        /*
+         * Centers the box
+         */
+        powerUpBox.setLayoutX(WIDTH / 2.0 - 150);
+        powerUpBox.setLayoutY(HEIGTH / 2.0 - 120);
+
+        powerUpLayer.getChildren().add(powerUpBox);
+        powerUpLayer.setVisible(false);
+
+        ui.getChildren().add(powerUpLayer);
+    }
+
+    public void showPowerUpPanel(PlayerImpl player, List<PowerUp> powerUps, Runnable onChoice){
+        powerUpBox.getChildren().clear();
+
+        for(PowerUp p : powerUps){
+            Button button = new Button(p.getName());
+            button.setPrefWidth(260);
+
+            button.setOnAction(e -> {
+                p.applyEffect(player);
+                hidePowerUpPanel();
+                if(onChoice != null){
+                    onChoice.run();
+                }
+            });
+
+            powerUpBox.getChildren().add(button);
+        }
+
+        powerUpLayer.setVisible(true);
+    }
+
+    public void hidePowerUpPanel(){
+        powerUpLayer.setVisible(false);
     }
 
     /*

@@ -5,17 +5,19 @@ import it.unibo.roguekong.model.game.GamePlatform;
 import java.awt.image.BufferedImage;
 
 public class Tile implements GamePlatform {
-    private static final int WIDTH = 16;
-    private static final int HEIGHT = 16;
+    private static final int WIDTH = 32;
+    private static final int HEIGHT = 32;
 
     private TileType tileType;
     private final String  image;
     private final boolean isCollidable;
+    private final boolean canDealDamage;
 
-    public Tile(String image, boolean isCollidable, TileType tileType) {
+    public Tile(String image, boolean isCollidable, boolean canDealDamage, TileType tileType) {
         this.image = image;
         this.isCollidable = isCollidable;
         this.tileType = tileType;
+        this.canDealDamage = canDealDamage;
     }
 
     @Override

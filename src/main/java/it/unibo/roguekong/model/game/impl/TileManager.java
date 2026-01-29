@@ -13,7 +13,8 @@ public class TileManager {
     private final static int COLS = 30; //The X of the map
     private final static int TILE_SIZE = 32;
 
-    private final Tile[] tileSet;
+    private Tile[] tileSet;
+    private Tile[] tileBackGround;
     private final int [][] gameMap;
     private final int [][] backgroundMap;
 
@@ -21,37 +22,65 @@ public class TileManager {
         this.gameMap = new int[ROWS][COLS];
         this.backgroundMap = new int[ROWS][COLS];
 
-        Tile tile0 = new Tile("", false, TileType.VOID);
-        Tile tile1 = new Tile(Assets.BRICK_WALL, true, TileType.PLATFORM);
-        Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, TileType.PLATFORM);
-        Tile tile3 = new Tile(Assets.SOIL, true, TileType.PLATFORM);
-        Tile tile4 = new Tile(Assets.WATER, false, TileType.VOID);
-        Tile tile5 = new Tile(Assets.WATER_RIPPLE, false, TileType.VOID);
-
-        Tile tile6 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
-        Tile tile7 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
-        Tile tile8 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
-
-        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8 };
-
+        this.fillTileSet();
         this.fillGameBackground(backgroundPath);
         this.fillGameMap(mapPath);
     }
 
+    public Tile[] getTileSet() {
+        return tileSet;
+    }
+
+    public int[][] getGameMap() {
+        return gameMap;
+    }
+
+    public int[][] getBackgroundMap() {
+        return backgroundMap;
+    }
+
+    public int getRows() { return ROWS; }
+
+    public int getCols() { return COLS; }
+
     /**
-     * This method fill the matrix, soon it will be passed a file.txt with inside the map
+     * Fill the tileSet array with the tile implementations
      */
-    public void fillGameMap(String mapPath){
-        // must be complete in the future, when it will be implemented the file reader map
-//        for(int i = 0; i < ROWS; i++){
-//            for(int j = 0; j < COLS; j++){
-//                if(i == ROWS - 1){
-//                    gameMap[i][j] = 4;
-//                } else{
-//                    gameMap[i][j] = 1;
-//                }
-//            }
-//        }
+    private void fillTileSet() {
+        // World tiles
+        Tile tile0 = new Tile("", false, false, TileType.VOID);
+        Tile tile1 = new Tile(Assets.BRICK_WALL, true, false, TileType.PLATFORM);
+        Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, false, TileType.PLATFORM);
+        Tile tile3 = new Tile(Assets.SOIL, true, false, TileType.PLATFORM);
+        Tile tile4 = new Tile(Assets.WATER, false, true, TileType.WATER);
+        Tile tile5 = new Tile(Assets.WATER_RIPPLES, false, true, TileType.WATER);
+        Tile tile6 = new Tile(Assets.LADDER, false, false, TileType.LADDER);
+        Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, false, false, TileType.TREE);
+        Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, false, TileType.TREE);
+        Tile tile9 = new Tile(Assets.TREE_LOG, false, false, TileType.TREE);
+        Tile tile10 = new Tile(Assets.LOWER_ORANGE_PORTAL, false, false, TileType.PORTAL);
+        Tile tile11 = new Tile(Assets.UPPER_ORANGE_PORTAL, false, false, TileType.PORTAL);
+        Tile tile12 = new Tile(Assets.LOWER_PURPLE_PORTAL, false, false, TileType.PORTAL);
+        Tile tile13 = new Tile(Assets.UPPER_PURPLE_PORTAL, false, false, TileType.PORTAL);
+        Tile tile14 = new Tile(Assets.SPIKES, false, true, TileType.SPIKE);
+        Tile tile15 = new Tile(Assets.LAVA, false, true, TileType.LAVA);
+        Tile tile16 = new Tile(Assets.LAVA_RIPPLES, false, true, TileType.LAVA);
+        Tile tile17 = new Tile(Assets.BRIDGE, true, false, TileType.PLATFORM);
+
+        // Background tiles
+        Tile tile18 = new Tile(Assets.DARK_CLOUD, false, false, TileType.VOID);
+        Tile tile19 = new Tile(Assets.DARK_FOGGY_SKY, false, false, TileType.VOID);
+        Tile tile20 = new Tile(Assets.DARK_SKY, false, false, TileType.VOID);
+
+        this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
+                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20 };
+    }
+
+    /**
+     * This method fill the matrix
+     * @param mapPath is the mapPath file
+     */
+    private void fillGameMap(String mapPath){
         try(final InputStream mapFile = ClassLoader.getSystemResourceAsStream(mapPath)) {
             BufferedReader mapReader = new BufferedReader(new InputStreamReader(mapFile));
 
@@ -75,19 +104,13 @@ public class TileManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    };
+    }
 
-    public void fillGameBackground(String backgroundPath){
-        // must be complete in the future, when it will be implemented the file reader map
-//        for(int i = 0; i < ROWS; i++){
-//            for(int j = 0; j < COLS; j++){
-//                if(i == ROWS - 1){
-//                    gameMap[i][j] = 4;
-//                } else{
-//                    gameMap[i][j] = 1;
-//                }
-//            }
-//        }
+    /**
+     * This method fill the matrix
+     * @param backgroundPath is the background map file
+     */
+    private void fillGameBackground(String backgroundPath){
         try(final InputStream backgroundFile = ClassLoader.getSystemResourceAsStream(backgroundPath)) {
             BufferedReader mapReader = new BufferedReader(new InputStreamReader(backgroundFile));
 
@@ -111,18 +134,6 @@ public class TileManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    };
-
-    public Tile[] getTileSet() {
-        return tileSet;
-    }
-
-    public int[][] getGameMap() {
-        return gameMap;
-    }
-
-    public int[][] getBackgroundMap() {
-        return backgroundMap;
     }
 
     /**
@@ -134,16 +145,10 @@ public class TileManager {
         int row = (int) pos.getY() / TILE_SIZE;
         int col = (int) pos.getX() / TILE_SIZE;
 
-        /*
-         * Check if the positions are in or out of bounds. If it's outside, return the tiletype void
-         */
         if(row < 0 || row >= ROWS
                 || col < 0 || col >= COLS){ return this.tileSet[0]; }
 
         int index = gameMap[row][col];
         return tileSet[index];
     }
-
-    public int getRows() { return ROWS; }
-    public int getCols() { return COLS; }
 }

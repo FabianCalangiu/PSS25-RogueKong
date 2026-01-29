@@ -3,6 +3,8 @@ package it.unibo.roguekong.controller;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
+import it.unibo.roguekong.model.game.impl.TileType;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
@@ -14,19 +16,28 @@ import javafx.scene.input.KeyCode;
  */
 
 public class GameController {
+    private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
+
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
     Runnable onMenu;
     Runnable onPause;
     private GameView gameView;
     private PlayerImpl player;
+    private LevelController levelController;
+    private ScoreManager scoreManager;
 
-    public GameController(GameView view, GameStateImpl gameState, PlayerImpl player){
+    private int score = 1000;
+    private long lastScoreUpdate = 0;
+
+    public GameController(GameView view, GameStateImpl gameState, PlayerImpl player, LevelController levelController, ScoreManager scoreManager) {
         this.gameState = gameState;
         this.gameView = view;
         this.player = player;
+        this.levelController = levelController;
+        this.scoreManager = scoreManager;
         /*
-         * Insert inputs from here (They're outside the main loop because its EVENT DRIVEN) ->>
+         * Insert inputs from here (They're outside the main loop because they're EVENT DRIVEN) ->>
          */
 
         /*
@@ -56,6 +67,7 @@ public class GameController {
         this.gameLoop = new AnimationTimer(){
             @Override
             public void handle(long now){
+                userInput();
                 update();
                 render();
             }
@@ -75,29 +87,8 @@ public class GameController {
      * Update and render are the body of the main game loop. Everything in their body
      * gets updated every 60fps
      */
-    private void update(){
-        /*
-         * Add game logic here, also, add below here the input user handler
-         */
-//        if(gameView.isKeyPressed(KeyCode.A)) {
-//            this.player.setPosition(player.getPosition().getX() - 1, player.getPosition().getY());
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.D)) {
-//            this.player.setPosition(player.getPosition().getX() + (1 * 2), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.W)) {
-//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.S)) {
-//            this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
-//        }
-//
-//        if(gameView.isKeyPressed(KeyCode.SPACE)) {
-//            this.player.setPosition(player.getPosition().getX() + 20, player.getPosition().getY() + 20);
-//        }
+    private void userInput(){
+        /* --------------------------- USER INPUT ----------------------------------*/
         if(gameState.getState() != GameStatus.PLAYING) {
             return;
         } else {
@@ -109,19 +100,43 @@ public class GameController {
             if(gameView.isKeyPressed(KeyCode.D)) {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
+            /**
+             * Must be improved soon
+             */
+            PositionImpl tileBelow = new PositionImpl(
+                    this.player.getPosition().getX() + 16,
+                    this.player.getPosition().getY()
+            );
 
-            if(gameView.isKeyPressed(KeyCode.W)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1); // It will be deleted soon. Keep It to try the player movement around the map
+            if(gameView.isKeyPressed(KeyCode.W) &&
+                    (levelController.getCurrentLevel()
+                            .getTileManager()
+                            .getTileAtPosition(tileBelow)
+                            .getTileType() == TileType.LADDER)) {
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
             }
 
+            /**
+             * Must be improved soon
+             */
             if(gameView.isKeyPressed(KeyCode.S)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1); // It will be deleted soon. Keep It to try the player movement around the map
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
             }
 
             if(gameView.isKeyPressed(KeyCode.SPACE)) {
                 this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
+                JUMP_SOUND.play();
+            }
+
+            if(gameView.isKeyPressed(KeyCode.P)){
+                showPowerUpPanel();
             }
         }
+        /* -------------------------------------------------------------*/
+    }
+
+    private void update(){
+        updateScore();
     }
 
     private void render(){
@@ -152,11 +167,48 @@ public class GameController {
         if (onMenu != null) onMenu.run();
     }
 
+    private void showPowerUpPanel(){
+        gameLoop.stop();
+        gameState.pauseGame();
+
+        var powerUps = PowerUpController.getRandomPowerUps(2);
+
+        gameView.showPowerUpPanel(
+                player,
+                powerUps,
+                () -> {
+                    gameState.resumeGame();
+                    gameLoop.start();
+                }
+        );
+    }
+
+    private void updateScore(){
+        long now = System.nanoTime();
+
+        if(lastScoreUpdate == 0){
+            lastScoreUpdate = now;
+            return;
+        }
+
+        long elapsed = now - lastScoreUpdate;
+
+        if(elapsed >= 1_000_000_000L){
+            score = Math.max(0, score - 2);
+            lastScoreUpdate = now;
+            System.out.println("Score: " + score);
+        }
+    }
+
     public void setOnPause(Runnable r) {
         this.onPause = r;
     }
 
     public void setOnMenu(Runnable r) {
         this.onMenu = r;
+    }
+
+    public int getScoreManager() {
+        return this.score;
     }
 }
