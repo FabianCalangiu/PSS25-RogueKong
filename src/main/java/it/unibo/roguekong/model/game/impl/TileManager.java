@@ -47,6 +47,7 @@ public class TileManager {
      * Fill the tileSet array with the tile implementations
      */
     private void fillTileSet() {
+        // World tiles
         Tile tile0 = new Tile("", false, TileType.VOID);
         Tile tile1 = new Tile(Assets.BRICK_WALL, true, TileType.PLATFORM);
         Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, TileType.PLATFORM);
@@ -58,7 +59,7 @@ public class TileManager {
         Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, TileType.TREE);
         Tile tile9 = new Tile(Assets.TREE_LOG, false, TileType.TREE);
 
-
+        // Background tiles
         Tile tile10 = new Tile(Assets.DARK_CLOUD, false, TileType.VOID);
         Tile tile11 = new Tile(Assets.DARK_FOGGY_SKY, false, TileType.VOID);
         Tile tile12 = new Tile(Assets.DARK_SKY, false, TileType.VOID);
