@@ -40,7 +40,7 @@ public class LevelControllerTest {
                 .build();
 
         LevelModel level3 = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(431, 543))
+                .setSpawnPosition(new PositionImpl(10, 10))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
@@ -65,9 +65,19 @@ public class LevelControllerTest {
 
     @Test
     public void LevelIndexMustBeOneAfterFirstLevelIsComplete() {
-        this.levelController.getCurrentLevel().checkLevel();
-        this.levelController.nextLevel();
+        this.levelController.nextLevelIfIsComplete();
         assertEquals(1, this.levelController.getCurrentLevelIndex());
+    }
+
+    @Test
+    public void LevelIndexMustBeTwoAfterSecondLevelIsComplete() {
+        // First Level
+        this.levelController.nextLevelIfIsComplete();
+
+        // Second Level
+        this.levelController.nextLevelIfIsComplete();
+
+        assertEquals(2, this.levelController.getCurrentLevelIndex());
     }
 
     @Test

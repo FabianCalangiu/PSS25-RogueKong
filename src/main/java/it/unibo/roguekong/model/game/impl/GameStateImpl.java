@@ -2,7 +2,7 @@ package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.game.GameState;
 
-/*
+/**
  * The states are defined as implemented in the
  * GameStatus ENUM
  * The course of the game is optimally defined as follows:

@@ -1,16 +1,19 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.view.RogueKongView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-
-public class MenuView {
+/**
+ * MenuView manages the Menu page rendering
+ */
+public class MenuView implements RogueKongView {
     private final Scene scene;
 
-    /*
+    /**
      * Runnable is an interface defined as follows:
      * interface Runnable{
      *  void run();
@@ -48,12 +51,12 @@ public class MenuView {
         );
     }
 
+    @Override
     public Scene getScene() {
         return scene;
     }
 
-
-    /*
+    /**
      * Reusable methods to set events
      * They will run in case they are not null, which is the default value
      */

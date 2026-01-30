@@ -17,13 +17,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * 1. This implementation defines several layers (Panes) and a Scene where
+ * all its contents are rendered
+ * 2. The scene renders said root Pane and takes as input widthxheight
+ * n pixels
+ */
 public class GameView implements RogueKongView {
-    /*
-     * 1. This implementation defines several layers (Panes) and a Scene where
-     * all its contents are rendered
-     * 2. The scene renders said root Pane and takes as input widthxheight
-     * n pixels
-     */
     private final static int WIDTH = 960;
     private final static int HEIGTH = 640;
     private final static int TILE_SIZE = 32;
@@ -42,6 +42,9 @@ public class GameView implements RogueKongView {
 
     private ImageView playerSpriteView;
 
+    /**
+     * GameView prepares the layout, several layers where map and player are loaded, event driven inputs
+     */
     public GameView(){
         this.root = new Pane();
         this.map = new Pane();
@@ -84,7 +87,7 @@ public class GameView implements RogueKongView {
         return root;
     }
 
-    /*
+    /**
      * The loaders beneath load both the map and the background.
      * Background and map are loaded on different layers, but are both Tile types
      */
@@ -133,6 +136,10 @@ public class GameView implements RogueKongView {
         }
     }
 
+    /**
+     * Renders the player. It has to be called each frame in the main game loop.
+     * @param player; gets player as input in order to load its sprite. Size are set manually here.
+     */
     public void renderPlayer(PlayerImpl player){
         if (playerSpriteView == null) {
             Image playerSprite = new Image(
@@ -151,7 +158,7 @@ public class GameView implements RogueKongView {
     }
 
 
-    /*
+    /**
      * Creates the powerup Overlay where the player can choose the random
      * powerups the game picks.
      */
@@ -183,6 +190,13 @@ public class GameView implements RogueKongView {
         ui.getChildren().add(powerUpLayer);
     }
 
+    /**
+     * Renders the power up panel in order for the player to click and choose the
+     * preferred Power Up. Clicking the button with said power up name applies the effect on the player.
+     * @param player needed to apply the power up effect
+     * @param powerUps is a list of powerups, shuffled
+     * @param onChoice sets the action of the buttons
+     */
     public void showPowerUpPanel(PlayerImpl player, List<PowerUp> powerUps, Runnable onChoice){
         powerUpBox.getChildren().clear();
 
@@ -204,11 +218,14 @@ public class GameView implements RogueKongView {
         powerUpLayer.setVisible(true);
     }
 
+    /**
+     * Simply hides the power up panel
+     */
     public void hidePowerUpPanel(){
         powerUpLayer.setVisible(false);
     }
 
-    /*
+    /**
      * Returns true if key is in the input queue
      */
     public boolean isKeyPressed(KeyCode key){
@@ -222,38 +239,4 @@ public class GameView implements RogueKongView {
     private void runIfNotNull(Runnable r) {
         if (r != null) r.run();
     }
-
-    /*
-     * ------------ Sample methods --------------
-     */
-
-//    public void addTestImage(){
-//        Image tileset = new Image(
-//                getClass().getResourceAsStream("/assets/sprites/world_tileset.png")
-//        );
-//
-//        ImageView tile = new ImageView(tileset);
-//
-//        int TILE_SIZE = 16;
-//        int col = 0;
-//        int row = 0;
-//
-//        tile.setViewport(new Rectangle2D(
-//                col * TILE_SIZE,
-//                row * TILE_SIZE,
-//                TILE_SIZE,
-//                TILE_SIZE
-//        ));
-//
-//        System.out.println(
-//                "Image size: " + tileset.getWidth() + " x " + tileset.getHeight()
-//        );
-//
-//        tile.setFitWidth(TILE_SIZE);
-//        tile.setFitHeight(TILE_SIZE);
-//        tile.setX(50);
-//        tile.setY(50);
-//
-//        root.getChildren().add(tile);
-//    }
 }

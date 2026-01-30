@@ -4,11 +4,18 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
+/**
+ * PowerUp that alters the player speed
+ */
 public class ChangePlayerSpeed implements PowerUp {
     private final double multiplier;
     private String name;
     private String description;
 
+    /**
+     * Creates an instance of a power up
+     * @param multiplier needed in order to alter player's velocity
+     */
     public ChangePlayerSpeed(double multiplier){
         this.multiplier = multiplier;
         this.name = "Speed Power Up";
@@ -24,9 +31,9 @@ public class ChangePlayerSpeed implements PowerUp {
 
     @Override
     public void removeEffect(PlayerImpl player){
-        VelocityImpl velocity = player.getVelocity();
-        velocity.setVelocityX(player.getVelocity().getVelocityX() / multiplier);
-        player.setVelocity(velocity);
+        /*
+         * Review effect...
+         */
     }
 
     @Override

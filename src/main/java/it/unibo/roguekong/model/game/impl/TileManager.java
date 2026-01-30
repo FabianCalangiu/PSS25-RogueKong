@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * This class represents the map manager. His job is to fill the map, return the tile type
+ */
 public class TileManager {
-    private final static int ROWS = 20; //The Y of the map
-    private final static int COLS = 30; //The X of the map
+    private final static int ROWS = 20;
+    private final static int COLS = 30;
     private final static int TILE_SIZE = 32;
 
     private Tile[] tileSet;
@@ -18,6 +21,11 @@ public class TileManager {
     private final int [][] gameMap;
     private final int [][] backgroundMap;
 
+    /**
+     * Create a new TileManager
+     * @param mapPath is the map resource path
+     * @param backgroundPath is the background map resource path
+     */
     public TileManager(String mapPath, String backgroundPath) {
         this.gameMap = new int[ROWS][COLS];
         this.backgroundMap = new int[ROWS][COLS];
@@ -27,17 +35,11 @@ public class TileManager {
         this.fillGameMap(mapPath);
     }
 
-    public Tile[] getTileSet() {
-        return tileSet;
-    }
+    public Tile[] getTileSet() { return tileSet; }
 
-    public int[][] getGameMap() {
-        return gameMap;
-    }
+    public int[][] getGameMap() { return gameMap; }
 
-    public int[][] getBackgroundMap() {
-        return backgroundMap;
-    }
+    public int[][] getBackgroundMap() { return backgroundMap; }
 
     public int getRows() { return ROWS; }
 
@@ -139,7 +141,7 @@ public class TileManager {
     /**
      * Get the tile by the player's x and y
      * @param pos Position player. Usefully to check collisions
-     * @return Must return the kind of tile is the player on
+     * @return tileSet[index] is the kind of tile at the position x and y
      */
     public Tile getTileAtPosition(PositionImpl pos) {
         int row = (int) pos.getY() / TILE_SIZE;

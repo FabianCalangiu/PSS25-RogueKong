@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * PowerUpController manages the randomicity of Power Ups
+ */
 public final class PowerUpController {
-
     private PowerUpController(){};
 
-    /*
+    /**
      * Returns a random amount of power ups in a list
+     * @param amount needed
      */
-
     public static List<PowerUp> getRandomPowerUps(int amount){
         List<PowerUp> powerUpPool = new ArrayList<>(List.of(
                 new ChangePlayerSpeed(1.4),

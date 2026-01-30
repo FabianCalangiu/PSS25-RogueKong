@@ -1,15 +1,22 @@
 package it.unibo.roguekong.view.impl;
 
+import it.unibo.roguekong.view.RogueKongView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class GameOverView {
+/**
+ * GameOverView renders the Game Over page
+ */
+public class GameOverView implements RogueKongView {
     private final Scene scene;
     private Runnable onResume, onMenu;
 
+    /**
+     * Prepares the Game Over page layout, such as Labels and action buttons
+     */
     public GameOverView() {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
@@ -27,6 +34,7 @@ public class GameOverView {
         );
     }
 
+    @Override
     public Scene getScene() {
         return scene;
     }
