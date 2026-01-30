@@ -34,7 +34,7 @@ public class Main extends Application {
         scoreView.setScores(scoreManager.loadTopScores(3));
 
         LevelModel level = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(100, 200))
+                .setSpawnPosition(new PositionImpl(90, 200))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())

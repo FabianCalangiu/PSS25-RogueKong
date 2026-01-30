@@ -3,11 +3,14 @@ package it.unibo.roguekong.controller;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
+import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileType;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
+
+import java.util.List;
 
 /**
  * This is the actual gameloop handler.
@@ -149,6 +152,10 @@ public class GameController {
     private void update(){
         updateScore();
         setGravityEachFrame();
+        List<Tile> map_tiles = this.gameView.getTileHitbox();
+        for(Tile tile : map_tiles) {
+            tile.isHit(this.player.getHitbox());
+        }
     }
 
     private void render(){

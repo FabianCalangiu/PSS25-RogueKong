@@ -3,6 +3,7 @@ package it.unibo.roguekong.model.entity.impl;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
+import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.Lives;
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.impl.LivesImpl;
@@ -90,8 +91,8 @@ public class PlayerImpl implements Player {
 
     @Override
     public void setPosition(double x, double y) {
-        hitbox.moveHitBox(x, y);
-        setXandY(hitbox.getTl());
+        getHitbox().moveHitBox(x, y);
+        setXandY(new PositionImpl(getHitbox().getBounds().getWidth(), getHitbox().getBounds().getHeight()));
     }
 
     private void setXandY(PositionImpl position) {

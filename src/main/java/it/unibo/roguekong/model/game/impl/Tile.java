@@ -1,6 +1,7 @@
 package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.game.GamePlatform;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 /**
  * This class represents the single tile implementation
@@ -46,12 +47,22 @@ public class Tile implements GamePlatform {
     public boolean isCanDealDamage() { return canDealDamage; }
 
     public TileType getTileType() { return tileType; }
+
     private void setIsCollidable(boolean isCollidable) {
         this.isCollidable = isCollidable;
-        this.hitbox = isCollidable ? new HitboxImpl() : null;
+        if(isCollidable) {
+            this.hitbox = new HitboxImpl();
+        }
     }
 
-    public TileType getTileType() {
-        return tileType;
+    public void setIsCollidable(boolean isCollidable, PositionImpl pos) {
+        setIsCollidable(isCollidable);
+        if(isCollidable){
+            getHitbox().moveHitBox(pos.getX(), pos.getY());
+        }
+    }
+
+    public void isHit(HitboxImpl hitbox) {
+        hitbox.isColliding(getHitbox());
     }
 }

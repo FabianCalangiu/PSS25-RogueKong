@@ -2,8 +2,10 @@ package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
+import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
+import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +30,7 @@ public class GameView implements RogueKongView {
     private final static int WIDTH = 960;
     private final static int HEIGTH = 640;
     private final static int TILE_SIZE = 32;
-
+    private List<Tile> tileHitbox ;
     private final Pane root;
     private final Pane background;
     private final Pane ui;
@@ -46,6 +49,7 @@ public class GameView implements RogueKongView {
      * GameView prepares the layout, several layers where map and player are loaded, event driven inputs
      */
     public GameView(){
+        this.tileHitbox = new ArrayList<>();
         this.root = new Pane();
         this.map = new Pane();
         this.background = new Pane();
@@ -83,6 +87,10 @@ public class GameView implements RogueKongView {
         return scene;
     }
 
+    public List<Tile> getTileHitbox() {
+        return tileHitbox;
+    }
+
     public Pane getRoot(){
         return root;
     }
@@ -104,6 +112,13 @@ public class GameView implements RogueKongView {
             for(int j = 0; j < tileManager.getCols(); j++){
                 int mapTileIndex = mapMatrix[i][j];
                 int backgroundTileIndex = backgroundMatrix[i][j];
+
+                if(tileManager.getTileAtPosition(new PositionImpl(j*TILE_SIZE, i*TILE_SIZE)).isCollidable()){
+                    PositionImpl pos = new PositionImpl(j*TILE_SIZE, i*TILE_SIZE);
+                    Tile tile = tileManager.getTileAtPosition(pos);
+                    tile.setIsCollidable(tile.isCollidable(), pos);
+                    this.tileHitbox.add(tile);
+                }
 
                 Tile mapTile = tileSet[mapTileIndex];
                 Tile backgroundTile = tileSet[backgroundTileIndex];
