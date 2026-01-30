@@ -86,7 +86,7 @@ public class LevelModel implements Level {
     }
 
     public void setGravityOnPlayer() {
-        this.player.setVelocity(new VelocityImpl(this.player.getVelocity().getVelocityX(), this.player.getVelocity().getVelocityY() + (1 * this.gravity)));
+        this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + (this.gravity * this.player.getVelocity().getVelocityY()));
     }
 
     private void setPlayerOnSpawn() {

@@ -163,4 +163,11 @@ public class PlayerImpl implements Player {
     public void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;
     }
+
+    /**
+     * This method must be called every frame. Applies the gravity on the player
+     */
+    public void applyGravity() {
+        this.setPosition(this.position.getX(), this.position.getY() + (1 * this.getVelocity().getVelocityY()));
+    }
 }

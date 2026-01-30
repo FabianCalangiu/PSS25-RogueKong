@@ -137,6 +137,7 @@ public class GameController {
 
     private void update(){
         updateScore();
+        setGravityEachFrame();
     }
 
     private void render(){
@@ -210,5 +211,9 @@ public class GameController {
 
     public int getScoreManager() {
         return this.score;
+    }
+
+    public void setGravityEachFrame() {
+        this.levelController.getCurrentLevel().setGravityOnPlayer();
     }
 }
