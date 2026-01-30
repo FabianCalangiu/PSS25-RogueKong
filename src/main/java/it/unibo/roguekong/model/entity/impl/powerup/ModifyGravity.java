@@ -4,6 +4,9 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
+/**
+ * Alters the player's y axis speed (gravity)
+ */
 public class ModifyGravity implements PowerUp {
     private final double multiplier;
 

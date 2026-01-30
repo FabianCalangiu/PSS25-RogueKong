@@ -3,6 +3,9 @@ package it.unibo.roguekong.model.entity.impl.powerup;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 
+/**
+ * Grants player the ability to do a second jump
+ */
 public class DoubleJump implements PowerUp {
     private String name;
     private String description;
