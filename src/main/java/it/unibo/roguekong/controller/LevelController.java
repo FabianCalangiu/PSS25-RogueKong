@@ -1,6 +1,7 @@
 package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.model.game.impl.LevelModel;
+import it.unibo.roguekong.view.impl.GameView;
 
 import java.util.List;
 
@@ -40,6 +41,19 @@ public class LevelController {
 
     /**
      * Method that set and init the next level once the previous one is completed
+     */
+    public void nextLevelIfIsComplete(GameView gameView) {
+        this.getCurrentLevel().checkIfPlayerIsOnEndPoint();
+
+        if(this.isThereAnotherLevel() && this.getCurrentLevel().isLevelComplete()){
+            this.currentLevelIndex++;
+            this.setUpLevel();
+            gameView.loadMap(this.getCurrentLevel().getTileManager());
+        }
+    }
+
+    /**
+     * Just for test without gameView
      */
     public void nextLevelIfIsComplete() {
         this.getCurrentLevel().checkIfPlayerIsOnEndPoint();

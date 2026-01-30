@@ -115,11 +115,12 @@ public class GameController {
                     this.player.getPosition().getY()
             );
 
-            if(gameView.isKeyPressed(KeyCode.W) &&
-                    (levelController.getCurrentLevel()
-                            .getTileManager()
-                            .getTileAtPosition(tileBelow)
-                            .getTileType() == TileType.LADDER)) {
+            if(gameView.isKeyPressed(KeyCode.W) // &&
+                    //(levelController.getCurrentLevel()
+                         //   .getTileManager()
+                           // .getTileAtPosition(tileBelow)
+                           // .getTileType() == TileType.LADDER)
+            ) {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
             }
 
@@ -148,7 +149,12 @@ public class GameController {
      */
     private void update(){
         updateScore();
-        setGravityEachFrame();
+        //setGravityEachFrame();
+
+        // Check the player position
+        this.levelController.nextLevelIfIsComplete(this.gameView);
+
+        System.out.println("After " + this.player.getPosition().getX() + " " + this.player.getPosition().getY());
     }
 
     private void render(){

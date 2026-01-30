@@ -1,10 +1,12 @@
 package it.unibo.roguekong.test;
 
+import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.LevelBuilderImpl;
 import it.unibo.roguekong.model.game.impl.LevelModel;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
+import it.unibo.roguekong.view.impl.GameView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

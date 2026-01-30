@@ -30,23 +30,24 @@ public class Main extends Application {
         GameView gameView = new GameView();
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
+        PlayerImpl player = new PlayerImpl();
 
         scoreView.setScores(scoreManager.loadTopScores(3));
 
         LevelModel level = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(100, 200))
-                .setEndPoint(new PositionImpl(10, 10))
+                .setEndPoint(new PositionImpl(960 - 32, 64))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
-                .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
+                .setPlayer(player)
+                .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
 
         LevelModel level2 = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(960-32, 640-32))
-                .setEndPoint(new PositionImpl(10, 10))
+                .setSpawnPosition(new PositionImpl(100, 200))
+                .setEndPoint(new PositionImpl(960 - 32, 64))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
