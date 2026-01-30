@@ -4,11 +4,13 @@ import it.unibo.roguekong.model.entity.Enemy;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
-import it.unibo.roguekong.model.value.impl.VelocityImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains the logic of each level
+ */
 public class LevelModel implements Level {
     private final List<Enemy> enemies;
     private final PositionImpl spawnPosition;
@@ -18,6 +20,15 @@ public class LevelModel implements Level {
     private final TileManager tileManager;
     private double gravity;
 
+    /**
+     * Create a new LevelModel
+     * @param spawnPoint is the player position spawn
+     * @param endPoint is the escape position of each level
+     * @param enemies is a list that contains every enemy of each level
+     * @param player is the main player
+     * @param tileManager the map manager of each level
+     * @param gravity effect that changes the Y axis player velocity
+     */
     public LevelModel(
             final PositionImpl spawnPoint,
             final PositionImpl endPoint,
@@ -35,60 +46,63 @@ public class LevelModel implements Level {
     }
 
     @Override
-    public List<Enemy> getEnemies() {
-        return List.copyOf(enemies);
-    }
+    public List<Enemy> getEnemies() { return List.copyOf(enemies); }
 
     @Override
-    public PlayerImpl getPlayer() {
-        return this.player;
-    }
+    public PlayerImpl getPlayer() { return this.player; }
 
     @Override
-    public PositionImpl getSpawnPoint() {
-        return this.spawnPosition;
-    }
+    public PositionImpl getSpawnPoint() { return this.spawnPosition; }
 
     @Override
-    public PositionImpl getEndPoint() {
-        return this.endPoint;
-    }
+    public PositionImpl getEndPoint() { return this.endPoint; }
 
     @Override
-    public boolean isLevelComplete() {
-        return this.isComplete;
-    }
+    public boolean isLevelComplete() { return this.isComplete; }
 
+    public TileManager getTileManager() { return tileManager; }
+
+    public double getLevelGravity(){ return this.gravity; }
+
+    /**
+     * This method initialize each level, setting the player position on the spawn point
+     */
     @Override
     public void init() {
         this.isComplete = false;
         this.setPlayerOnSpawn();
-        this.setGravityOnPlayer();
+//        this.setGravityOnPlayer();
     }
 
+    /**
+     * Check if the player position is equals to the endpoint position
+     */
     @Override
-    public void checkLevel() {
+    public void checkIfPlayerIsOnEndPoint() {
         if(this.player.getPosition().equals(this.endPoint)){
             this.isComplete = true;
         }
     }
 
-    public TileManager getTileManager() {
-        return tileManager;
-    }
-
-    public double getLevelGravity(){
-        return this.gravity;
-    }
-
+    /**
+     * Set the gravity of each level
+     * @param gravity world
+     */
     public void setLevelGravity(double gravity){
         this.gravity = gravity;
+        this.setGravityOnPlayer();
     }
 
+    /**
+     * Change the Y axis velocity of the player based to the gravity
+     */
     public void setGravityOnPlayer() {
         this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + (this.gravity * this.player.getVelocity().getVelocityY()));
     }
 
+    /**
+     * Set the player spawnPosition
+     */
     private void setPlayerOnSpawn() {
         this.player.setPosition(this.spawnPosition.getX(), this.spawnPosition.getY());
     }

@@ -25,6 +25,8 @@ public class LevelTest {
         this.endPoint = new PositionImpl(10, 10);
         this.tileManager = new TileManager("maps/map1.txt", "maps/background1.txt");
         this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), this.player, this.tileManager, 1);
+
+        this.level.init();
     }
 
     @Test
@@ -35,20 +37,19 @@ public class LevelTest {
     @Test
     void checkIfLevelIsCompleteAtEnd() {
         this.player.setPosition(endPoint.getX(), endPoint.getY());
-        this.level.checkLevel();
+        this.level.checkIfPlayerIsOnEndPoint();
         assertTrue(level.isLevelComplete());
     }
 
     @Test
     void checkIfLevelIsNotCompleteIfPlayerIsNotAtTheStart() {
         this.player.setPosition(spawnPoint.getX(), spawnPoint.getY());
-        this.level.checkLevel();
+        this.level.checkIfPlayerIsOnEndPoint();
         assertFalse(level.isLevelComplete());
     }
 
     @Test
     void checkIfLevelIsNotCompleteAfterTheReset() {
-        this.level.init();
         assertFalse(level.isLevelComplete());
         assertEquals(this.player.getPosition(), this.level.getSpawnPoint());
     }

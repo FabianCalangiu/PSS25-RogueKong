@@ -10,6 +10,11 @@ public class SoundManager {
     private Clip clip;
     private final String soundPath;
 
+    /**
+     * Create a new SoundManager. Must be used for every new sound
+     * @param musicPath sound resource path
+     * @param volume of the sound
+     */
     public SoundManager(final String musicPath, final float volume) {
         this.soundPath = musicPath;
         this.volume = volume;
@@ -20,9 +25,7 @@ public class SoundManager {
      */
     public void play() {
         try{
-            /**
-             * Check if the sound is already running
-             */
+            // Check if the sound is already running
             if (clip != null && clip.isRunning()) {
                 return;
             }
@@ -32,9 +35,8 @@ public class SoundManager {
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
 
-            /**
-             * This part right below, must be used to change the volume sound
-             */
+
+            // This part right below, must be used to change the volume sound
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 gain.setValue(this.volume);
