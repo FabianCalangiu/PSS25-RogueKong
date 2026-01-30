@@ -10,14 +10,19 @@ public class Tile implements GamePlatform {
 
     private TileType tileType;
     private final String  image;
-    private final boolean isCollidable;
+    private boolean isCollidable;
     private final boolean canDealDamage;
+    private HitboxImpl hitbox;
 
     public Tile(String image, boolean isCollidable, boolean canDealDamage, TileType tileType) {
         this.image = image;
-        this.isCollidable = isCollidable;
+        setIsCollidable(isCollidable);
         this.tileType = tileType;
         this.canDealDamage = canDealDamage;
+    }
+
+    public HitboxImpl getHitbox() {
+        return hitbox;
     }
 
     @Override
@@ -34,6 +39,11 @@ public class Tile implements GamePlatform {
 
     public boolean isCollidable() {
         return isCollidable;
+    }
+
+    private void setIsCollidable(boolean isCollidable) {
+        this.isCollidable = isCollidable;
+        this.hitbox = isCollidable ? new HitboxImpl() : null;
     }
 
     public TileType getTileType() {

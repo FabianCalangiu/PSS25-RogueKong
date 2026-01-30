@@ -8,13 +8,19 @@ public class HitboxImpl implements Hitbox {
     private PositionImpl tr = new PositionImpl();
     private PositionImpl bl = new PositionImpl();
     private PositionImpl br = new PositionImpl();
-    private final static double WIDTH = 32;
-    private final static double HEIGHT = 32;
+    private double width = 32;
+    private double height = 32;
 
     public HitboxImpl() {}
 
     public HitboxImpl(PositionImpl tl) {
         moveHitBox(tl.getX(), tl.getY());
+    }
+
+    public HitboxImpl(PositionImpl tl, double height, double width) {
+        moveHitBox(tl.getX(), tl.getY());
+        setHeight(height);
+        setWidth(width);
     }
 
     public void moveHitBox(double x, double y, HitboxImpl hitbox) {
@@ -31,9 +37,9 @@ public class HitboxImpl implements Hitbox {
 
         try{
             PositionImpl newTl = new PositionImpl(x, y);
-            PositionImpl newTr = new PositionImpl(x + WIDTH, y);
-            PositionImpl newBl = new PositionImpl(x, y + HEIGHT);
-            PositionImpl newBr = new PositionImpl(x + WIDTH, y + HEIGHT);
+            PositionImpl newTr = new PositionImpl(x + getWidth(), y);
+            PositionImpl newBl = new PositionImpl(x, y + getHeight());
+            PositionImpl newBr = new PositionImpl(x + getWidth(), y + getHeight());
 
             this.tl = newTl;
             this.tr = newTr;
@@ -62,6 +68,22 @@ public class HitboxImpl implements Hitbox {
             return true;
         }
         return false;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    private void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    private void setHeight(double height) {
+        this.height = height;
     }
 
     public PositionImpl getTl() {
