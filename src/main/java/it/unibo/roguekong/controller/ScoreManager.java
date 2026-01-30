@@ -10,8 +10,12 @@ import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Score Manager records the player's score, writing it on an external file
+ * (see saves/scores.txt)
+ */
 public class ScoreManager {
-    /*
+    /**
      * Gets path relative to the project root
      * Path type is a better choice in this case since the class writes, other than read
      * on the target file
@@ -30,7 +34,7 @@ public class ScoreManager {
         }
     }
 
-    /*
+    /**
      * Writes on the given file the score entry through append
      */
     public void saveScore(ScoreRecord entry){
@@ -46,7 +50,7 @@ public class ScoreManager {
         }
     }
 
-    /*
+    /**
      * Format file is as follows:
      * 1 Player;number1
      * 2 Player:number2
@@ -59,7 +63,7 @@ public class ScoreManager {
         return new ScoreRecord(lineParts[0], Integer.parseInt(lineParts[1]));
      }
 
-    /*
+    /**
      * Loads all score ordered DESCENDING in a list
      */
     private List<ScoreRecord> loadScores(){
@@ -79,14 +83,15 @@ public class ScoreManager {
         }
     }
 
-    /*
+    /**
      * Loads only top records
+     * @param limit limits which top scores are returned
      */
     public List<ScoreRecord> loadTopScores(int limit){
         return loadScores().stream().limit(limit).toList();
     }
 
-    /*
+    /**
      * Clears all registered scores
      */
     public void clearScores(){

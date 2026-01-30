@@ -9,7 +9,7 @@ import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 
-/*
+/**
  * This is the actual gameloop handler.
  * From javafx docs: The class AnimationTimer allows to create a timer, that is called in each frame while it is active.
  * An extending class has to override the method handle(long) which will be called in every frame. The methods start() and stop() allow to start and stop the timer
@@ -30,6 +30,14 @@ public class GameController {
     private int score = 1000;
     private long lastScoreUpdate = 0;
 
+    /**
+     * Initializes all the implementations the controller needs in order to update and run each frame
+     * @param view renders the main game
+     * @param gameState keeps record on game states
+     * @param player: position and sprites are updated and loaded each frame
+     * @param levelController gets current level and updates levels
+     * @param scoreManager keeps record of the player's score
+     */
     public GameController(GameView view, GameStateImpl gameState, PlayerImpl player, LevelController levelController, ScoreManager scoreManager) {
         this.gameState = gameState;
         this.gameView = view;
@@ -74,7 +82,7 @@ public class GameController {
         };
     }
 
-    /*
+    /**
      * Uses AnimationTimer methods to start or stop the loop.
      * Calls state change.
      */
@@ -83,9 +91,8 @@ public class GameController {
         gameLoop.start();
     }
 
-    /*
-     * Update and render are the body of the main game loop. Everything in their body
-     * gets updated every 60fps
+    /**
+     * Parses user input each frames
      */
     private void userInput(){
         /* --------------------------- USER INPUT ----------------------------------*/
@@ -116,7 +123,7 @@ public class GameController {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
             }
 
-            /**
+            /*
              * Must be improved soon
              */
             if(gameView.isKeyPressed(KeyCode.S)) {
@@ -135,6 +142,10 @@ public class GameController {
         /* -------------------------------------------------------------*/
     }
 
+    /**
+     * Update and render are the body of the main game loop. Everything in their body
+     * gets updated every 60fps
+     */
     private void update(){
         updateScore();
         setGravityEachFrame();
@@ -184,6 +195,9 @@ public class GameController {
         );
     }
 
+    /**
+     * Updates score each second (may be changed)
+     */
     private void updateScore(){
         long now = System.nanoTime();
 
