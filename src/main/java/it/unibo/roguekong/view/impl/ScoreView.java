@@ -1,6 +1,7 @@
 package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.game.impl.ScoreRecord;
+import it.unibo.roguekong.view.RogueKongView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +10,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class ScoreView {
+/**
+ * ScoreView manages the Score page rendering.
+ */
+
+public class ScoreView implements RogueKongView {
     private final Scene scene;
     private Runnable onReturn;
     private Runnable onClearScores;
@@ -18,6 +23,9 @@ public class ScoreView {
     private Label score2;
     private Label score3;
 
+    /**
+     * Creates the ScoreView layout and renders score labels and control buttons
+     */
     public ScoreView() {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
@@ -51,6 +59,13 @@ public class ScoreView {
         );
     }
 
+    /**
+     * Formats how the score is viewed in the Score page
+     * @param scores are the points the player obtained during the completion of the level
+     * @param index represents its position on the scoreboard
+     * @return if the score is empty on the line, returns '-', if not returns the following string:
+     * 'Player - 1000'
+     */
     private String format(List<ScoreRecord> scores, int index){
         if(scores.size() <= index){
             return "-";
@@ -59,12 +74,16 @@ public class ScoreView {
         return s.name() + " - " + s.score();
     }
 
+    /**
+     * Loads the scores at the index position given
+     */
     public void setScores(List<ScoreRecord> scores){
         score1.setText(format(scores, 0));
         score2.setText(format(scores, 1));
         score3.setText(format(scores, 2));
     }
 
+    @Override
     public Scene getScene() {
         return scene;
     }
