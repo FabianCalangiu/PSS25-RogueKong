@@ -1,10 +1,7 @@
 package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.GameStateImpl;
-import it.unibo.roguekong.model.game.impl.GameStatus;
-import it.unibo.roguekong.model.game.impl.Tile;
-import it.unibo.roguekong.model.game.impl.TileType;
+import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
@@ -20,7 +17,6 @@ import java.util.List;
 
 public class GameController {
     private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
-
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
     Runnable onMenu;
@@ -151,11 +147,7 @@ public class GameController {
      */
     private void update(){
         updateScore();
-        setGravityEachFrame();
-        List<Tile> map_tiles = this.gameView.getTileHitbox();
-        for(Tile tile : map_tiles) {
-            tile.isHit(this.player.getHitbox());
-        }
+        //setGravityEachFrame();
     }
 
     private void render(){

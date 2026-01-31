@@ -14,7 +14,6 @@ public class Tile implements GamePlatform {
     private final String  image;
     private boolean isCollidable;
     private final boolean canDealDamage;
-    private HitboxImpl hitbox;
 
     /**
      * Create a new tile
@@ -28,10 +27,6 @@ public class Tile implements GamePlatform {
         setIsCollidable(isCollidable);
         this.tileType = tileType;
         this.canDealDamage = canDealDamage;
-    }
-
-    public HitboxImpl getHitbox() {
-        return hitbox;
     }
 
     @Override
@@ -50,19 +45,5 @@ public class Tile implements GamePlatform {
 
     private void setIsCollidable(boolean isCollidable) {
         this.isCollidable = isCollidable;
-        if(isCollidable) {
-            this.hitbox = new HitboxImpl();
-        }
-    }
-
-    public void setIsCollidable(boolean isCollidable, PositionImpl pos) {
-        setIsCollidable(isCollidable);
-        if(isCollidable){
-            getHitbox().moveHitBox(pos.getX(), pos.getY());
-        }
-    }
-
-    public void isHit(HitboxImpl hitbox) {
-        hitbox.isColliding(getHitbox());
     }
 }

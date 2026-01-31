@@ -3,6 +3,7 @@ package it.unibo.roguekong.model.entity.impl;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
+import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.value.Lives;
 import it.unibo.roguekong.model.value.Position;
@@ -16,16 +17,17 @@ import java.util.List;
 public class PlayerImpl implements Player {
 
     private PositionImpl position = new PositionImpl();
-    private HitboxImpl hitbox = new HitboxImpl();
+    private HitboxImpl hitbox;
     private VelocityImpl velocity = new VelocityImpl();
     private boolean midAir = false;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
     private static final int LIVES_AT_START = 3;
+    private TileManager tileManager;
 
     public PlayerImpl() {
-        hitbox = new HitboxImpl(getPosition());
+        hitbox = new HitboxImpl(getPosition(), 30, 32);
         setMidAir(true);
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
@@ -89,10 +91,32 @@ public class PlayerImpl implements Player {
         setPosition(getPosition().getX(), y);
     }
 
+    public void setTileManager(TileManager tileManager) {
+        this.tileManager = tileManager;
+    }
+
     @Override
     public void setPosition(double x, double y) {
-        getHitbox().moveHitBox(x, y);
-        setXandY(new PositionImpl(getHitbox().getBounds().getWidth(), getHitbox().getBounds().getHeight()));
+        boolean move = false;
+        if(getPosition().getX()<x){
+            if(!tileManager.getTileAtPosition(new PositionImpl(x+32,y)).isCollidable()) {
+                move = true;
+            }
+        }
+        else if(getPosition().getX()>x || getPosition().getY()>y){
+            if(!tileManager.getTileAtPosition(new PositionImpl(x+9,y)).isCollidable()) {
+                move = true;
+            }
+        }
+        else if(getPosition().getY()<y){
+            if(!tileManager.getTileAtPosition(new PositionImpl(x+9,y+32)).isCollidable()) {
+                move = true;
+            }
+        }
+        if(move){
+            getHitbox().moveHitBox(x, y);
+            setXandY(new PositionImpl(getHitbox().getBounds().getMinX(), getHitbox().getBounds().getMinY()));
+        }
     }
 
     private void setXandY(PositionImpl position) {

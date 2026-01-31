@@ -56,7 +56,7 @@ public class Main extends Application {
          */
         List<LevelModel> levels = List.of(level, level2);
         LevelController levelController = new LevelController(levels);
-
+        levelController.getCurrentLevel().getPlayer().setTileManager(levelController.getCurrentLevel().getTileManager());
         /**
          * Set up the first level
          */
