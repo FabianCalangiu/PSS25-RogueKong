@@ -2,78 +2,51 @@ package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.game.Hitbox;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
+import javafx.geometry.Rectangle2D;
 
 public class HitboxImpl implements Hitbox {
-    private PositionImpl tl = new PositionImpl();
-    private PositionImpl tr = new PositionImpl();
-    private PositionImpl bl = new PositionImpl();
-    private PositionImpl br = new PositionImpl();
+    Rectangle2D hitbox ;
 
-    public HitboxImpl(PositionImpl tl, double width, double height) {
-        setHitBox(tl, width, height);
+    public HitboxImpl() { //void constructor
+        setHitbox(new Rectangle2D(0,0,0,0));
     }
 
-    public HitboxImpl(PositionImpl tl){
-        setHitBox(tl, 32, 32);
+    public HitboxImpl(PositionImpl tl) { //base constructor
+        setHitbox(new Rectangle2D(tl.getX(), tl.getY(), 32, 32));
     }
 
-    @Override
-    public void setHitBox(PositionImpl tl, double width, double height) {
-        PositionImpl topLeft = getTl();
-        PositionImpl topRight = getTr();
-        PositionImpl bottomLeft = getBl();
-        PositionImpl bottomRight = getBr();
+    public HitboxImpl(PositionImpl tl, double width, double height) { //constructor with width and height
+        setHitbox(new Rectangle2D(tl.getX(), tl.getY(), width, height));
+    }
 
-        try{
-            this.tl = tl;
-            this.tr = new PositionImpl(getTl().getX()+width, getTl().getY());
-            this.bl = new PositionImpl(getTl().getX(), getTl().getY()+height);
-            this.br = new PositionImpl(getTr().getX(), getBl().getY());
-        }catch(IllegalArgumentException e){
-            this.tl = getTl();
-            this.tr = getTr();
-            this.bl = getBl();
-            this.br = getBr();
+    public void moveHitBox(double x, double y, HitboxImpl hitbox) { //check if the hitbox is moveing without colliding with another Hitbox
+        if(!isColliding(hitbox)) {
+            moveHitBox(x, y);
         }
     }
 
-    public void moveHitBox(double x, double y) {
-        PositionImpl topLeft = getTl();
-        PositionImpl topRight = getTr();
-        PositionImpl bottomLeft = getBl();
-        PositionImpl bottomRight = getBr();
+    public void moveHitBox(double x, double y) { //check if the hitbox is within screen bounds
+        final double SCREEN_W = 960;
+        final double SCREEN_H = 640;
 
-        try{
-            this.tl = new PositionImpl(getTl().getX()+x, getTl().getY()+y);
-            this.tr = new PositionImpl(getTr().getX()+x, getTr().getY()+y);
-            this.bl = new PositionImpl(getBl().getX()+x, getBl().getY()+y);
-            this.br = new PositionImpl(getBr().getX()+x, getBr().getY()+y);
-        }catch(IllegalArgumentException e){
-            this.tl = getTl();
-            this.tr = getTr();
-            this.bl = getBl();
-            this.br = getBr();
+        final Rectangle2D screen = new Rectangle2D(0, 0, SCREEN_W, SCREEN_H);
+
+        Rectangle2D candidate = new Rectangle2D(x, y, getBounds().getWidth(), getBounds().getHeight());
+
+        if (screen.contains(candidate)) {
+            setHitbox(candidate);
         }
     }
 
-    public boolean destra(Hitbox hb){
-        //se colpisce destra torna false
-        return false;
+    public boolean isColliding(HitboxImpl hb) { //return true when the other hitbox is toutching this one
+        return getBounds().intersects(hb.getBounds());
     }
 
-    public PositionImpl getTl() {
-        return tl;
+    public Rectangle2D getBounds() {
+        return hitbox;
     }
 
-    public PositionImpl getTr() {
-        return tr;
-    }
-
-    public PositionImpl getBl() {
-        return bl;
-    }
-
-    public PositionImpl getBr() {
-        return br;
+    private void setHitbox(Rectangle2D rect) {
+        this.hitbox = rect;
     }
 }

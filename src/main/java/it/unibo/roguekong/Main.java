@@ -35,8 +35,8 @@ public class Main extends Application {
         scoreView.setScores(scoreManager.loadTopScores(3));
 
         LevelModel level = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(0, 480))
-                .setEndPoint(new PositionImpl(928, 64))
+                .setSpawnPosition(new PositionImpl(80, 200))
+                .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
@@ -66,7 +66,7 @@ public class Main extends Application {
          */
         List<LevelModel> levels = List.of(level3);
         LevelController levelController = new LevelController(levels);
-
+        levelController.getCurrentLevel().getPlayer().setTileManager(levelController.getCurrentLevel().getTileManager());
         /**
          * Set up the first level
          */

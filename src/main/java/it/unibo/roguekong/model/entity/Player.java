@@ -19,10 +19,6 @@ public interface Player{
 
     public List<PowerUp> getActivePowerUps();
 
-    public boolean canJump();
-    public boolean canMoveRight();
-    public boolean canMoveLeft();
-    public boolean canMoveUp();
     public void addPowerUp(PowerUp powerUp);
     public void setPosition(double x, double y);
     public void moveX(double x);

@@ -9,25 +9,20 @@ public class PositionImpl implements Position{
     public PositionImpl(){
         this(0, 0);
     }
-    public PositionImpl(double x, double y)throws IllegalArgumentException{
+    public PositionImpl(double x, double y){
         setX(x);
         setY(y);
     }
-    public PositionImpl(Position position)throws IllegalArgumentException{
+    public PositionImpl(Position position){
         setX(position.getX());
         setY(position.getY());
     }
 
-    public void setX(double x)throws IllegalArgumentException{
-        if(x>960 || x<0){
-            throw new IllegalArgumentException("x out of range");
-        }
+    public void setX(double x){
         this.x = x;
     }
-    public void setY(double y)throws IllegalArgumentException{
-        if(y>640 || y<0){
-            throw new IllegalArgumentException("y out of range");
-        }
+
+    public void setY(double y){
         this.y = y;
     }
 

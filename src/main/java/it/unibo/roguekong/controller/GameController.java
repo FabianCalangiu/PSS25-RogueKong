@@ -1,13 +1,13 @@
 package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.GameStateImpl;
-import it.unibo.roguekong.model.game.impl.GameStatus;
-import it.unibo.roguekong.model.game.impl.TileType;
+import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
+
+import java.util.List;
 
 /**
  * This is the actual gameloop handler.
@@ -17,7 +17,6 @@ import javafx.scene.input.KeyCode;
 
 public class GameController {
     private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
-
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
     Runnable onMenu;
@@ -100,11 +99,11 @@ public class GameController {
             return;
         } else {
 
-            if(gameView.isKeyPressed(KeyCode.A) && this.player.getPosition().getX() > 0) {
+            if(gameView.isKeyPressed(KeyCode.A)) {
                 this.player.setPosition(player.getPosition().getX() - (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
             }
 
-            if(gameView.isKeyPressed(KeyCode.D) && this.player.getPosition().getX() + 32 < 960) {
+            if(gameView.isKeyPressed(KeyCode.D)) {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
             /**
@@ -148,7 +147,7 @@ public class GameController {
      */
     private void update(){
         updateScore();
-        setGravityEachFrame();
+        //setGravityEachFrame();
     }
 
     private void render(){
