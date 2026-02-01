@@ -73,9 +73,10 @@ public class TileManager {
         Tile tile18 = new Tile(Assets.DARK_CLOUD, false, false, TileType.VOID);
         Tile tile19 = new Tile(Assets.DARK_FOGGY_SKY, false, false, TileType.VOID);
         Tile tile20 = new Tile(Assets.DARK_SKY, false, false, TileType.VOID);
+        Tile tile21 = new Tile(Assets.STONE_SKY, false, false, TileType.VOID);
 
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
-                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20 };
+                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21 };
     }
 
     /**

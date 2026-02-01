@@ -19,7 +19,7 @@ public class LevelBuilderImpl implements LevelBuilder {
     private PositionImpl endPoint;
     private PlayerImpl player;
     private TileManager tileManager;
-    private int gravity;
+    private double gravity;
 
     public LevelBuilderImpl setSpawnPosition(final PositionImpl spawnPosition) {
         this.spawnPosition = spawnPosition;
@@ -41,7 +41,7 @@ public class LevelBuilderImpl implements LevelBuilder {
         return this;
     }
 
-    public LevelBuilderImpl setGravity(final int gravity) {
+    public LevelBuilderImpl setGravity(final double gravity) {
         this.gravity = gravity;
         return this;
     }
