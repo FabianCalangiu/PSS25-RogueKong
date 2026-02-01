@@ -7,6 +7,7 @@ import it.unibo.roguekong.controller.SoundManager;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
+import it.unibo.roguekong.model.value.impl.VelocityImpl;
 import it.unibo.roguekong.view.impl.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,10 +32,11 @@ public class Main extends Application {
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
         PlayerImpl player = new PlayerImpl();
+        player.setVelocity(new VelocityImpl(2, 1));
 
         scoreView.setScores(scoreManager.loadTopScores(3));
 
-        LevelModel level = new LevelBuilderImpl()
+        LevelModel level1 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
                 .setEnemiesList(List.of())
@@ -64,7 +66,7 @@ public class Main extends Application {
         /**
          * Creation of the LevelController, which contains LevelModel implementation for each levels
          */
-        List<LevelModel> levels = List.of(level3);
+        List<LevelModel> levels = List.of(level1, level2, level3);
         LevelController levelController = new LevelController(levels);
 
         /**
