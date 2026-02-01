@@ -37,6 +37,7 @@ public class LevelController {
     public void reset(GameView gameView) {
         this.currentLevelIndex = 0;
         this.setUpLevel();
+        this.getCurrentLevel().getPlayer().setTileManager(this.getCurrentLevel().getTileManager());
         gameView.loadMap(this.getCurrentLevel().getTileManager());
     }
 
@@ -49,6 +50,7 @@ public class LevelController {
         if(this.isThereAnotherLevel() && this.getCurrentLevel().isLevelComplete()){
             this.currentLevelIndex++;
             this.setUpLevel();
+            this.getCurrentLevel().getPlayer().setTileManager(this.getCurrentLevel().getTileManager());
             gameView.loadMap(this.getCurrentLevel().getTileManager());
         }
     }

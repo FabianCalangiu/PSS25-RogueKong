@@ -151,6 +151,8 @@ public class GameController {
         if(this.levelController.hasPlayerWon()) {
             runIfNotNull(this.onVictory);
         }
+
+        System.out.println(this.player.getPosition().getX() + " " + this.player.getPosition().getY());
     }
 
     private void render(){
