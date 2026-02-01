@@ -195,7 +195,7 @@ public class GameController {
     }
 
     /**
-     * Updates score each second (may be changed)
+     * Updates score each second (maybe changed)
      */
     private void updateScore(){
         long now = System.nanoTime();

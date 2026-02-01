@@ -23,5 +23,6 @@ public final class Assets {
     public static final String DARK_CLOUD = ROOT + "backgrounds/dark_cloud.png";
     public static final String DARK_FOGGY_SKY = ROOT + "backgrounds/dark_foggy_sky.png";
     public static final String DARK_SKY = ROOT + "backgrounds/dark_sky.png";
+    public static final String STONE_SKY = ROOT + "backgrounds/stoneBackground.png";
 }
 
