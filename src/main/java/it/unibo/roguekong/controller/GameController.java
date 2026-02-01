@@ -22,6 +22,7 @@ public class GameController {
     private final GameStateImpl gameState;
     Runnable onMenu;
     Runnable onPause;
+    Runnable onVictory;
     private GameView gameView;
     private PlayerImpl player;
     private LevelController levelController;
@@ -121,7 +122,7 @@ public class GameController {
                            // .getTileAtPosition(tileBelow)
                            // .getTileType() == TileType.LADDER)
             ) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 2);
             }
 
             /*
@@ -149,12 +150,14 @@ public class GameController {
      */
     private void update(){
         updateScore();
-        //setGravityEachFrame();
+        setGravityEachFrame();
 
         // Check the player position
         this.levelController.nextLevelIfIsComplete(this.gameView);
 
-        System.out.println("After " + this.player.getPosition().getX() + " " + this.player.getPosition().getY());
+        if(this.levelController.hasPlayerWon()) {
+            runIfNotNull(this.onVictory);
+        }
     }
 
     private void render(){
@@ -225,15 +228,13 @@ public class GameController {
         this.onPause = r;
     }
 
-    public void setOnMenu(Runnable r) {
-        this.onMenu = r;
-    }
+    public void setOnVictory(Runnable r) { this.onVictory = r; }
 
-    public int getScoreManager() {
-        return this.score;
-    }
+    public int getScoreManager() { return this.score; }
 
     public void setGravityEachFrame() {
         this.levelController.getCurrentLevel().setGravityOnPlayer();
     }
+
+    private void runIfNotNull(Runnable r) { r.run(); }
 }

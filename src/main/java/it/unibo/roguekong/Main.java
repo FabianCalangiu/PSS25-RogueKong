@@ -29,6 +29,7 @@ public class Main extends Application {
         ScoreView scoreView = new ScoreView();
         PauseView pauseView = new PauseView();
         GameView gameView = new GameView();
+        VictoryView victoryView = new VictoryView();
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
         PlayerImpl player = new PlayerImpl();
@@ -116,6 +117,13 @@ public class Main extends Application {
             stage.setScene(pauseView.getScene());
             BACKGROUND_MUSIC.stop();
         });
+
+        controller.setOnVictory(() -> {
+            stage.setScene(victoryView.getScene());
+            controller.stop();
+            levelController.reset(gameView);
+            BACKGROUND_MUSIC.stop();
+        } );
         /* ---------------------------------------*/
 
         /* ------------ GAME BUTTONS -------------*/
@@ -137,7 +145,7 @@ public class Main extends Application {
         pauseView.setOnMenu(() -> {
             controller.goToMenu();
             stage.setScene(menuView.getScene());
-            levelController.reset();
+            levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         });
         /* ---------------------------------------*/
@@ -145,16 +153,22 @@ public class Main extends Application {
         /* ------------ GAME OVER BUTTONS -------------*/
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
-            levelController.reset();
+            levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
             scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
         /* -----------------------------------------------*/
 
+        victoryView.setOnMenu(() -> {
+            stage.setScene(menuView.getScene());
+            levelController.reset(gameView);
+            BACKGROUND_MUSIC.stop();
+            scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
+        });
+
         stage.setScene(menuView.getScene());
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -34,9 +34,10 @@ public class LevelController {
     /**
      * Method that reset the index if the player lose or quit the game
      */
-    public void reset() {
+    public void reset(GameView gameView) {
         this.currentLevelIndex = 0;
         this.setUpLevel();
+        gameView.loadMap(this.getCurrentLevel().getTileManager());
     }
 
     /**
@@ -70,5 +71,12 @@ public class LevelController {
     public void setUpLevel() {
         LevelModel level = getCurrentLevel();
         level.init();
+    }
+
+    /**
+     *
+     */
+    public boolean hasPlayerWon() {
+        return (this.getCurrentLevel().isLevelComplete()) && (!this.isThereAnotherLevel());
     }
 }
