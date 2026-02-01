@@ -35,7 +35,7 @@ public class LevelModel implements Level {
             final List<Enemy> enemies,
             final PlayerImpl player,
             final TileManager tileManager,
-            final int gravity) {
+            final double gravity) {
         this.spawnPosition = spawnPoint;
         this.endPoint = endPoint;
         this.enemies = new ArrayList<>(enemies);

@@ -30,6 +30,7 @@ public class Main extends Application {
         GameView gameView = new GameView();
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
+        PlayerImpl player = new PlayerImpl();
 
         scoreView.setScores(scoreManager.loadTopScores(3));
 
@@ -37,7 +38,7 @@ public class Main extends Application {
                 .setSpawnPosition(new PositionImpl(100, 200))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
                 .setGravity(1)
                 .build();
@@ -46,15 +47,24 @@ public class Main extends Application {
                 .setSpawnPosition(new PositionImpl(960-32, 640-32))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
                 .setGravity(1)
+                .build();
+
+        LevelModel level3 = new LevelBuilderImpl()
+                .setSpawnPosition(new PositionImpl(960-32, 640-32))
+                .setEndPoint(new PositionImpl(10, 10))
+                .setEnemiesList(List.of())
+                .setPlayer(player)
+                .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
+                .setGravity(1.5f)
                 .build();
 
         /**
          * Creation of the LevelController, which contains LevelModel implementation for each levels
          */
-        List<LevelModel> levels = List.of(level, level2);
+        List<LevelModel> levels = List.of(level, level2, level3);
         LevelController levelController = new LevelController(levels);
 
         /**
