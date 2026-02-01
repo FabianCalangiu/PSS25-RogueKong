@@ -114,12 +114,8 @@ public class GameController {
                     this.player.getPosition().getY()
             );
 
-            if(gameView.isKeyPressed(KeyCode.W) &&
-                    (levelController.getCurrentLevel()
-                            .getTileManager()
-                            .getTileAtPosition(tileBelow)
-                            .getTileType() == TileType.LADDER)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 1);
+            if(gameView.isKeyPressed(KeyCode.W)) {
+                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 3);
             }
 
             /*
