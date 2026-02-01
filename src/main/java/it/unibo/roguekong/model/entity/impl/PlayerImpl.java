@@ -27,7 +27,7 @@ public class PlayerImpl implements Player {
     private TileManager tileManager;
 
     public PlayerImpl() {
-        hitbox = new HitboxImpl(getPosition(), 30, 32);
+        hitbox = new HitboxImpl(getPosition(), 23, 32);
         setMidAir(true);
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
@@ -97,26 +97,22 @@ public class PlayerImpl implements Player {
 
     @Override
     public void setPosition(double x, double y) {
-        boolean move = false;
-        if(getPosition().getX()<x){
-            if(!tileManager.getTileAtPosition(new PositionImpl(x+32,y)).isCollidable()) {
-                move = true;
-            }
-        }
-        else if(getPosition().getX()>x || getPosition().getY()>y){
-            if(!tileManager.getTileAtPosition(new PositionImpl(x+9,y)).isCollidable()) {
-                move = true;
-            }
-        }
-        else if(getPosition().getY()<y){
-            if(!tileManager.getTileAtPosition(new PositionImpl(x+9,y+32)).isCollidable()) {
-                move = true;
-            }
-        }
-        if(move){
+        if(!collidesAt(x, y)){
             getHitbox().moveHitBox(x, y);
             setXandY(new PositionImpl(getHitbox().getBounds().getMinX(), getHitbox().getBounds().getMinY()));
         }
+    }
+
+    private boolean collidesAt(double x, double y) {
+        double left = x;
+        double right = x + 31;
+        double top = y;
+        double bottom = y + 31;
+
+        return tileManager.getTileAtPosition(new PositionImpl(left, top)).isCollidable()
+                || tileManager.getTileAtPosition(new PositionImpl(right, top)).isCollidable()
+                || tileManager.getTileAtPosition(new PositionImpl(left, bottom)).isCollidable()
+                || tileManager.getTileAtPosition(new PositionImpl(right, bottom)).isCollidable();
     }
 
     private void setXandY(PositionImpl position) {
