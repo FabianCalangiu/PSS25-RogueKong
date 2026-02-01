@@ -19,3 +19,8 @@ Player;930
 Player;862
 Player;920
 Player;934
+Player;908
+Player;872
+Player;826
+Player;780
+Player;730
