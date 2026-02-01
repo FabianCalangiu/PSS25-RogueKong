@@ -54,12 +54,12 @@ public class Main extends Application {
                 .build();
 
         LevelModel level3 = new LevelBuilderImpl()
-                .setSpawnPosition(new PositionImpl(0, 576))
+                .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
-                .setGravity(1.5f)
+                .setGravity(1)
                 .build();
 
         /**
