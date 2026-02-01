@@ -7,7 +7,6 @@ import it.unibo.roguekong.controller.SoundManager;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
-import it.unibo.roguekong.model.value.impl.VelocityImpl;
 import it.unibo.roguekong.view.impl.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -33,7 +32,6 @@ public class Main extends Application {
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
         PlayerImpl player = new PlayerImpl();
-        player.setVelocity(new VelocityImpl(2, 1));
 
         scoreView.setScores(scoreManager.loadTopScores(3));
 
@@ -169,6 +167,7 @@ public class Main extends Application {
         stage.setScene(menuView.getScene());
         stage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);
