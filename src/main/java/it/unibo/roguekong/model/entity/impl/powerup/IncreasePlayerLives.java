@@ -18,15 +18,14 @@ public class IncreasePlayerLives implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player){
-        /*
-        Add body after player implementation!!
-         */
+        int currentLives = player.getLives().getLives();
+        player.getLives().setLivesByValue(currentLives + NUMBER_OF_LIVES);
     }
 
     @Override
     public void removeEffect(PlayerImpl player){
         /*
-        Add body after player implementation!!
+        Permanent power up
          */
     }
 
