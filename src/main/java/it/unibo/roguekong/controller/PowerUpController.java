@@ -22,8 +22,7 @@ public final class PowerUpController {
                 new ChangePlayerSpeed(1.4),
                 new DoubleJump(),
                 new Invulnerability(),
-                new IncreasePlayerLives(),
-                new ModifyGravity(0.8)
+                new IncreasePlayerLives()
         ));
 
         /*

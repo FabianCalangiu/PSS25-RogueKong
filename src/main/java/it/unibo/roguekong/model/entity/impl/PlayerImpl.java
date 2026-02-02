@@ -16,7 +16,7 @@ public class PlayerImpl implements Player {
     private PositionImpl position = new PositionImpl();
     private HitboxImpl hitbox;
     private VelocityImpl velocity = new VelocityImpl();
-    private boolean midAir = false;
+    private int maxJumps;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
@@ -25,7 +25,7 @@ public class PlayerImpl implements Player {
 
     public PlayerImpl() {
         hitbox = new HitboxImpl(getPosition(), 23, 32);
-        setMidAir(true);
+        this.maxJumps = 1;
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
     }
@@ -56,11 +56,6 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public boolean isMidAir() {
-        return this.midAir;
-    }
-
-    @Override
     public List<PowerUp> getActivePowerUps() {
         return activePowerUps;
     }
@@ -72,10 +67,6 @@ public class PlayerImpl implements Player {
 
     private void setSprite(String sprite) {
         this.sprite = sprite;
-    }
-
-    private void setMidAir(boolean midAir) {
-        this.midAir = midAir;
     }
 
     @Override
@@ -98,6 +89,18 @@ public class PlayerImpl implements Player {
             getHitbox().moveHitBox(x, y);
             setXandY(new PositionImpl(getHitbox().getBounds().getMinX(), getHitbox().getBounds().getMinY()));
         }
+    }
+
+    public void incrementMaxJumps(){
+        this.maxJumps++;
+    }
+
+    public int getMaxJumps(){
+        return this.maxJumps;
+    }
+
+    public void setMaxJumps(int maxJumps){
+        this.maxJumps = maxJumps;
     }
 
     private boolean collidesAt(double x, double y) {
@@ -147,7 +150,9 @@ public class PlayerImpl implements Player {
         this.lives.decrementLives();
     }
 
-    public void resetLives(){
+    public void resetPlayerStatus(){
         setLives(new LivesImpl(LIVES_AT_START));
+        this.maxJumps = 1;
     }
 }
+
