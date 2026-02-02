@@ -28,3 +28,5 @@ Player;990
 Player;992
 Player;998
 Player;984
+Player;952
+Player;900

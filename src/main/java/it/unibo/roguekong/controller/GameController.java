@@ -150,6 +150,7 @@ public class GameController {
 
         if(this.levelController.hasPlayerWon()) {
             runIfNotNull(this.onVictory);
+            this.gameView.clearKeyPressed();
         }
 
         System.out.println(this.player.getPosition().getX() + " " + this.player.getPosition().getY());

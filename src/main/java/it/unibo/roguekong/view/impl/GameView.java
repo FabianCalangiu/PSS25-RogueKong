@@ -261,6 +261,10 @@ public class GameView implements RogueKongView {
         return keysPressed.contains(key);
     }
 
+    public void clearKeyPressed(){
+        keysPressed.clear();
+    }
+
     public void setOnKill(Runnable r){
         this.onKill = r;
     }
