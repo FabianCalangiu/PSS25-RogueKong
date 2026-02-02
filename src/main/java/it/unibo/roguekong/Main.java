@@ -83,7 +83,7 @@ public class Main extends Application {
             controller.start();
             stage.setScene(gameView.getScene());
             gameView.getRoot().requestFocus();
-            player.resetLives();
+            player.resetPlayerStatus();
             BACKGROUND_MUSIC.loop();
         });
 

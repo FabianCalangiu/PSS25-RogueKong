@@ -15,8 +15,6 @@ public interface Player{
 
     public Velocity getVelocity();
 
-    public boolean isMidAir();
-
     public List<PowerUp> getActivePowerUps();
 
     public void addPowerUp(PowerUp powerUp);
