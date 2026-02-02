@@ -2,20 +2,18 @@ package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
-import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +35,8 @@ public class GameView implements RogueKongView {
     private final Pane playerRender;
     private Pane powerUpLayer;
     private VBox powerUpBox;
+    private Label livesLabel;
+    private int lastLives = -1;
     private final Scene scene;
 
     private Runnable onKill;
@@ -57,8 +57,9 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
-        ui.getChildren().addAll(sampleKill);
+        this.root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
+        this.ui.getChildren().addAll(sampleKill);
+        this.createLivesUI();
         /*
          * setFocusTraversable makes the user input readable
          */
@@ -218,6 +219,28 @@ public class GameView implements RogueKongView {
         }
 
         powerUpLayer.setVisible(true);
+    }
+
+    private void createLivesUI(){
+        livesLabel = new Label("Lives: 0");
+        livesLabel.setLayoutX(20);
+        livesLabel.setLayoutY(20);
+
+        livesLabel.setStyle("""
+                -fx-font-size: 18;
+                -fx-font-weight: bold;
+                """);
+
+        ui.getChildren().add(livesLabel);
+    }
+
+    public void renderLives(PlayerImpl player){
+        int currentLives = player.getLives().getLives();
+
+        if(currentLives != lastLives){
+            livesLabel.setText("Lives: " + currentLives);
+            lastLives = currentLives;
+        }
     }
 
     /**

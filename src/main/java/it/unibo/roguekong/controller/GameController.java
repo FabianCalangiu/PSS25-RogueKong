@@ -160,6 +160,7 @@ public class GameController {
          * Add render here
          */
         gameView.renderPlayer(this.player);
+        gameView.renderPlayer(this.player);
     }
 
     public void stop(){
