@@ -12,6 +12,8 @@ public class ChangePlayerSpeed implements PowerUp {
     private String name;
     private String description;
 
+    private Double originalSpeed = null;
+
     /**
      * Creates an instance of a power up
      * @param multiplier needed in order to alter player's velocity
@@ -25,15 +27,22 @@ public class ChangePlayerSpeed implements PowerUp {
     @Override
     public void applyEffect(PlayerImpl player){
         VelocityImpl velocity = player.getVelocity();
-        velocity.setVelocityX(player.getVelocity().getVelocityX() * multiplier);
+
+        if(originalSpeed == null){
+            originalSpeed = velocity.getVelocityX();
+        }
+
+        velocity.setVelocityX(originalSpeed * multiplier);
         player.setVelocity(velocity);
     }
 
     @Override
     public void removeEffect(PlayerImpl player){
-        /*
-         * Review effect...
-         */
+        if(originalSpeed != null){
+            VelocityImpl velocity = player.getVelocity();
+            velocity.setVelocityX(originalSpeed);
+            player.setVelocity(velocity);
+        }
     }
 
     @Override
