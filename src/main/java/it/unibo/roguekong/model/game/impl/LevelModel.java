@@ -79,7 +79,7 @@ public class LevelModel implements Level {
      */
     @Override
     public void checkIfPlayerIsOnEndPoint() {
-        if(this.player.getPosition().equals(this.endPoint)){
+        if(this.player.getPosition().getX() + 16 >= this.endPoint.getX() && this.player.getPosition().getX() <= this.endPoint.getX() + 32){
             this.isComplete = true;
         }
     }
@@ -97,7 +97,7 @@ public class LevelModel implements Level {
      * Change the Y axis velocity of the player based to the gravity
      */
     public void setGravityOnPlayer() {
-        this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + (this.gravity * this.player.getVelocity().getVelocityY()));
+        this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + (this.gravity + this.player.getVelocity().getVelocityY()));
     }
 
     /**

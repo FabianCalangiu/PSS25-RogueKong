@@ -5,6 +5,7 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
+import it.unibo.roguekong.model.game.impl.TileType;
 import it.unibo.roguekong.model.value.Lives;
 import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.impl.LivesImpl;
@@ -103,7 +104,7 @@ public class PlayerImpl implements Player {
         }
     }
 
-    private boolean collidesAt(double x, double y) {
+    public boolean collidesAt(double x, double y) {
         double left = x;
         double right = x + 31;
         double top = y;

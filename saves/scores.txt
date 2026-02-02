@@ -24,3 +24,6 @@ Player;872
 Player;826
 Player;780
 Player;730
+Player;952
+Player;866
+Player;954
