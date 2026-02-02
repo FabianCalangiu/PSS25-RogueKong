@@ -112,6 +112,24 @@ public class PlayerImpl implements Player {
                 || tileManager.getTileAtPosition(new PositionImpl(right, bottom)).isCollidable();
     }
 
+    /**
+     * Check if player collides with a tile that deals damage
+     * @param x player position
+     * @param y player position
+     * @return boolean value, that evaluates if player got hit or not
+     */
+    public boolean isPlayerHit(double x, double y) {
+        double left = x;
+        double right = x + 31;
+        double top = y;
+        double bottom = y + 31;
+
+        return tileManager.getTileAtPosition(new PositionImpl(left, top)).isCanDealDamage()
+                || tileManager.getTileAtPosition(new PositionImpl(right, top)).isCanDealDamage()
+                || tileManager.getTileAtPosition(new PositionImpl(left, bottom)).isCanDealDamage()
+                || tileManager.getTileAtPosition(new PositionImpl(right, bottom)).isCanDealDamage();
+    }
+
     private void setXandY(PositionImpl position) {
         this.position = position;
     }

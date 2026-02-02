@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 
 public class GameController {
     private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
+    private static final SoundManager HURT_SOUND = new SoundManager("/assets/sound/Hit1.wav", -30.0f);
 
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
@@ -106,21 +107,11 @@ public class GameController {
             if(gameView.isKeyPressed(KeyCode.D)) {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
-            /**
-             * Must be improved soon
-             */
-            PositionImpl tileBelow = new PositionImpl(
-                    this.player.getPosition().getX() + 16,
-                    this.player.getPosition().getY()
-            );
 
             if(gameView.isKeyPressed(KeyCode.W)) {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 3);
             }
 
-            /*
-             * Must be improved soon
-             */
             if(gameView.isKeyPressed(KeyCode.S)) {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
             }
@@ -147,6 +138,12 @@ public class GameController {
 
         // Check the player position
         this.levelController.nextLevelIfIsComplete(this.gameView);
+
+        if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
+            this.player.getLives().decrementLives();
+            HURT_SOUND.play();
+            this.player.setPosition(this.levelController.getCurrentLevel().getSpawnPoint().getX(), this.levelController.getCurrentLevel().getSpawnPoint().getY());
+        }
 
         if(this.levelController.hasPlayerWon()) {
             runIfNotNull(this.onVictory);

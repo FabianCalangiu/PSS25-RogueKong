@@ -76,7 +76,7 @@ public class LevelController {
     }
 
     /**
-     *
+     * Check if player has won the game
      */
     public boolean hasPlayerWon() {
         return (this.getCurrentLevel().isLevelComplete()) && (!this.isThereAnotherLevel());
