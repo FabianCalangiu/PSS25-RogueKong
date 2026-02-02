@@ -83,6 +83,7 @@ public class Main extends Application {
             controller.start();
             stage.setScene(gameView.getScene());
             gameView.getRoot().requestFocus();
+            player.resetLives();
             BACKGROUND_MUSIC.loop();
         });
 
@@ -132,6 +133,17 @@ public class Main extends Application {
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         });
+
+        gameView.setOnHit(() -> {
+            if(player.getLives().getLives() == 1){
+                stage.setScene(gameOverView.getScene());
+                controller.stop();
+                levelController.reset(gameView);
+                BACKGROUND_MUSIC.stop();
+            } else {
+                player.hit();
+            }
+        });
         /* ---------------------------------------*/
 
         /* ------------ PAUSE BUTTONS -------------*/
@@ -143,10 +155,10 @@ public class Main extends Application {
         });
 
         pauseView.setOnMenu(() -> {
-            controller.goToMenu();
             stage.setScene(menuView.getScene());
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
+            scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
         /* ---------------------------------------*/
 

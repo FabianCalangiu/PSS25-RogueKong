@@ -22,4 +22,10 @@ public class LivesImpl implements Lives {
     public void setLivesByValue(int lives) {
         this.lives = lives;
     }
+
+    public void decrementLives(){
+        if(this.lives > 0){
+            this.lives--;
+        }
+    }
 }

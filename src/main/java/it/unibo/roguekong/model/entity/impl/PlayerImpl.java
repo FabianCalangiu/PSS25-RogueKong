@@ -3,10 +3,7 @@ package it.unibo.roguekong.model.entity.impl;
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
-import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
-import it.unibo.roguekong.model.value.Lives;
-import it.unibo.roguekong.model.value.Position;
 import it.unibo.roguekong.model.value.impl.LivesImpl;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
@@ -126,5 +123,13 @@ public class PlayerImpl implements Player {
     @Override
     public void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;
+    }
+
+    public void hit(){
+        this.lives.decrementLives();
+    }
+
+    public void resetLives(){
+        setLives(new LivesImpl(LIVES_AT_START));
     }
 }

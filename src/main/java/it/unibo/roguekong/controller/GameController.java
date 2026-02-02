@@ -160,7 +160,8 @@ public class GameController {
          * Add render here
          */
         gameView.renderPlayer(this.player);
-        gameView.renderPlayer(this.player);
+        gameView.renderLives(this.player);
+        System.out.println(this.player.getLives().getLives());
     }
 
     public void stop(){

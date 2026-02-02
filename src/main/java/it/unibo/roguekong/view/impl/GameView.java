@@ -30,7 +30,7 @@ public class GameView implements RogueKongView {
     private final static int TILE_SIZE = 32;
     private final Pane root;
     private final Pane background;
-    private final Pane ui;
+    private final VBox ui;
     private final Pane map;
     private final Pane playerRender;
     private Pane powerUpLayer;
@@ -40,6 +40,7 @@ public class GameView implements RogueKongView {
     private final Scene scene;
 
     private Runnable onKill;
+    private Runnable onHit;
     private final Set<KeyCode> keysPressed = new HashSet<>();
 
     private ImageView playerSpriteView;
@@ -51,14 +52,17 @@ public class GameView implements RogueKongView {
         this.root = new Pane();
         this.map = new Pane();
         this.background = new Pane();
-        this.ui = new Pane();
+        this.ui = new VBox();
         this.playerRender = new Pane();
 
         Button sampleKill = new Button("Kill");
-        sampleKill.setOnAction(e -> runIfNotNull(onKill));
+        Button sampleHit = new Button("Hit");
 
-        this.root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
-        this.ui.getChildren().addAll(sampleKill);
+        sampleKill.setOnAction(e -> runIfNotNull(onKill));
+        sampleHit.setOnAction(e -> runIfNotNull(onHit));
+
+        this.root.getChildren().addAll(background, map, playerRender, ui);
+        this.ui.getChildren().addAll(sampleKill, sampleHit);
         this.createLivesUI();
         /*
          * setFocusTraversable makes the user input readable
@@ -259,6 +263,10 @@ public class GameView implements RogueKongView {
 
     public void setOnKill(Runnable r){
         this.onKill = r;
+    }
+
+    public void setOnHit(Runnable r) {
+        this.onHit = r;
     }
 
     private void runIfNotNull(Runnable r) {
