@@ -16,7 +16,7 @@ public class PlayerImpl implements Player {
     private PositionImpl position = new PositionImpl();
     private HitboxImpl hitbox;
     private VelocityImpl velocity = new VelocityImpl();
-    private boolean midAir = false;
+    private int maxJumps = 1;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
