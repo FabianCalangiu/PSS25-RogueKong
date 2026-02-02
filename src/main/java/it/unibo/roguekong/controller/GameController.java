@@ -139,12 +139,14 @@ public class GameController {
         // Check the player position
         this.levelController.nextLevelIfIsComplete(this.gameView);
 
+        // Check if player gets hit
         if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
             this.player.getLives().decrementLives();
             HURT_SOUND.play();
             this.player.setPosition(this.levelController.getCurrentLevel().getSpawnPoint().getX(), this.levelController.getCurrentLevel().getSpawnPoint().getY());
         }
 
+        // Check if player has won the game
         if(this.levelController.hasPlayerWon()) {
             runIfNotNull(this.onVictory);
             this.gameView.clearKeyPressed();
