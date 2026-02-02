@@ -1,8 +1,8 @@
 package it.unibo.roguekong.controller;
 
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.*;
-import it.unibo.roguekong.model.value.impl.PositionImpl;
+import it.unibo.roguekong.model.game.impl.GameStateImpl;
+import it.unibo.roguekong.model.game.impl.GameStatus;
 import it.unibo.roguekong.view.impl.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
@@ -29,6 +29,7 @@ public class GameController {
 
     private int score = 1000;
     private long lastScoreUpdate = 0;
+    private boolean jumpPressed = false;
 
     /**
      * Initializes all the implementations the controller needs in order to update and run each frame
@@ -51,18 +52,37 @@ public class GameController {
         /*
          * Press ESC to open Pause Menu while playing
          */
+
         view.getRoot().setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE) {
-                if (gameState.getState() == GameStatus.PLAYING) {
-                    gameState.pauseGame();
-                    pause();
-                } else if (gameState.getState() == GameStatus.PAUSED) {
-                    gameState.resumeGame();
-                    resume();
+            if (gameState.getState() != GameStatus.PLAYING) {
+                return;
+            }
+
+            switch (e.getCode()) {
+
+                case ESCAPE -> {
+                    if (gameState.getState() == GameStatus.PLAYING) {
+                        pause();
+                    } else if (gameState.getState() == GameStatus.PAUSED) {
+                        resume();
+                    }
+                }
+
+                case SPACE -> {
+                    if (!jumpPressed) {
+                        player.jump(1);
+                        JUMP_SOUND.play();
+                        jumpPressed = true;
+                    }
                 }
             }
         });
 
+        view.getRoot().setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.SPACE) {
+                jumpPressed = false;
+            }
+        });
         /*
          * ->> To here
          */
@@ -116,10 +136,10 @@ public class GameController {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
             }
 
-            if(gameView.isKeyPressed(KeyCode.SPACE)) {
-                this.player.setPosition(player.getPosition().getX() + 0.5, player.getPosition().getY() + 0.5);
-                JUMP_SOUND.play();
-            }
+//            if(gameView.isKeyPressed(KeyCode.SPACE)) {
+//                this.player.jump(1);
+//                JUMP_SOUND.play();
+//            }
 
             if(gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
@@ -150,6 +170,7 @@ public class GameController {
             this.gameView.clearKeyPressed();
         }
 
+        this.player.checkIfPlayerOnGround();
         System.out.println(this.player.getPosition().getX() + " " + this.player.getPosition().getY());
     }
 

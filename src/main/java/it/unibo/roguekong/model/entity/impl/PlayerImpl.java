@@ -16,7 +16,9 @@ public class PlayerImpl implements Player {
     private PositionImpl position = new PositionImpl();
     private HitboxImpl hitbox;
     private VelocityImpl velocity = new VelocityImpl();
+    private int remainingJumps;
     private int maxJumps;
+    private int jumpForce;
     private List<PowerUp> activePowerUps = new ArrayList<PowerUp>();
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
@@ -26,6 +28,8 @@ public class PlayerImpl implements Player {
     public PlayerImpl() {
         hitbox = new HitboxImpl(getPosition(), 23, 32);
         this.maxJumps = 1;
+        this.remainingJumps = this.maxJumps;
+        this.jumpForce = 20;
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
     }
@@ -153,6 +157,21 @@ public class PlayerImpl implements Player {
     public void resetPlayerStatus(){
         setLives(new LivesImpl(LIVES_AT_START));
         this.maxJumps = 1;
+    }
+
+    public void jump(int gravity){
+        if(this.remainingJumps > 0) {
+            this.moveY(this.getPosition().getY() - (gravity * this.jumpForce));
+            this.remainingJumps--;
+        }
+    }
+
+    public void checkIfPlayerOnGround(){
+        if(this.collidesAt(this.getPosition().getX(), this.getPosition().getY())){
+            System.out.println("Collide");
+            this.remainingJumps = maxJumps;
+        }
+        System.out.println(this.remainingJumps);
     }
 }
 
