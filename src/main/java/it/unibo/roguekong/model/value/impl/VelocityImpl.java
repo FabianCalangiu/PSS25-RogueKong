@@ -34,4 +34,9 @@ public class VelocityImpl implements Velocity {
     public double getVelocityY(){
         return velocityY;
     }
+
+    public void resetVelocity(){
+        this.velocityX = 1;
+        this.velocityY = 1;
+    }
 }

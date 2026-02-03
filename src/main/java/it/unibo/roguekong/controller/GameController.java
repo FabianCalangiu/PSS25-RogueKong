@@ -54,25 +54,25 @@ public class GameController {
          * Press ESC to open Pause Menu while playing
          */
         view.getRoot().setOnKeyPressed(e -> {
-            if (gameState.getState() != GameStatus.PLAYING) {
+            if (this.gameState.getState() != GameStatus.PLAYING) {
                 return;
             }
 
             switch (e.getCode()) {
 
                 case ESCAPE -> {
-                    if (gameState.getState() == GameStatus.PLAYING) {
+                    if (this.gameState.getState() == GameStatus.PLAYING) {
                         pause();
-                    } else if (gameState.getState() == GameStatus.PAUSED) {
+                    } else if (this.gameState.getState() == GameStatus.PAUSED) {
                         resume();
                     }
                 }
 
                 case SPACE -> {
-                    if (!jumpPressed) {
-                        player.jump();
+                    if (!this.jumpPressed) {
+                        this.player.jump();
                         JUMP_SOUND.play();
-                        jumpPressed = true;
+                        this.jumpPressed = true;
                     }
                 }
             }
@@ -80,7 +80,7 @@ public class GameController {
 
         view.getRoot().setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.SPACE) {
-                jumpPressed = false;
+                this.jumpPressed = false;
             }
         });
         /*
@@ -107,8 +107,8 @@ public class GameController {
      * Calls state change.
      */
     public void start(){
-        gameState.startGame();
-        gameLoop.start();
+        this.gameState.startGame();
+        this.gameLoop.start();
     }
 
     /**
@@ -116,29 +116,29 @@ public class GameController {
      */
     private void userInput(){
         /* --------------------------- USER INPUT ----------------------------------*/
-        if(gameState.getState() != GameStatus.PLAYING) {
+        if(this.gameState.getState() != GameStatus.PLAYING) {
             return;
         } else {
 
             if(gameView.isKeyPressed(KeyCode.A)) {
-                this.player.setPosition(player.getPosition().getX() - (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
+                this.player.setPosition(this.player.getPosition().getX() - (1 * this.player.getVelocity().getVelocityX()), this.player.getPosition().getY());
                 this.player.setSprite("/assets/sprites/standing-mario-left.png");
             }
 
             if(gameView.isKeyPressed(KeyCode.D)) {
-                this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
+                this.player.setPosition(this.player.getPosition().getX() + (1 * this.player.getVelocity().getVelocityX()), this.player.getPosition().getY());
                 this.player.setSprite("/assets/sprites/standing-mario-right.png");
             }
 
             if(gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 3);
+                this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() - 3);
             }
 
             if(gameView.isKeyPressed(KeyCode.S)) {
-                this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
+                this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + 1);
             }
 
-            if(gameView.isKeyPressed(KeyCode.P)){
+            if(this.gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
             }
         }
@@ -150,95 +150,47 @@ public class GameController {
      * gets updated every 60fps
      */
     private void update() {
-        updateScore();
+        this.updateScore();
 
-        player.setGravityOnPlayer();
+        this.player.setGravityOnPlayer();
 
-        levelController.nextLevelIfIsComplete(gameView);
+        this.levelController.nextLevelIfIsComplete(this.gameView);
 
-        if (player.isPlayerHit(player.getPosition().getX(), player.getPosition().getY())) {
-            player.getLives().decrementLives();
-            HURT_SOUND.play();
-            player.setPosition(
-                    levelController.getCurrentLevel().getSpawnPoint().getX(),
-                    levelController.getCurrentLevel().getSpawnPoint().getY()
-            );
-        }
+        this.checkIfPlayerGotHit();
 
-        if(player.getLives().getLives() == 0){
-            runIfNotNull(onDeath);
-        }
+        this.checkLose();
 
-        if (levelController.hasPlayerWon()) {
-            runIfNotNull(onVictory);
-            gameView.clearKeyPressed();
-        }
+        this.checkWin();
     }
 
     private void render(){
         /*
          * Add render here
          */
-        gameView.renderPlayer(this.player);
-        gameView.renderLives(this.player);
+        this.gameView.renderPlayer(this.player);
+        this.gameView.renderLives(this.player);
         System.out.println(this.player.getLives().getLives());
     }
 
     public void stop(){
-        gameLoop.stop();
+        this.gameLoop.stop();
     }
 
     private void pause(){
-        gameState.pauseGame();
-        gameLoop.stop();
-        if(onPause != null) onPause.run();
+        this.gameState.pauseGame();
+        this.gameLoop.stop();
+        if(this.onPause != null) this.onPause.run();
     }
 
     public void resume(){
-        gameState.resumeGame();
-        gameLoop.start();
+        this.gameState.resumeGame();
+        this.gameLoop.start();
     }
 
     public void goToMenu() {
-        gameLoop.stop();
-        gameState.goToMenu();
-        if (onMenu != null) onMenu.run();
-    }
-
-    private void showPowerUpPanel(){
-        gameLoop.stop();
-        gameState.pauseGame();
-
-        var powerUps = PowerUpController.getRandomPowerUps(2);
-
-        gameView.showPowerUpPanel(
-                player,
-                powerUps,
-                () -> {
-                    gameState.resumeGame();
-                    gameLoop.start();
-                }
-        );
-    }
-
-    /**
-     * Updates score each second (maybe changed)
-     */
-    private void updateScore(){
-        long now = System.nanoTime();
-
-        if(lastScoreUpdate == 0){
-            lastScoreUpdate = now;
-            return;
-        }
-
-        long elapsed = now - lastScoreUpdate;
-
-        if(elapsed >= 1_000_000_000L){
-            score = Math.max(0, score - 2);
-            lastScoreUpdate = now;
-            System.out.println("Score: " + score);
-        }
+        this.gameLoop.stop();
+        this.gameState.goToMenu();
+        if (this.onMenu != null) this.onMenu.run();
     }
 
     public void setOnPause(Runnable r) {
@@ -254,4 +206,70 @@ public class GameController {
     public int getScoreManager() { return this.score; }
 
     private void runIfNotNull(Runnable r) { if(r != null) r.run(); }
+
+    private void showPowerUpPanel(){
+        this.gameLoop.stop();
+        this.gameState.pauseGame();
+
+        var powerUps = PowerUpController.getRandomPowerUps(2);
+
+        this.gameView.showPowerUpPanel(
+                this.player,
+                powerUps,
+                () -> {
+                    this.gameState.resumeGame();
+                    this.gameLoop.start();
+                }
+        );
+    }
+
+    /**
+     * Updates score each second (maybe changed)
+     */
+    private void updateScore(){
+        long now = System.nanoTime();
+
+        if(this.lastScoreUpdate == 0){
+            this.lastScoreUpdate = now;
+            return;
+        }
+
+        long elapsed = now - this.lastScoreUpdate;
+
+        if(elapsed >= 1_000_000_000L){
+            this.score = Math.max(0, this.score - 2);
+            this.lastScoreUpdate = now;
+            System.out.println("Score: " + this.score);
+        }
+    }
+
+    private void checkWin() {
+        if(this.levelController.hasPlayerWon()) {
+            this.gameView.clearKeyPressed();
+            this.player.getVelocity().resetVelocity();
+            this.gameState.goToMenu();
+            runIfNotNull(this.onVictory);
+        }
+    }
+
+    private void checkLose() {
+        if(this.player.getLives().getLives() == 0){
+            this.gameView.clearKeyPressed();
+            this.player.getVelocity().resetVelocity();
+            this.gameState.gameOver();
+            runIfNotNull(this.onDeath);
+        }
+    }
+
+    private void checkIfPlayerGotHit() {
+        if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
+            this.player.getLives().decrementLives();
+            this.player.setSprite("/assets/sprites/standing-mario-right.png");
+            HURT_SOUND.play();
+            this.player.setPosition(
+                    this.levelController.getCurrentLevel().getSpawnPoint().getX(),
+                    this.levelController.getCurrentLevel().getSpawnPoint().getY()
+            );
+        }
+    }
 }
