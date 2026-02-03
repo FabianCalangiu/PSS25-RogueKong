@@ -70,7 +70,7 @@ public class GameController {
 
                 case SPACE -> {
                     if (!jumpPressed) {
-                        player.jump(1);
+                        player.jump();
                         JUMP_SOUND.play();
                         jumpPressed = true;
                     }
@@ -128,18 +128,13 @@ public class GameController {
                 this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
             }
 
-            if(gameView.isKeyPressed(KeyCode.W)) {
+            if(gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() - 3);
             }
 
             if(gameView.isKeyPressed(KeyCode.S)) {
                 this.player.setPosition(player.getPosition().getX(), player.getPosition().getY() + 1);
             }
-
-//            if(gameView.isKeyPressed(KeyCode.SPACE)) {
-//                this.player.jump(1);
-//                JUMP_SOUND.play();
-//            }
 
             if(gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
@@ -152,25 +147,27 @@ public class GameController {
      * Update and render are the body of the main game loop. Everything in their body
      * gets updated every 60fps
      */
-    private void update(){
+    private void update() {
         updateScore();
-        setGravityEachFrame();
 
-        // Check the player position
-        this.levelController.nextLevelIfIsComplete(this.gameView);
+        player.setGravityOnPlayer();
 
-        if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
-            this.player.getLives().decrementLives();
+        levelController.nextLevelIfIsComplete(gameView);
+
+        if (player.isPlayerHit(player.getPosition().getX(), player.getPosition().getY())) {
+            player.getLives().decrementLives();
             HURT_SOUND.play();
-            this.player.setPosition(this.levelController.getCurrentLevel().getSpawnPoint().getX(), this.levelController.getCurrentLevel().getSpawnPoint().getY());
+            player.setPosition(
+                    levelController.getCurrentLevel().getSpawnPoint().getX(),
+                    levelController.getCurrentLevel().getSpawnPoint().getY()
+            );
         }
 
-        if(this.levelController.hasPlayerWon()) {
-            runIfNotNull(this.onVictory);
-            this.gameView.clearKeyPressed();
+        if (levelController.hasPlayerWon()) {
+            runIfNotNull(onVictory);
+            gameView.clearKeyPressed();
         }
 
-        this.player.checkIfPlayerOnGround();
         System.out.println(this.player.getPosition().getX() + " " + this.player.getPosition().getY());
     }
 
@@ -247,10 +244,6 @@ public class GameController {
     public void setOnVictory(Runnable r) { this.onVictory = r; }
 
     public int getScoreManager() { return this.score; }
-
-    public void setGravityEachFrame() {
-        this.levelController.getCurrentLevel().setGravityOnPlayer();
-    }
 
     private void runIfNotNull(Runnable r) { r.run(); }
 }
