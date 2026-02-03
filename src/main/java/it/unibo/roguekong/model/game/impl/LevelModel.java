@@ -27,22 +27,19 @@ public class LevelModel implements Level {
      * @param enemies is a list that contains every enemy of each level
      * @param player is the main player
      * @param tileManager the map manager of each level
-     * @param gravity effect that changes the Y axis player velocity
      */
     public LevelModel(
             final PositionImpl spawnPoint,
             final PositionImpl endPoint,
             final List<Enemy> enemies,
             final PlayerImpl player,
-            final TileManager tileManager,
-            final double gravity) {
+            final TileManager tileManager) {
         this.spawnPosition = spawnPoint;
         this.endPoint = endPoint;
         this.enemies = new ArrayList<>(enemies);
         this.player = player;
         this.isComplete = false;
         this.tileManager = tileManager;
-        this.gravity = gravity;
     }
 
     @Override
@@ -62,8 +59,6 @@ public class LevelModel implements Level {
 
     public TileManager getTileManager() { return tileManager; }
 
-    public double getLevelGravity(){ return this.gravity; }
-
     /**
      * This method initialize each level, setting the player position on the spawn point
      */
@@ -71,7 +66,6 @@ public class LevelModel implements Level {
     public void init() {
         this.isComplete = false;
         this.setPlayerOnSpawn();
-//        this.setGravityOnPlayer();
     }
 
     /**
@@ -82,22 +76,6 @@ public class LevelModel implements Level {
         if(this.player.getPosition().getX() + 16 >= this.endPoint.getX() && this.player.getPosition().getX() <= this.endPoint.getX() + 32){
             this.isComplete = true;
         }
-    }
-
-    /**
-     * Set the gravity of each level
-     * @param gravity world
-     */
-    public void setLevelGravity(double gravity){
-        this.gravity = gravity;
-        this.setGravityOnPlayer();
-    }
-
-    /**
-     * Change the Y axis velocity of the player based to the gravity
-     */
-    public void setGravityOnPlayer() {
-        this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + (this.gravity + this.player.getVelocity().getVelocityY()));
     }
 
     /**

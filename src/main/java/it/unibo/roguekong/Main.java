@@ -41,7 +41,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level2 = new LevelBuilderImpl()
@@ -50,7 +49,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level3 = new LevelBuilderImpl()
@@ -59,7 +57,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
-                .setGravity(1)
                 .build();
 
         /**
@@ -78,7 +75,7 @@ public class Main extends Application {
         gameView.loadMap(levelController.getCurrentLevel().getTileManager());
         gameView.renderPlayer(levelController.getCurrentLevel().getPlayer());
 
-        /* ------------ MENU BUTTONS -------------*/
+        /* ------------ MENU RUNNABLES -------------*/
         menuView.setOnStart(() -> {
             controller.start();
             stage.setScene(gameView.getScene());
@@ -97,7 +94,7 @@ public class Main extends Application {
         });
         /* ---------------------------------------*/
 
-        /* ------------ SCORE BUTTONS -------------*/
+        /* ------------ SCORE RUNNABLES -------------*/
         scoreView.setOnReturn(() -> {
             stage.setScene(menuView.getScene());
         });
@@ -108,7 +105,7 @@ public class Main extends Application {
         });
         /* ---------------------------------------*/
 
-        /* ------------ CONTROLLER BUTTONS -------------*/
+        /* ------------ CONTROLLER RUNNABLES -------------*/
         controller.setOnPause(() -> {
             controller.setOnPause(() -> {
                 stage.setScene(pauseView.getScene());
@@ -124,9 +121,17 @@ public class Main extends Application {
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         } );
+
+        controller.setOnDeath(() -> {
+            stage.setScene(gameOverView.getScene());
+            controller.stop();
+            player.resetPlayerStatus();
+            levelController.reset(gameView);
+            BACKGROUND_MUSIC.stop();
+        });
         /* ---------------------------------------*/
 
-        /* ------------ GAME BUTTONS -------------*/
+        /* ------------ GAME RUNNABLES -------------*/
         gameView.setOnKill(() -> {
             stage.setScene(gameOverView.getScene());
             controller.stop();
@@ -146,7 +151,7 @@ public class Main extends Application {
         });
         /* ---------------------------------------*/
 
-        /* ------------ PAUSE BUTTONS -------------*/
+        /* ------------ PAUSE RUNNABLES -------------*/
         pauseView.setOnResume(() -> {
             controller.resume();
             stage.setScene(gameView.getScene());
@@ -162,7 +167,7 @@ public class Main extends Application {
         });
         /* ---------------------------------------*/
 
-        /* ------------ GAME OVER BUTTONS -------------*/
+        /* ------------ GAME OVER RUNNABLES -------------*/
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
             levelController.reset(gameView);

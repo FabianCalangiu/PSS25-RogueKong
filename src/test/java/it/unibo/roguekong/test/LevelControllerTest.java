@@ -29,7 +29,6 @@ public class LevelControllerTest {
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level2 = new LevelBuilderImpl()
@@ -38,7 +37,6 @@ public class LevelControllerTest {
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level3 = new LevelBuilderImpl()
@@ -47,7 +45,6 @@ public class LevelControllerTest {
                 .setEnemiesList(List.of())
                 .setPlayer(new PlayerImpl())
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
-                .setGravity(2)
                 .build();
 
         List<LevelModel> levels = List.of(level, level2, level3);
