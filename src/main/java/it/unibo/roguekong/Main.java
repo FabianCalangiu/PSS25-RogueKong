@@ -125,6 +125,7 @@ public class Main extends Application {
         controller.setOnDeath(() -> {
             stage.setScene(gameOverView.getScene());
             controller.stop();
+            player.resetPlayerStatus();
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         });
