@@ -21,6 +21,7 @@ public class GameController {
     private final GameStateImpl gameState;
     Runnable onMenu;
     Runnable onPause;
+    Runnable onDeath;
     Runnable onVictory;
     private GameView gameView;
     private PlayerImpl player;
@@ -163,6 +164,10 @@ public class GameController {
             );
         }
 
+        if(player.getLives().getLives() == 0){
+            runIfNotNull(onDeath);
+        }
+
         if (levelController.hasPlayerWon()) {
             runIfNotNull(onVictory);
             gameView.clearKeyPressed();
@@ -239,6 +244,10 @@ public class GameController {
 
     public void setOnPause(Runnable r) {
         this.onPause = r;
+    }
+
+    public void setOnDeath(Runnable r) {
+        this.onDeath = r;
     }
 
     public void setOnVictory(Runnable r) { this.onVictory = r; }
