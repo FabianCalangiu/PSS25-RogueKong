@@ -37,7 +37,7 @@ public class PlayerImpl implements Player {
         this.jumpForce = 3;
         this.gravity = new Gravity(GRAVITY, MAX_FALL_SPEED);
         setLives(new LivesImpl(LIVES_AT_START));
-        setSprite("/assets/sprites/standing-mario.png");
+        setSprite("/assets/sprites/standing-mario-right.png");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class PlayerImpl implements Player {
         this.activePowerUps.add(powerUp);
     }
 
-    private void setSprite(String sprite) {
+    public void setSprite(String sprite) {
         this.sprite = sprite;
     }
 

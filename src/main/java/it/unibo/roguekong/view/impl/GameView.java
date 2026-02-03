@@ -28,6 +28,7 @@ public class GameView implements RogueKongView {
     private final static int WIDTH = 960;
     private final static int HEIGTH = 640;
     private final static int TILE_SIZE = 32;
+    private String lastSpritePath;
     private final Pane root;
     private final Pane background;
     private final VBox ui;
@@ -147,17 +148,22 @@ public class GameView implements RogueKongView {
      * Renders the player. It has to be called each frame in the main game loop.
      * @param player; gets player as input in order to load its sprite. Size are set manually here.
      */
-    public void renderPlayer(PlayerImpl player){
-        if (playerSpriteView == null) {
-            Image playerSprite = new Image(
-                    getClass().getResourceAsStream(player.getSprite())
-            );
+    public void renderPlayer(PlayerImpl player) {
+        String currentSprite = player.getSprite();
 
-            playerSpriteView = new ImageView(playerSprite);
+        if (playerSpriteView == null) {
+            playerSpriteView = new ImageView();
             playerSpriteView.setFitWidth(TILE_SIZE);
             playerSpriteView.setFitHeight(TILE_SIZE);
-
             playerRender.getChildren().add(playerSpriteView);
+        }
+
+        if (!currentSprite.equals(lastSpritePath)) {
+            Image spriteImage = new Image(
+                    getClass().getResourceAsStream(currentSprite)
+            );
+            playerSpriteView.setImage(spriteImage);
+            lastSpritePath = currentSprite;
         }
 
         playerSpriteView.setX(player.getPosition().getX());

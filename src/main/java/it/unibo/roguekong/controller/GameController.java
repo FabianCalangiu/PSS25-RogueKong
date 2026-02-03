@@ -122,10 +122,12 @@ public class GameController {
 
             if(gameView.isKeyPressed(KeyCode.A)) {
                 this.player.setPosition(player.getPosition().getX() - (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
+                this.player.setSprite("/assets/sprites/standing-mario-left.png");
             }
 
             if(gameView.isKeyPressed(KeyCode.D)) {
-                this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY()); // Must be implemented the velocity variation like gravity.
+                this.player.setPosition(player.getPosition().getX() + (1 * player.getVelocity().getVelocityX()), player.getPosition().getY());
+                this.player.setSprite("/assets/sprites/standing-mario-right.png");
             }
 
             if(gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
@@ -171,8 +173,6 @@ public class GameController {
             runIfNotNull(onVictory);
             gameView.clearKeyPressed();
         }
-
-        System.out.println(this.player.getPosition().getX() + " " + this.player.getPosition().getY());
     }
 
     private void render(){
@@ -253,5 +253,5 @@ public class GameController {
 
     public int getScoreManager() { return this.score; }
 
-    private void runIfNotNull(Runnable r) { r.run(); }
+    private void runIfNotNull(Runnable r) { if(r != null) r.run(); }
 }
