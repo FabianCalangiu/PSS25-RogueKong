@@ -24,7 +24,7 @@ public class LevelTest {
         this.spawnPoint = new PositionImpl(0, 0);
         this.endPoint = new PositionImpl(10, 10);
         this.tileManager = new TileManager("maps/map1.txt", "maps/background1.txt");
-        this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), this.player, this.tileManager, 1);
+        this.level = new LevelModel(this.spawnPoint, this.endPoint, List.of(), this.player, this.tileManager);
 
         this.level.init();
     }

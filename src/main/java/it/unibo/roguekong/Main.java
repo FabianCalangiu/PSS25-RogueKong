@@ -41,7 +41,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level2 = new LevelBuilderImpl()
@@ -50,7 +49,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
-                .setGravity(1)
                 .build();
 
         LevelModel level3 = new LevelBuilderImpl()
@@ -59,7 +57,6 @@ public class Main extends Application {
                 .setEnemiesList(List.of())
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
-                .setGravity(1)
                 .build();
 
         /**

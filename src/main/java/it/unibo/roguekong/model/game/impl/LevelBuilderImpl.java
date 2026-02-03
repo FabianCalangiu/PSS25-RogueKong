@@ -12,14 +12,12 @@ import java.util.Objects;
 /**
  * This is a LevelModel Builder, to guarantee dryness when we need to create more than one level
  */
-
 public class LevelBuilderImpl implements LevelBuilder {
     private List<Enemy> enemies;
     private PositionImpl spawnPosition;
     private PositionImpl endPoint;
     private PlayerImpl player;
     private TileManager tileManager;
-    private double gravity;
 
     public LevelBuilderImpl setSpawnPosition(final PositionImpl spawnPosition) {
         this.spawnPosition = spawnPosition;
@@ -41,11 +39,6 @@ public class LevelBuilderImpl implements LevelBuilder {
         return this;
     }
 
-    public LevelBuilderImpl setGravity(final double gravity) {
-        this.gravity = gravity;
-        return this;
-    }
-
     public LevelBuilderImpl setEnemiesList(final List<Enemy> enemies) {
         this.enemies = enemies;
         return this;
@@ -56,9 +49,8 @@ public class LevelBuilderImpl implements LevelBuilder {
         Objects.requireNonNull(this.enemies, "Enemies is required");
         Objects.requireNonNull(this.endPoint, "End point is required");
         Objects.requireNonNull(this.player, "Player is required");
-        Objects.requireNonNull(this.gravity, "Gravity is required");
         Objects.requireNonNull(this.tileManager, "TileManager is required");
 
-        return new LevelModel(this.spawnPosition, this.endPoint, this.enemies, this.player, this.tileManager, this.gravity);
+        return new LevelModel(this.spawnPosition, this.endPoint, this.enemies, this.player, this.tileManager);
     }
 }
