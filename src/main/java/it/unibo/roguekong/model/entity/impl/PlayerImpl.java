@@ -5,6 +5,7 @@ import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.game.impl.TileType;
+import it.unibo.roguekong.model.value.impl.Gravity;
 import it.unibo.roguekong.model.value.impl.LivesImpl;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.model.value.impl.VelocityImpl;
@@ -27,12 +28,14 @@ public class PlayerImpl implements Player {
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
     private TileManager tileManager;
+    private Gravity gravity;
 
     public PlayerImpl() {
         hitbox = new HitboxImpl(getPosition(), 23, 32);
         this.maxJumps = 2;
         this.remainingJumps = this.maxJumps;
         this.jumpForce = 3;
+        this.gravity = new Gravity(GRAVITY, MAX_FALL_SPEED);
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
     }
@@ -192,7 +195,7 @@ public class PlayerImpl implements Player {
      * Must be used to update players physic
      */
     public void setGravityOnPlayer() {
-        this.velocity.setVelocityY(Math.min(this.velocity.getVelocityY() + this.GRAVITY, this.MAX_FALL_SPEED));
+        this.velocity.setVelocityY(Math.min(this.velocity.getVelocityY() + this.gravity.gravity(), this.gravity.max_fall_speed()));
 
         if (!collidesAt(this.position.getX(), this.position.getY() + this.velocity.getVelocityY())) {
             moveY(this.position.getY() + this.velocity.getVelocityY());
@@ -202,6 +205,10 @@ public class PlayerImpl implements Player {
             }
             this.velocity.setVelocityY(0);
         }
+    }
+
+    public void setGravity(double gravity, int max_fall_speed){
+        this.gravity = new Gravity(gravity, max_fall_speed);
     }
 }
 
