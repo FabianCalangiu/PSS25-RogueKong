@@ -70,9 +70,10 @@ public class GameController {
 
                 case SPACE -> {
                     if (!this.jumpPressed) {
-                        this.player.jump();
-                        JUMP_SOUND.play();
-                        this.jumpPressed = true;
+                        if(this.player.jump()) {
+                            this.jumpPressed = true;
+                            JUMP_SOUND.play();
+                        }
                     }
                 }
             }
@@ -172,9 +173,7 @@ public class GameController {
         System.out.println(this.player.getLives().getLives());
     }
 
-    public void stop(){
-        this.gameLoop.stop();
-    }
+    public void stop() { this.gameLoop.stop(); }
 
     private void pause(){
         this.gameState.pauseGame();
@@ -193,13 +192,9 @@ public class GameController {
         if (this.onMenu != null) this.onMenu.run();
     }
 
-    public void setOnPause(Runnable r) {
-        this.onPause = r;
-    }
+    public void setOnPause(Runnable r) { this.onPause = r; }
 
-    public void setOnDeath(Runnable r) {
-        this.onDeath = r;
-    }
+    public void setOnDeath(Runnable r) { this.onDeath = r; }
 
     public void setOnVictory(Runnable r) { this.onVictory = r; }
 
@@ -243,6 +238,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Check if the player has won the game
+     */
     private void checkWin() {
         if(this.levelController.hasPlayerWon()) {
             this.gameView.clearKeyPressed();
@@ -252,6 +250,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Check if the player has lost the game
+     */
     private void checkLose() {
         if(this.player.getLives().getLives() == 0){
             this.gameView.clearKeyPressed();
@@ -261,11 +262,15 @@ public class GameController {
         }
     }
 
+    /**
+     * Check if the player has got hit
+     */
     private void checkIfPlayerGotHit() {
         if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
-            this.player.getLives().decrementLives();
+            this.player.hit();
             this.player.setSprite("/assets/sprites/standing-mario-right.png");
             HURT_SOUND.play();
+
             this.player.setPosition(
                     this.levelController.getCurrentLevel().getSpawnPoint().getX(),
                     this.levelController.getCurrentLevel().getSpawnPoint().getY()

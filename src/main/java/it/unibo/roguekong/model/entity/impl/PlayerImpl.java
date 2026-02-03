@@ -184,10 +184,17 @@ public class PlayerImpl implements Player {
         this.maxJumps = 1;
     }
 
-    public void jump(){
+    /**
+     * Method that contains the actual logic jump
+     * @return true if player can actually jump, else it returns false
+     */
+    public boolean jump(){
         if(this.remainingJumps > 0) {
             this.velocity.setVelocityY(-jumpForce);
             this.remainingJumps--;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -207,6 +214,11 @@ public class PlayerImpl implements Player {
         }
     }
 
+    /**
+     * Must be called when it's necessary to change world gravity
+     * @param gravity world
+     * @param max_fall_speed max velocity when player is falling
+     */
     public void setGravity(double gravity, int max_fall_speed){
         this.gravity = new Gravity(gravity, max_fall_speed);
     }
