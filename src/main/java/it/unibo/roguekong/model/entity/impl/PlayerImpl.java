@@ -33,7 +33,7 @@ public class PlayerImpl implements Player {
 
     public PlayerImpl() {
         hitbox = new HitboxImpl(getPosition(), 23, 32);
-        this.maxJumps = 2;
+        this.maxJumps = 1;
         this.remainingJumps = this.maxJumps;
         this.jumpForce = 3;
         this.gravity = new Gravity(GRAVITY, MAX_FALL_SPEED);
@@ -184,7 +184,6 @@ public class PlayerImpl implements Player {
 
     public void resetPlayerStatus(){
         setLives(new LivesImpl(LIVES_AT_START));
-        this.maxJumps = 1;
     }
 
     /**
