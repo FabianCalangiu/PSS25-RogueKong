@@ -18,7 +18,6 @@ public class LevelModel implements Level {
     private final PlayerImpl player;
     private boolean isComplete;
     private final TileManager tileManager;
-    private double gravity;
 
     /**
      * Create a new LevelModel
@@ -69,7 +68,7 @@ public class LevelModel implements Level {
     }
 
     /**
-     * Check if the player position is equals to the endpoint position
+     * Check if the player position is between the endpoint positions
      */
     @Override
     public void checkIfPlayerIsOnEndPoint() {
@@ -79,7 +78,7 @@ public class LevelModel implements Level {
     }
 
     /**
-     * Set the player spawnPosition
+     * Set the player on spawn position
      */
     private void setPlayerOnSpawn() {
         this.player.setPosition(this.spawnPosition.getX(), this.spawnPosition.getY());

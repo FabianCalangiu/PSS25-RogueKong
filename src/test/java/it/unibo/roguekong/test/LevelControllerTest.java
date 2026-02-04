@@ -1,6 +1,7 @@
 package it.unibo.roguekong.test;
 
 import it.unibo.roguekong.controller.GameController;
+import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.LevelBuilderImpl;
 import it.unibo.roguekong.model.game.impl.LevelModel;
@@ -20,14 +21,17 @@ import java.util.List;
 
 public class LevelControllerTest {
     LevelController levelController;
-
+    PlayerImpl player;
     @BeforeEach
     void setUp() {
+        this.player = new PlayerImpl();
+        this.player.setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"));
+
         LevelModel level = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(10, 10))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
                 .build();
 
@@ -35,7 +39,7 @@ public class LevelControllerTest {
                 .setSpawnPosition(new PositionImpl(10, 10))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
                 .build();
 
@@ -43,13 +47,14 @@ public class LevelControllerTest {
                 .setSpawnPosition(new PositionImpl(10, 10))
                 .setEndPoint(new PositionImpl(10, 10))
                 .setEnemiesList(List.of())
-                .setPlayer(new PlayerImpl())
+                .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
                 .build();
 
         List<LevelModel> levels = List.of(level, level2, level3);
          this.levelController = new LevelController(levels);
          this.levelController.setUpLevel();
+
     }
 
     @Test
