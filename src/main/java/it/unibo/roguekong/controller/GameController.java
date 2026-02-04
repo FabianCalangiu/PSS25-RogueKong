@@ -150,6 +150,10 @@ public class GameController {
      * gets updated every 60fps
      */
     private void update() {
+        if(this.gameState.getState() != GameStatus.PLAYING) {
+            return;
+        }
+
         this.updateScore();
 
         this.player.setGravityOnPlayer();
@@ -161,6 +165,7 @@ public class GameController {
         this.checkLose();
 
         this.checkWin();
+        System.out.println(gameState.getState());
     }
 
     private void render(){
@@ -213,6 +218,7 @@ public class GameController {
                 () -> {
                     this.gameState.resumeGame();
                     this.gameLoop.start();
+                    this.gameView.getRoot().requestFocus();
                 }
         );
     }

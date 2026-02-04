@@ -59,11 +59,8 @@ public class GameView implements RogueKongView {
         Button sampleKill = new Button("Kill");
         Button sampleHit = new Button("Hit");
 
-        sampleKill.setOnAction(e -> runIfNotNull(onKill));
-        sampleHit.setOnAction(e -> runIfNotNull(onHit));
 
         this.root.getChildren().addAll(background, map, playerRender, ui);
-        this.ui.getChildren().addAll(sampleKill, sampleHit);
         this.createLivesUI();
         /*
          * setFocusTraversable makes the user input readable

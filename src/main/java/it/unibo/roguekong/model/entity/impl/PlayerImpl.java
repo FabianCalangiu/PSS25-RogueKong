@@ -162,6 +162,7 @@ public class PlayerImpl implements Player {
                 || tileManager.getTileAtPosition(new PositionImpl(right, top)).isCanDealDamage()
                 || tileManager.getTileAtPosition(new PositionImpl(left, bottom)).isCanDealDamage()
                 || tileManager.getTileAtPosition(new PositionImpl(right, bottom)).isCanDealDamage();
+
     }
 
     private void setXandY(PositionImpl position) {
