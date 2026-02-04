@@ -108,6 +108,7 @@ public class GameController {
     public void start(){
         this.gameState.startGame();
         this.gameLoop.start();
+        this.score = 1000;
     }
 
     /**
