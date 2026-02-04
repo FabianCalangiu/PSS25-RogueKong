@@ -222,5 +222,9 @@ public class PlayerImpl implements Player {
     public void setGravity(double gravity, int max_fall_speed){
         this.gravity = new Gravity(gravity, max_fall_speed);
     }
+
+    public Gravity getGravity(){
+        return this.gravity;
+    }
 }
 

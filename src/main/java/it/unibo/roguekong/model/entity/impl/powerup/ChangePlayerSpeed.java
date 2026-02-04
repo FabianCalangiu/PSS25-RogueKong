@@ -9,8 +9,8 @@ import it.unibo.roguekong.model.value.impl.VelocityImpl;
  */
 public class ChangePlayerSpeed implements PowerUp {
     private final double multiplier;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     private Double originalSpeed = null;
 

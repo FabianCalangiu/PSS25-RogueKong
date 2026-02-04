@@ -8,8 +8,8 @@ import it.unibo.roguekong.model.entity.impl.PlayerImpl;
  */
 public class IncreasePlayerLives implements PowerUp {
     private final static int NUMBER_OF_LIVES = 1;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     public IncreasePlayerLives(){
         this.name = "Life up";
