@@ -17,16 +17,16 @@ public class DoubleJump implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player){
-        if (originalMaxJumps == null) {
-            originalMaxJumps = player.getMaxJumps();
+        if (this.originalMaxJumps == null) {
+            this.originalMaxJumps = player.getMaxJumps();
         }
-        player.setMaxJumps(originalMaxJumps + 1);
+        player.setMaxJumps(this.originalMaxJumps + 1);
     }
 
     @Override
     public void removeEffect(PlayerImpl player){
-        if (originalMaxJumps != null) {
-            player.setMaxJumps(originalMaxJumps);
+        if (this.originalMaxJumps != null) {
+            player.setMaxJumps(this.originalMaxJumps);
         }
     }
 

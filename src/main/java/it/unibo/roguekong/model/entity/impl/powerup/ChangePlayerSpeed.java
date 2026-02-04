@@ -28,19 +28,19 @@ public class ChangePlayerSpeed implements PowerUp {
     public void applyEffect(PlayerImpl player){
         VelocityImpl velocity = player.getVelocity();
 
-        if(originalSpeed == null){
-            originalSpeed = velocity.getVelocityX();
+        if(this.originalSpeed == null){
+            this.originalSpeed = velocity.getVelocityX();
         }
 
-        velocity.setVelocityX(originalSpeed * multiplier);
+        velocity.setVelocityX(this.originalSpeed * this.multiplier);
         player.setVelocity(velocity);
     }
 
     @Override
     public void removeEffect(PlayerImpl player){
-        if(originalSpeed != null){
+        if(this.originalSpeed != null){
             VelocityImpl velocity = player.getVelocity();
-            velocity.setVelocityX(originalSpeed);
+            velocity.setVelocityX(this.originalSpeed);
             player.setVelocity(velocity);
         }
     }

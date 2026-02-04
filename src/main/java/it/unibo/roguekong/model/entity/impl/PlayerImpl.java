@@ -28,6 +28,7 @@ public class PlayerImpl implements Player {
     private String sprite = "";
     private LivesImpl lives = new LivesImpl();
     private TileManager tileManager;
+    private boolean isInvulnerable;
     private Gravity gravity;
 
     public PlayerImpl() {
@@ -38,6 +39,7 @@ public class PlayerImpl implements Player {
         this.gravity = new Gravity(GRAVITY, MAX_FALL_SPEED);
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario-right.png");
+        isInvulnerable = false;
     }
 
     @Override
@@ -219,7 +221,7 @@ public class PlayerImpl implements Player {
      * @param gravity world
      * @param max_fall_speed max velocity when player is falling
      */
-    public void setGravity(double gravity, int max_fall_speed){
+    public void setGravity(double gravity, double max_fall_speed){
         this.gravity = new Gravity(gravity, max_fall_speed);
     }
 
