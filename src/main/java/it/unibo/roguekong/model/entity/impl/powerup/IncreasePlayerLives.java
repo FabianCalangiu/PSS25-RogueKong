@@ -22,7 +22,6 @@ public class IncreasePlayerLives implements PowerUp {
         player.getLives().setLivesByValue(currentLives + NUMBER_OF_LIVES);
     }
 
-    @Override
     public void removeEffect(PlayerImpl player){
         /*
         Permanent power up

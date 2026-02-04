@@ -12,13 +12,13 @@ public class ChangePlayerGravity implements PowerUp {
     private final String description;
     private final double multiplier;
 
-    private Double originalGravity = null;
+    private static double ORIGINAL_GRAVITY = 0.05;
 
     /**
      * Creates an instance of the powerup
      * @param multiplier needed in order to alter the player's gravity
      */
-    ChangePlayerGravity(double multiplier){
+    public ChangePlayerGravity(double multiplier){
         this.multiplier = multiplier;
         this.name = "Alter gravity";
         this.description = "Changes player's gravity.";
@@ -27,18 +27,11 @@ public class ChangePlayerGravity implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player) {
-        if(this.originalGravity == null){
-            this.originalGravity = player.getGravity().gravity();
-        }
-
         player.setGravity(player.getGravity().gravity() * this.multiplier, player.getGravity().max_fall_speed());
     }
 
-    @Override
-    public void removeEffect(PlayerImpl player) {
-        if(this.originalGravity != null){
-            player.setGravity(this.originalGravity, player.getGravity().max_fall_speed());
-        }
+    public static void removeEffect(PlayerImpl player) {
+            player.setGravity(ORIGINAL_GRAVITY, player.getGravity().max_fall_speed());
     }
 
     @Override

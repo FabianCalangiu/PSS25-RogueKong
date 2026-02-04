@@ -8,7 +8,7 @@ public class DoubleJump implements PowerUp {
     private final String name;
     private final String description;
 
-    private Integer originalMaxJumps = null;
+    private static int ORIGINAL_MAX_JUMPS = 1;
 
     public DoubleJump(){
         this.name = "Double Jump";
@@ -17,17 +17,11 @@ public class DoubleJump implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player){
-        if (this.originalMaxJumps == null) {
-            this.originalMaxJumps = player.getMaxJumps();
-        }
-        player.setMaxJumps(this.originalMaxJumps + 1);
+        player.setMaxJumps(player.getMaxJumps() + 1);
     }
 
-    @Override
-    public void removeEffect(PlayerImpl player){
-        if (this.originalMaxJumps != null) {
-            player.setMaxJumps(this.originalMaxJumps);
-        }
+    public static void removeEffect(PlayerImpl player){
+        player.setMaxJumps(ORIGINAL_MAX_JUMPS);
     }
 
     @Override
