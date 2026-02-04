@@ -237,8 +237,10 @@ public class GameView implements RogueKongView {
         livesLabel.setLayoutY(20);
 
         livesLabel.setStyle("""
-                -fx-font-size: 18;
+                -fx-font-size: 40;
                 -fx-font-weight: bold;
+                -fx-padding: 0 0 0 30;
+                -fx-text-fill: red;
                 """);
 
         ui.getChildren().add(livesLabel);
@@ -247,8 +249,13 @@ public class GameView implements RogueKongView {
     public void renderLives(PlayerImpl player){
         int currentLives = player.getLives().getLives();
 
+        String heartsLives = "Lives: ";
+
+        for(int i = 0; i < currentLives; i++) {
+            heartsLives += "❤";
+        }
         if(currentLives != lastLives){
-            livesLabel.setText("Lives: " + currentLives);
+            livesLabel.setText(heartsLives);
             lastLives = currentLives;
         }
     }
