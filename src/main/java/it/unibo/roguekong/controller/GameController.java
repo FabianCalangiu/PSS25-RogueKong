@@ -69,11 +69,9 @@ public class GameController {
                 }
 
                 case SPACE -> {
-                    if (!this.jumpPressed) {
-                        if(this.player.jump()) {
-                            this.jumpPressed = true;
-                            JUMP_SOUND.play();
-                        }
+                    if (!this.jumpPressed && this.player.jump()) {
+                        this.jumpPressed = true;
+                        JUMP_SOUND.play();
                     }
                 }
             }
