@@ -48,4 +48,14 @@ public class PowerUpsTest {
         increasePlayerLives.applyEffect(player);
         assertEquals(4, player.getLives().getLives());
     }
+
+    @Test
+    void testRemoveAllEffectd(){
+        ChangePlayerSpeed.removeEffect(player);
+        DoubleJump.removeEffect(player);
+        ChangePlayerGravity.removeEffect(player);
+        assertEquals(1, player.getVelocity().getVelocityX());
+        assertEquals(1, player.getMaxJumps());
+        assertEquals(0.05, player.getGravity().gravity());
+    }
 }
