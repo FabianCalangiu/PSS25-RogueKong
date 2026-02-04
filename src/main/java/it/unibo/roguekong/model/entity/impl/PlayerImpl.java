@@ -2,6 +2,9 @@ package it.unibo.roguekong.model.entity.impl;
 
 import it.unibo.roguekong.model.entity.Player;
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.entity.impl.powerup.ChangePlayerGravity;
+import it.unibo.roguekong.model.entity.impl.powerup.ChangePlayerSpeed;
+import it.unibo.roguekong.model.entity.impl.powerup.DoubleJump;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.TileManager;
 import it.unibo.roguekong.model.game.impl.TileType;
@@ -184,6 +187,9 @@ public class PlayerImpl implements Player {
 
     public void resetPlayerStatus(){
         setLives(new LivesImpl(LIVES_AT_START));
+        ChangePlayerGravity.removeEffect(this);
+        ChangePlayerSpeed.removeEffect(this);
+        DoubleJump.removeEffect(this);
     }
 
     /**

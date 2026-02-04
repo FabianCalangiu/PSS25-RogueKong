@@ -180,7 +180,9 @@ public class GameController {
         this.checkLose();
 
         this.checkWin();
-        System.out.println(gameState.getState());
+        System.out.println("Max Jumps: " + player.getMaxJumps());
+        System.out.println("Velocity: " + player.getVelocity().getVelocityX());
+        System.out.println("Gravity: "+ player.getGravity().gravity());
     }
 
     private void render(){

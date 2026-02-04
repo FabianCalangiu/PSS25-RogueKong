@@ -162,6 +162,7 @@ public class Main extends Application {
         pauseView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
             levelController.reset(gameView);
+            player.resetPlayerStatus();
             BACKGROUND_MUSIC.stop();
             scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
@@ -171,6 +172,7 @@ public class Main extends Application {
         gameOverView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
             levelController.reset(gameView);
+            player.resetPlayerStatus();
             BACKGROUND_MUSIC.stop();
             scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });
@@ -179,6 +181,7 @@ public class Main extends Application {
         victoryView.setOnMenu(() -> {
             stage.setScene(menuView.getScene());
             levelController.reset(gameView);
+            player.resetPlayerStatus();
             BACKGROUND_MUSIC.stop();
             scoreManager.saveScore(new ScoreRecord("Player", controller.getScoreManager()));
         });

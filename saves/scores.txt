@@ -87,3 +87,8 @@ Player;978
 Player;986
 Player;994
 Player;794
+Player;804
+Player;854
+Player;906
+Player;718
+Player;918
