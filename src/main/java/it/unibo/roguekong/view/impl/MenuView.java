@@ -20,7 +20,7 @@ public class MenuView implements RogueKongView {
      * }
      * It simply executes a series of user written instructions
      */
-    private Runnable onStart, onScore, onExit;
+    private Runnable onStart, onScore, onRules, onExit;
 
     public MenuView(){
         /*
@@ -38,13 +38,15 @@ public class MenuView implements RogueKongView {
         title.getStyleClass().add("game-title");
         Button start = new Button("Start");
         Button score = new Button("Score");
+        Button rules = new Button("Rules");
         Button exit = new Button("Exit");
 
         start.setOnAction(e -> runIfNotNull(onStart));
         score.setOnAction(e -> runIfNotNull(onScore));
+        rules.setOnAction(e -> runIfNotNull(onRules));
         exit.setOnAction(e -> runIfNotNull(onExit));
 
-        root.getChildren().addAll(title, start, score, exit);
+        root.getChildren().addAll(title, start, score, rules, exit);
         this.scene = new Scene(root, 800, 600);
         this.scene.getStylesheets().add(
                 getClass().getResource("/css/menu.css").toExternalForm()
@@ -64,9 +66,9 @@ public class MenuView implements RogueKongView {
         this.onStart = r;
     }
 
-    public void setOnScore(Runnable r){
-        this.onScore = r;
-    }
+    public void setOnScore(Runnable r) { this.onScore = r; }
+
+    public void setOnRules(Runnable r) { this.onRules = r; }
 
     public void setOnExit(Runnable r){
         this.onExit = r;

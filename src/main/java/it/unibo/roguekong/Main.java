@@ -31,6 +31,7 @@ public class Main extends Application {
         VictoryView victoryView = new VictoryView();
         GameOverView gameOverView = new GameOverView();
         ScoreManager scoreManager = new ScoreManager();
+        RulesView rulesView = new RulesView();
         PlayerImpl player = new PlayerImpl();
 
         scoreView.setScores(scoreManager.loadTopScores(3));
@@ -89,6 +90,10 @@ public class Main extends Application {
             stage.setScene(scoreView.getScene());
         });
 
+        menuView.setOnRules(() -> {
+            stage.setScene(rulesView.getScene());
+        });
+
         menuView.setOnExit(() -> {
             Platform.exit();
         });
@@ -102,6 +107,12 @@ public class Main extends Application {
         scoreView.setOnClearScores(() -> {
             scoreManager.clearScores();
             scoreView.setScores(scoreManager.loadTopScores(3));
+        });
+        /* ---------------------------------------*/
+
+        /* ------------ RULES RUNNABLES -------------*/
+        rulesView.setOnReturn(() -> {
+            stage.setScene(menuView.getScene());
         });
         /* ---------------------------------------*/
 
