@@ -45,7 +45,7 @@ public class LevelController {
     /**
      * Method that set and init the next level once the previous one is completed
      */
-    public void nextLevelIfIsComplete(GameView gameView) {
+    public void nextLevelIfIsComplete(GameView gameView, Runnable r) {
         this.getCurrentLevel().checkIfPlayerIsOnEndPoint();
 
         if(this.isThereAnotherLevel() && this.getCurrentLevel().isLevelComplete()){
@@ -53,6 +53,7 @@ public class LevelController {
             this.setUpLevel();
             this.getCurrentLevel().getPlayer().setSprite("/assets/sprites/standing-mario-right.png");
             this.getCurrentLevel().getPlayer().setTileManager(this.getCurrentLevel().getTileManager());
+            r.run();
             gameView.loadMap(this.getCurrentLevel().getTileManager());
         }
     }

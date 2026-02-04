@@ -158,7 +158,22 @@ public class GameController {
 
         this.player.setGravityOnPlayer();
 
-        this.levelController.nextLevelIfIsComplete(this.gameView);
+        this.levelController.nextLevelIfIsComplete(this.gameView, () -> {
+            this.gameLoop.stop();
+            this.gameState.pauseGame();
+
+            var powerUps = PowerUpController.getRandomPowerUps(2);
+
+            this.gameView.showPowerUpPanel(
+                    this.player,
+                    powerUps,
+                    () -> {
+                        this.gameState.resumeGame();
+                        this.gameLoop.start();
+                        this.gameView.getRoot().requestFocus();
+                    }
+            );
+        });
 
         this.checkIfPlayerGotHit();
 
