@@ -234,5 +234,13 @@ public class PlayerImpl implements Player {
     public Gravity getGravity(){
         return this.gravity;
     }
+
+    public void setInvulnerability(boolean isInvulnerable){
+        this.isInvulnerable = isInvulnerable;
+    }
+
+    public boolean hasInvulnerability(){
+        return this.isInvulnerable;
+    }
 }
 

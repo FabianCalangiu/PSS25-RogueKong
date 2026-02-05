@@ -21,7 +21,7 @@ public final class PowerUpController {
         List<PowerUp> powerUpPool = new ArrayList<>(List.of(
                 new ChangePlayerSpeed(1.4),
                 new DoubleJump(),
-                new ChangePlayerGravity(0.5),
+                new ChangePlayerGravity(0.75),
                 new Invulnerability(),
                 new IncreasePlayerLives()
         ));

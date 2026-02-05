@@ -288,7 +288,7 @@ public class GameController {
      * Check if the player has got hit
      */
     private void checkIfPlayerGotHit() {
-        if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY())) {
+        if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY()) && !this.player.hasInvulnerability()) {
             this.player.hit();
             this.player.setSprite("/assets/sprites/standing-mario-right.png");
             HURT_SOUND.play();
