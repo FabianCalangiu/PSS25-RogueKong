@@ -17,6 +17,7 @@ public class TileManager {
     private final static int TILE_SIZE = 32;
 
     private Tile[] tileSet;
+    private Tile[] tileSetBackground;
     private final int [][] gameMap;
     private final int [][] backgroundMap;
 
@@ -35,6 +36,8 @@ public class TileManager {
     }
 
     public Tile[] getTileSet() { return tileSet; }
+
+    public Tile[] getTileSetBackground() { return tileSetBackground; }
 
     public int[][] getGameMap() { return gameMap; }
 
@@ -68,14 +71,16 @@ public class TileManager {
         Tile tile16 = new Tile(Assets.LAVA_RIPPLES, false, true, TileType.LAVA);
         Tile tile17 = new Tile(Assets.BRIDGE, true, false, TileType.PLATFORM);
 
-        // Background tiles
-        Tile tile18 = new Tile(Assets.DARK_CLOUD, TileType.VOID);
-        Tile tile19 = new Tile(Assets.DARK_FOGGY_SKY, TileType.VOID);
-        Tile tile20 = new Tile(Assets.DARK_SKY, TileType.VOID);
-        Tile tile21 = new Tile(Assets.STONE_SKY, TileType.VOID);
-
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
-                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21 };
+                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17};
+
+        // Background tiles
+        Tile tileBG0 = new Tile(Assets.DARK_CLOUD, TileType.VOID);
+        Tile tileBG1 = new Tile(Assets.DARK_FOGGY_SKY, TileType.VOID);
+        Tile tileBG2 = new Tile(Assets.DARK_SKY, TileType.VOID);
+        Tile tileBG3 = new Tile(Assets.STONE_SKY, TileType.VOID);
+
+        this.tileSetBackground = new Tile[] { tileBG0, tileBG1, tileBG2, tileBG3};
     }
 
     /**

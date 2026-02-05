@@ -56,10 +56,6 @@ public class GameView implements RogueKongView {
         this.ui = new VBox();
         this.playerRender = new Pane();
 
-        Button sampleKill = new Button("Kill");
-        Button sampleHit = new Button("Hit");
-
-
         this.root.getChildren().addAll(background, map, playerRender, ui);
         this.createLivesUI();
         /*
@@ -101,6 +97,7 @@ public class GameView implements RogueKongView {
         int[][] backgroundMatrix = tileManager.getBackgroundMap();
 
         Tile[] tileSet = tileManager.getTileSet();
+        Tile[] tileSetBackground = tileManager.getTileSetBackground();
 
         map.getChildren().clear();
         background.getChildren().clear();
@@ -111,8 +108,7 @@ public class GameView implements RogueKongView {
                 int backgroundTileIndex = backgroundMatrix[i][j];
 
                 Tile mapTile = tileSet[mapTileIndex];
-                Tile backgroundTile = tileSet[backgroundTileIndex];
-
+                Tile backgroundTile = tileSetBackground[backgroundTileIndex];
 
                 Image mapTileImage = new Image(
                         getClass().getResourceAsStream(mapTile.getImage())
@@ -143,7 +139,7 @@ public class GameView implements RogueKongView {
 
     /**
      * Renders the player. It has to be called each frame in the main game loop.
-     * @param player; gets player as input in order to load its sprite. Size are set manually here.
+     * @param player gets player as input in order to load its sprite. Size are set manually here.
      */
     public void renderPlayer(PlayerImpl player) {
         String currentSprite = player.getSprite();
