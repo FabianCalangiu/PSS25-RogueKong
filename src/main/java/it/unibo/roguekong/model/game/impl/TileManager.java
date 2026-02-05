@@ -87,8 +87,11 @@ public class TileManager {
         Tile tileBG4 = new Tile(Assets.SUNNY_CLOUD, TileType.VOID);
         Tile tileBG5 = new Tile(Assets.SUNNY_FOGGY_SKY, TileType.VOID);
         Tile tileBG6 = new Tile(Assets.SUNNY_SKY, TileType.VOID);
+        Tile tileBG7 = new Tile(Assets.GREY_CLOUD, TileType.VOID);
+        Tile tileBG8 = new Tile(Assets.GREY_FOGGY_SKY, TileType.VOID);
+        Tile tileBG9 = new Tile(Assets.GREY_SKY, TileType.VOID);
 
-        this.tileSetBackground = new Tile[] { tileBG0, tileBG1, tileBG2, tileBG3};
+        this.tileSetBackground = new Tile[] { tileBG0, tileBG1, tileBG2, tileBG3, tileBG4, tileBG5, tileBG6, tileBG7, tileBG8, tileBG9};
     }
 
     /**
