@@ -24,5 +24,12 @@ public final class Assets {
     public static final String DARK_FOGGY_SKY = ROOT + "backgrounds/dark_foggy_sky.png";
     public static final String DARK_SKY = ROOT + "backgrounds/dark_sky.png";
     public static final String STONE_SKY = ROOT + "backgrounds/stoneBackground.png";
+    public static final String ORANGE_BUSH = ROOT + "sprites/orange_bush.png";
+    public static final String SAND = ROOT + "sprites/sand.png";
+    public static final String SANDY_ROCK = ROOT + "sprites/sandy_rock.png";
+    public static final String SANDY_SOIL = ROOT + "sprites/sandy_soil.png";
+    public static final String SUNNY_CLOUD = ROOT + "backgrounds/sunny_cloud.png";
+    public static final String SUNNY_FOGGY_SKY = ROOT + "backgrounds/sunny_foggy_sky.png";
+    public static final String SUNNY_SKY = ROOT + "backgrounds/sunny_sky.png";
 }
 
