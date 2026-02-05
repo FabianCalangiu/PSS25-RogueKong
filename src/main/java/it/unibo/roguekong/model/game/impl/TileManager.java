@@ -70,6 +70,10 @@ public class TileManager {
         Tile tile15 = new Tile(Assets.LAVA, false, true, TileType.LAVA);
         Tile tile16 = new Tile(Assets.LAVA_RIPPLES, false, true, TileType.LAVA);
         Tile tile17 = new Tile(Assets.BRIDGE, true, false, TileType.PLATFORM);
+        Tile tile18 = new Tile(Assets.ORANGE_BUSH, TileType.VOID);
+        Tile tile19 = new Tile(Assets.SAND, true, false, TileType.PLATFORM);
+        Tile tile20 = new Tile(Assets.SANDY_ROCK, true, false, TileType.PLATFORM);
+        Tile tile21 = new Tile(Assets.SANDY_SOIL, true, false, TileType.PLATFORM);
 
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
                 tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17};
@@ -79,6 +83,9 @@ public class TileManager {
         Tile tileBG1 = new Tile(Assets.DARK_FOGGY_SKY, TileType.VOID);
         Tile tileBG2 = new Tile(Assets.DARK_SKY, TileType.VOID);
         Tile tileBG3 = new Tile(Assets.STONE_SKY, TileType.VOID);
+        Tile tileBG4 = new Tile(Assets.SUNNY_CLOUD, TileType.VOID);
+        Tile tileBG5 = new Tile(Assets.SUNNY_FOGGY_SKY, TileType.VOID);
+        Tile tileBG6 = new Tile(Assets.SUNNY_SKY, TileType.VOID);
 
         this.tileSetBackground = new Tile[] { tileBG0, tileBG1, tileBG2, tileBG3};
     }
