@@ -1,6 +1,6 @@
 package it.unibo.roguekong.model.game.impl;
 
-import it.unibo.roguekong.model.entity.Enemy;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.Level;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -12,7 +12,7 @@ import java.util.List;
  * This class contains the logic of each level
  */
 public class LevelModel implements Level {
-    private final List<Enemy> enemies;
+    private final List<EnemyImpl> enemies;
     private final PositionImpl spawnPosition;
     private final PositionImpl endPoint;
     private final PlayerImpl player;
@@ -32,7 +32,7 @@ public class LevelModel implements Level {
     public LevelModel(
             final PositionImpl spawnPoint,
             final PositionImpl endPoint,
-            final List<Enemy> enemies,
+            final List<EnemyImpl> enemies,
             final PlayerImpl player,
             final TileManager tileManager,
             final double gravity) {
@@ -46,7 +46,7 @@ public class LevelModel implements Level {
     }
 
     @Override
-    public List<Enemy> getEnemies() { return List.copyOf(enemies); }
+    public List<EnemyImpl> getEnemies() { return List.copyOf(enemies); }
 
     @Override
     public PlayerImpl getPlayer() { return this.player; }

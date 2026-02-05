@@ -4,6 +4,7 @@ import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.controller.LevelController;
 import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.controller.SoundManager;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -19,6 +20,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        var enemies3 = List.of(
+                new EnemyImpl(new PositionImpl(200, 200)),
+                new EnemyImpl(new PositionImpl(400, 100)),
+                new EnemyImpl(new PositionImpl(700, 200))
+        );
+        enemies3.forEach(e -> e.setIsMovable(true));
+
         stage.setTitle("RogueKong");
         stage.setResizable(false);
 
@@ -55,7 +64,7 @@ public class Main extends Application {
         LevelModel level3 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 576))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies3)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
                 .setGravity(1.5f)

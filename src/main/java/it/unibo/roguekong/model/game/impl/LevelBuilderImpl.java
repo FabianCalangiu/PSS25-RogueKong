@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 
 public class LevelBuilderImpl implements LevelBuilder {
-    private List<Enemy> enemies;
+    private List<EnemyImpl> enemies;
     private PositionImpl spawnPosition;
     private PositionImpl endPoint;
     private PlayerImpl player;
@@ -46,7 +46,7 @@ public class LevelBuilderImpl implements LevelBuilder {
         return this;
     }
 
-    public LevelBuilderImpl setEnemiesList(final List<Enemy> enemies) {
+    public LevelBuilderImpl setEnemiesList(final List<EnemyImpl> enemies) {
         this.enemies = enemies;
         return this;
     }

@@ -1,5 +1,6 @@
 package it.unibo.roguekong.controller;
 
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -155,6 +156,16 @@ public class GameController {
          * Add render here
          */
         gameView.renderPlayer(this.player);
+        gameView.renderEnemies(levelController.getCurrentLevel().getEnemies());
+        for (var e : levelController.getCurrentLevel().getEnemies()) {
+            if (e instanceof EnemyImpl enemy) {
+                enemy.patrolHorizontal(0.6);
+
+                // enemy.patrolHorizontalWithGravity(0.6, level.getLevelGravity());
+
+                // enemy.chasePlayerIgnoreTiles(player, 0.25);
+            }
+        }
     }
 
     public void stop(){

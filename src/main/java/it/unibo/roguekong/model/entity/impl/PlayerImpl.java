@@ -27,7 +27,7 @@ public class PlayerImpl implements Player {
     private TileManager tileManager;
 
     public PlayerImpl() {
-        hitbox = new HitboxImpl(getPosition(), 23, 32);
+        hitbox = new HitboxImpl(getPosition(), 32, 32);
         setMidAir(true);
         setLives(new LivesImpl(LIVES_AT_START));
         setSprite("/assets/sprites/standing-mario.png");
@@ -104,7 +104,7 @@ public class PlayerImpl implements Player {
     }
 
     private boolean collidesAt(double x, double y) {
-        double left = x;
+        double left = x+9;
         double right = x + 31;
         double top = y;
         double bottom = y + 31;

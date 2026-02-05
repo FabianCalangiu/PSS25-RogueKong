@@ -1,6 +1,7 @@
 package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
@@ -15,10 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 1. This implementation defines several layers (Panes) and a Scene where
@@ -35,6 +33,8 @@ public class GameView implements RogueKongView {
     private final Pane ui;
     private final Pane map;
     private final Pane playerRender;
+    private final Pane enemyRender;
+    private final Map<EnemyImpl, ImageView> enemyViews = new IdentityHashMap<>();
     private Pane powerUpLayer;
     private VBox powerUpBox;
     private final Scene scene;
@@ -43,6 +43,7 @@ public class GameView implements RogueKongView {
     private final Set<KeyCode> keysPressed = new HashSet<>();
 
     private ImageView playerSpriteView;
+    private ImageView enemySpriteView;
 
     /**
      * GameView prepares the layout, several layers where map and player are loaded, event driven inputs
@@ -53,11 +54,12 @@ public class GameView implements RogueKongView {
         this.background = new Pane();
         this.ui = new Pane();
         this.playerRender = new Pane();
+        this.enemyRender = new Pane();
 
         Button sampleKill = new Button("Kill");
         sampleKill.setOnAction(e -> runIfNotNull(onKill));
 
-        root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
+        root.getChildren().addAll(sampleKill, background, map, enemyRender, playerRender, ui);
         ui.getChildren().addAll(sampleKill);
         /*
          * setFocusTraversable makes the user input readable
@@ -157,6 +159,36 @@ public class GameView implements RogueKongView {
 
         playerSpriteView.setX(player.getPosition().getX());
         playerSpriteView.setY(player.getPosition().getY());
+    }
+
+    public void renderEnemies(List<EnemyImpl> enemies) {
+        enemyViews.entrySet().removeIf(entry -> {
+            EnemyImpl e = entry.getKey();
+            if (e.isDead()) {
+                enemyRender.getChildren().remove(entry.getValue());
+            }
+            return e.isDead();
+        });
+
+        for (EnemyImpl enemy : enemies) {
+            if (enemy.isDead()) {
+                continue;
+            }
+
+            ImageView view = enemyViews.get(enemy);
+            if (view == null) {
+                Image sprite = new Image(getClass().getResourceAsStream(enemy.getSprite()));
+                view = new ImageView(sprite);
+                view.setFitWidth(TILE_SIZE);
+                view.setFitHeight(TILE_SIZE);
+
+                enemyViews.put(enemy, view);
+                enemyRender.getChildren().add(view);
+            }
+
+            view.setX(enemy.getPosition().getX());
+            view.setY(enemy.getPosition().getY());
+        }
     }
 
 

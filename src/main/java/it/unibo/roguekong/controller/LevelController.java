@@ -56,5 +56,7 @@ public class LevelController {
     public void setUpLevel() {
         LevelModel level = getCurrentLevel();
         level.init();
+        level.getPlayer().setTileManager(level.getTileManager());
+        level.getEnemies().forEach(e -> e.setTileManager(level.getTileManager()));
     }
 }
