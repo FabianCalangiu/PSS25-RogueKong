@@ -72,7 +72,8 @@ public class LevelModel implements Level {
      */
     @Override
     public void checkIfPlayerIsOnEndPoint() {
-        if(this.player.getPosition().getX() + 16 >= this.endPoint.getX() && this.player.getPosition().getX() <= this.endPoint.getX() + 32){
+        if((this.player.getPosition().getX() + 16 >= this.endPoint.getX() && this.player.getPosition().getX() <= this.endPoint.getX() + 32)
+                && (this.player.getPosition().getY() + 16 >= this.endPoint.getY() && this.player.getPosition().getY() <= this.endPoint.getY() + 32)){
             this.isComplete = true;
         }
     }
