@@ -60,10 +60,18 @@ public class Main extends Application {
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
                 .build();
 
+        LevelModel level5 = new LevelBuilderImpl()
+                .setSpawnPosition(new PositionImpl(0, 480))
+                .setEndPoint(new PositionImpl(928, 64))
+                .setEnemiesList(List.of())
+                .setPlayer(player)
+                .setTileManager(new TileManager("maps/map5.txt", "maps/background4.txt"))
+                .build();
+
         /**
          * Creation of the LevelController, which contains LevelModel implementation for each levels
          */
-        List<LevelModel> levels = List.of(level1, level2, level3);
+        List<LevelModel> levels = List.of(level5);
         LevelController levelController = new LevelController(levels);
         levelController.getCurrentLevel().getPlayer().setTileManager(levelController.getCurrentLevel().getTileManager());
 
