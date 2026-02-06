@@ -37,5 +37,8 @@ public final class Assets {
     public static final String GREY_CLOUD = ROOT + "backgrounds/grey_cloud.png";
     public static final String GREY_FOGGY_SKY = ROOT + "backgrounds/grey_foggy_sky.png";
     public static final String GREY_SKY = ROOT + "backgrounds/grey_sky.png";
+    public static final String ICE_SPIKE_BOTTOM = ROOT + "sprites/ice_spike_bottom.png";
+    public static final String ICE_SPIKE_TOP = ROOT + "sprites/ice_spike_top.png";
+    public static final String SNOWY_ROCK = ROOT + "sprites/snowy_rock.png";
 }
 

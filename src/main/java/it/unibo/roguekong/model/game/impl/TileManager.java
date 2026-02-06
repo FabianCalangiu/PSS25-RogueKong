@@ -77,9 +77,12 @@ public class TileManager {
         Tile tile22 = new Tile(Assets.CACTUS, false, true, TileType.SPIKE);
         Tile tile23 = new Tile(Assets.SNOW, true, false, TileType.PLATFORM);
         Tile tile24 = new Tile(Assets.SNOWY_SOIL, true, false, TileType.PLATFORM);
+        Tile tile25 = new Tile(Assets.ICE_SPIKE_BOTTOM, false, true, TileType.SPIKE);
+        Tile tile26 = new Tile(Assets.ICE_SPIKE_TOP, false, true, TileType.SPIKE);
+        Tile tile27 = new Tile(Assets.SNOWY_ROCK, true, false, TileType.PLATFORM);
 
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
-                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24};
+                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27};
 
         // Background tiles
         Tile tileBG0 = new Tile(Assets.DARK_CLOUD, TileType.VOID);
