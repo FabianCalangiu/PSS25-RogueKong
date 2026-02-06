@@ -134,10 +134,6 @@ public class GameController {
                 this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() - 3);
             }
 
-            if(gameView.isKeyPressed(KeyCode.S)) {
-                this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() + 1);
-            }
-
             if(this.gameView.isKeyPressed(KeyCode.P)){
                 showPowerUpPanel();
             }
