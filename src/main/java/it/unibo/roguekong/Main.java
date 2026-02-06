@@ -79,7 +79,7 @@ public class Main extends Application {
         /**
          * Creation of the LevelController, which contains LevelModel implementation for each levels
          */
-        List<LevelModel> levels = List.of(level1, level2, level3, level4, level5);
+        List<LevelModel> levels = List.of(/*level1, level2, level3, level4,*/ level5);
         LevelController levelController = new LevelController(levels);
         levelController.getCurrentLevel().getPlayer().setTileManager(levelController.getCurrentLevel().getTileManager());
 
