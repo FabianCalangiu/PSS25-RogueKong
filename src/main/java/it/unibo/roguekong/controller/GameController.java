@@ -1,5 +1,6 @@
 package it.unibo.roguekong.controller;
 
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.GameStateImpl;
 import it.unibo.roguekong.model.game.impl.GameStatus;
@@ -185,6 +186,15 @@ public class GameController {
         /*
          * Add render here
          */
+        gameView.renderPlayer(this.player);
+        gameView.renderEnemies(levelController.getCurrentLevel().getEnemies());
+
+        for (var e : levelController.getCurrentLevel().getEnemies()) {
+            if (e instanceof EnemyImpl enemy) {
+                enemy.patrolHorizontal(0.6);
+            }
+        }
+
         this.gameView.renderPlayer(this.player);
         this.gameView.renderLives(this.player);
         System.out.println(this.player.getLives().getLives());
@@ -284,6 +294,21 @@ public class GameController {
      * Check if the player has got hit
      */
     private void checkIfPlayerGotHit() {
+        var enemies = this.levelController.getCurrentLevel().getEnemies();
+
+        for(EnemyImpl en : enemies) {
+            if(en.collidesWithPlayer(this.player) && !this.player.hasInvulnerability()) {
+                this.player.hit();
+                this.player.setSprite("/assets/sprites/standing-mario-right.png");
+                HURT_SOUND.play();
+
+                this.player.setPosition(
+                        this.levelController.getCurrentLevel().getSpawnPoint().getX(),
+                        this.levelController.getCurrentLevel().getSpawnPoint().getY()
+                );
+            };
+        }
+
         if(this.player.isPlayerHit(this.player.getPosition().getX(), this.player.getPosition().getY()) && !this.player.hasInvulnerability()) {
             this.player.hit();
             this.player.setSprite("/assets/sprites/standing-mario-right.png");
