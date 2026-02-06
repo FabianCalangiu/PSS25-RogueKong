@@ -10,6 +10,7 @@ import it.unibo.roguekong.model.value.impl.PositionImpl;
 public interface Enemy {
     public Position getPosition();
 
+    public String getSprite();
     public Velocity getVelocity();
 
     public boolean hitPlayer(PositionImpl player);

@@ -4,6 +4,7 @@ import it.unibo.roguekong.controller.GameController;
 import it.unibo.roguekong.controller.LevelController;
 import it.unibo.roguekong.controller.ScoreManager;
 import it.unibo.roguekong.controller.SoundManager;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.impl.*;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -36,42 +37,47 @@ public class Main extends Application {
 
         scoreView.setScores(scoreManager.loadTopScores(3));
 
+        var enemies1 = List.of(new EnemyImpl(new PositionImpl(200, 200)));
         LevelModel level1 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies1)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map1.txt", "maps/background1.txt"))
                 .build();
 
+        var enemies2 = List.of(new EnemyImpl(new PositionImpl(200, 400)), new EnemyImpl(new PositionImpl(100, 200)));
         LevelModel level2 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies2)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map2.txt", "maps/background1.txt"))
                 .build();
 
+        var enemies3 = List.of(new EnemyImpl(new PositionImpl(200, 200)),  new EnemyImpl(new PositionImpl(100, 200)));
         LevelModel level3 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies3)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map3.txt", "maps/background2.txt"))
                 .build();
 
+        var enemies4 = List.of(new EnemyImpl(new PositionImpl(200, 200)),  new EnemyImpl(new PositionImpl(100, 200)));
         LevelModel level4 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies4)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map4.txt", "maps/background3.txt"))
                 .build();
 
+        var enemies5 = List.of(new EnemyImpl(new PositionImpl(200, 200)),  new EnemyImpl(new PositionImpl(100, 200)));
         LevelModel level5 = new LevelBuilderImpl()
                 .setSpawnPosition(new PositionImpl(0, 480))
                 .setEndPoint(new PositionImpl(928, 64))
-                .setEnemiesList(List.of())
+                .setEnemiesList(enemies5)
                 .setPlayer(player)
                 .setTileManager(new TileManager("maps/map5.txt", "maps/background4.txt"))
                 .build();
@@ -96,6 +102,7 @@ public class Main extends Application {
         menuView.setOnStart(() -> {
             controller.start();
             stage.setScene(gameView.getScene());
+            gameView.clearKeyPressed();
             gameView.getRoot().requestFocus();
             player.resetPlayerStatus();
             BACKGROUND_MUSIC.loop();
@@ -134,10 +141,6 @@ public class Main extends Application {
 
         /* ------------ CONTROLLER RUNNABLES -------------*/
         controller.setOnPause(() -> {
-            controller.setOnPause(() -> {
-                stage.setScene(pauseView.getScene());
-                BACKGROUND_MUSIC.stop();
-            });
             stage.setScene(pauseView.getScene());
             BACKGROUND_MUSIC.stop();
         });
@@ -145,6 +148,7 @@ public class Main extends Application {
         controller.setOnVictory(() -> {
             stage.setScene(victoryView.getScene());
             controller.stop();
+            gameView.clearKeyPressed();
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         } );
@@ -152,6 +156,7 @@ public class Main extends Application {
         controller.setOnDeath(() -> {
             stage.setScene(gameOverView.getScene());
             controller.stop();
+            gameView.clearKeyPressed();
             player.resetPlayerStatus();
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
@@ -162,6 +167,7 @@ public class Main extends Application {
         gameView.setOnKill(() -> {
             stage.setScene(gameOverView.getScene());
             controller.stop();
+            gameView.clearKeyPressed();
             levelController.reset(gameView);
             BACKGROUND_MUSIC.stop();
         });
@@ -170,6 +176,7 @@ public class Main extends Application {
             if(player.getLives().getLives() == 1){
                 stage.setScene(gameOverView.getScene());
                 controller.stop();
+                gameView.clearKeyPressed();
                 levelController.reset(gameView);
                 BACKGROUND_MUSIC.stop();
             } else {
@@ -182,6 +189,7 @@ public class Main extends Application {
         pauseView.setOnResume(() -> {
             controller.resume();
             stage.setScene(gameView.getScene());
+            gameView.clearKeyPressed();
             gameView.getRoot().requestFocus();
             BACKGROUND_MUSIC.restart();
         });

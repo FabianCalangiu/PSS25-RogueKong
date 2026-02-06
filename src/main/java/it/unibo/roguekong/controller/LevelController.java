@@ -40,6 +40,7 @@ public class LevelController {
         this.getCurrentLevel().getPlayer().setSprite("/assets/sprites/standing-mario-right.png");
         this.getCurrentLevel().getPlayer().setTileManager(this.getCurrentLevel().getTileManager());
         gameView.loadMap(this.getCurrentLevel().getTileManager());
+        gameView.clearEnemies();
     }
 
     /**
@@ -55,6 +56,7 @@ public class LevelController {
             this.getCurrentLevel().getPlayer().setTileManager(this.getCurrentLevel().getTileManager());
             r.run();
             gameView.loadMap(this.getCurrentLevel().getTileManager());
+            gameView.clearEnemies();
         }
     }
 
@@ -77,6 +79,8 @@ public class LevelController {
     public void setUpLevel() {
         LevelModel level = getCurrentLevel();
         level.init();
+        level.getPlayer().setTileManager(level.getTileManager());
+        level.getEnemies().forEach(e -> e.setTileManager(level.getTileManager()));
     }
 
     /**

@@ -1,6 +1,6 @@
 package it.unibo.roguekong.model.game.impl;
 
-import it.unibo.roguekong.model.entity.Enemy;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 import it.unibo.roguekong.model.game.LevelBuilder;
 import it.unibo.roguekong.model.value.impl.PositionImpl;
@@ -12,7 +12,7 @@ import java.util.Objects;
  * This is a LevelModel Builder, to guarantee dryness when we need to create more than one level
  */
 public class LevelBuilderImpl implements LevelBuilder {
-    private List<Enemy> enemies;
+    private List<EnemyImpl> enemies;
     private PositionImpl spawnPosition;
     private PositionImpl endPoint;
     private PlayerImpl player;
@@ -63,7 +63,7 @@ public class LevelBuilderImpl implements LevelBuilder {
      * @param enemies enemy entity inside the level
      * @return this
      */
-    public LevelBuilderImpl setEnemiesList(final List<Enemy> enemies) {
+    public LevelBuilderImpl setEnemiesList(final List<EnemyImpl> enemies) {
         this.enemies = enemies;
         return this;
     }
