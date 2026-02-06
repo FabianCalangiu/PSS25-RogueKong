@@ -19,7 +19,7 @@ public class EnemyImpl implements Enemy {
     private final LivesImpl lives = new LivesImpl(ENEMY_LIVES_AT_START);
     private boolean isMovable;
     private boolean isDead;
-    private String sprite = "/assets/sprites/standing-mario.png";
+    private String sprite = "/assets/sprites/ufo.png";
     private HitboxImpl hitbox = new HitboxImpl(new PositionImpl(0, 0), W, H);
     private TileManager tileManager;
     private int dirX = 1;
@@ -27,7 +27,7 @@ public class EnemyImpl implements Enemy {
     public EnemyImpl() {
         setIsMovable(false);
         setIsDead(false);
-        setSprite("/assets/sprites/standing-mario.png");
+        setSprite("/assets/sprites/ufo.png");
         syncHitboxWithPosition();
     }
 
@@ -37,7 +37,7 @@ public class EnemyImpl implements Enemy {
         setLivesInternal(lives);
         setIsMovable(true);
         setIsDead(false);
-        setSprite("/assets/sprites/standing-mario.png");
+        setSprite("/assets/sprites/ufo.png");
         syncHitboxWithPosition();
     }
 
@@ -46,7 +46,7 @@ public class EnemyImpl implements Enemy {
         setVelocityInternal(new VelocityImpl());
         setIsMovable(true);
         setIsDead(false);
-        setSprite("/assets/sprites/standing-mario-right.png");
+        setSprite("/assets/sprites/ufo.png");
         syncHitboxWithPosition();
     }
 
