@@ -70,9 +70,12 @@ public class GameController {
                 }
 
                 case SPACE -> {
-                    if (!this.jumpPressed && this.player.jump()) {
-                        this.jumpPressed = true;
-                        JUMP_SOUND.play();
+                    if(!this.player.collidesWithLadder(this.player.getPosition().getX(),
+                            this.player.getPosition().getY())){
+                        if (!this.jumpPressed && this.player.jump()) {
+                            this.jumpPressed = true;
+                            JUMP_SOUND.play();
+                        }
                     }
                 }
             }
