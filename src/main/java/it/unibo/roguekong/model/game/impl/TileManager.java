@@ -169,7 +169,7 @@ public class TileManager {
         int col = (int) pos.getX() / TILE_SIZE;
 
         if(row < 0 || row >= ROWS
-                || col < 0 || col >= COLS){ return this.tileSet[0]; }
+                || col < 0 || col >= COLS) { return this.tileSet[0]; }
 
         int index = this.gameMap[row][col];
         return tileSet[index];

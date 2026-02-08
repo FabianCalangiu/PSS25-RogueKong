@@ -126,17 +126,17 @@ public class GameController {
             return;
         } else {
 
-            if(gameView.isKeyPressed(KeyCode.A)) {
+            if(this.gameView.isKeyPressed(KeyCode.A)) {
                 this.player.setPosition(this.player.getPosition().getX() - (1 * this.player.getVelocity().getVelocityX()), this.player.getPosition().getY());
                 this.player.setSprite("/assets/sprites/standing-mario-left.png");
             }
 
-            if(gameView.isKeyPressed(KeyCode.D)) {
+            if(this.gameView.isKeyPressed(KeyCode.D)) {
                 this.player.setPosition(this.player.getPosition().getX() + (1 * this.player.getVelocity().getVelocityX()), this.player.getPosition().getY());
                 this.player.setSprite("/assets/sprites/standing-mario-right.png");
             }
 
-            if(gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
+            if(this.gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
                 this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() - 3);
             }
 
