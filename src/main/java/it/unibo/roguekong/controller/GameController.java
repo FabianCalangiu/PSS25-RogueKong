@@ -178,9 +178,6 @@ public class GameController {
         this.checkLose();
 
         this.checkWin();
-        System.out.println("Max Jumps: " + player.getMaxJumps());
-        System.out.println("Velocity: " + player.getVelocity().getVelocityX());
-        System.out.println("Gravity: "+ player.getGravity().gravity());
     }
 
     private void render(){
@@ -198,7 +195,6 @@ public class GameController {
 
         this.gameView.renderPlayer(this.player);
         this.gameView.renderLives(this.player);
-        System.out.println(this.player.getLives().getLives());
     }
 
     public void stop() { this.gameLoop.stop(); }
@@ -263,7 +259,6 @@ public class GameController {
         if(elapsed >= 1_000_000_000L){
             this.score = Math.max(0, this.score - 2);
             this.lastScoreUpdate = now;
-            System.out.println("Score: " + this.score);
         }
     }
 
