@@ -110,6 +110,7 @@ public class GameController {
         this.gameState.startGame();
         this.gameLoop.start();
         this.score = 1000;
+        this.jumpPressed = false;
     }
 
     /**
@@ -301,6 +302,7 @@ public class GameController {
                 this.player.hit();
                 this.player.setSprite("/assets/sprites/standing-mario-right.png");
                 HURT_SOUND.play();
+                this.gameView.clearKeyPressed();
 
                 this.player.setPosition(
                         this.levelController.getCurrentLevel().getSpawnPoint().getX(),
@@ -313,6 +315,7 @@ public class GameController {
             this.player.hit();
             this.player.setSprite("/assets/sprites/standing-mario-right.png");
             HURT_SOUND.play();
+            this.gameView.clearKeyPressed();
 
             this.player.setPosition(
                     this.levelController.getCurrentLevel().getSpawnPoint().getX(),
