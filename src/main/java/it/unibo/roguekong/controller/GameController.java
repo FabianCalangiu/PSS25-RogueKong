@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 public class GameController {
     private static final SoundManager JUMP_SOUND = new SoundManager("/assets/sound/jump.wav", -30.0f);
     private static final SoundManager HURT_SOUND = new SoundManager("/assets/sound/Hit1.wav", -30.0f);
+    private static final SoundManager DEATH_SOUND = new SoundManager("/assets/sound/death.wav", -30.0f);
 
     private AnimationTimer gameLoop;
     private final GameStateImpl gameState;
@@ -287,6 +288,7 @@ public class GameController {
      */
     private void checkLose() {
         if(this.player.getLives().getLives() == 0){
+            DEATH_SOUND.play();
             this.gameView.clearKeyPressed();
             this.player.getVelocity().resetVelocity();
             this.gameState.gameOver();
