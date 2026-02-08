@@ -14,3 +14,4 @@ Player;946
 Player;1000
 Player;996
 Player;996
+Player;672
