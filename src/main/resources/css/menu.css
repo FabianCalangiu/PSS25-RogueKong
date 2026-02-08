@@ -23,3 +23,9 @@
     -fx-font-size: 28px;
     -fx-font-weight: bold;
 }
+
+.root {
+    -fx-background-image: url("/assets/backgrounds/background1.jpg");
+    -fx-background-size: stretch;
+    -fx-background-repeat: no-repeat;
+}
