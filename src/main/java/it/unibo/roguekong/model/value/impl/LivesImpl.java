@@ -18,8 +18,21 @@ public class LivesImpl implements Lives {
         return this.lives;
     }
 
+    /**
+     * set lives by a specific int value
+     * @param lives int value of number of lives
+     */
     @Override
     public void setLivesByValue(int lives) {
         this.lives = lives;
+    }
+
+    /**
+     * method to decrement lives by one
+     */
+    public void decrementLives(){
+        if(this.lives > 0){
+            this.lives--;
+        }
     }
 }

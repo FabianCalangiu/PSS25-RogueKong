@@ -22,7 +22,7 @@ public class GameOverView implements RogueKongView {
         root.setAlignment(Pos.CENTER);
 
         Label title = new Label("Game Over");
-        title.getStyleClass().add("game-over-title");
+        title.getStyleClass().add("title");
         Button menu = new Button("Menu");
 
         menu.setOnAction(e -> runIfNotNull(onMenu));

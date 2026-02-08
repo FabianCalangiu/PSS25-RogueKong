@@ -17,7 +17,7 @@ public class TileManager {
     private final static int TILE_SIZE = 32;
 
     private Tile[] tileSet;
-    private Tile[] tileBackGround;
+    private Tile[] tileSetBackground;
     private final int [][] gameMap;
     private final int [][] backgroundMap;
 
@@ -37,6 +37,8 @@ public class TileManager {
 
     public Tile[] getTileSet() { return tileSet; }
 
+    public Tile[] getTileSetBackground() { return tileSetBackground; }
+
     public int[][] getGameMap() { return gameMap; }
 
     public int[][] getBackgroundMap() { return backgroundMap; }
@@ -50,33 +52,51 @@ public class TileManager {
      */
     private void fillTileSet() {
         // World tiles
-        Tile tile0 = new Tile("", false, false, TileType.VOID);
+        Tile tile0 = new Tile("", TileType.VOID);
         Tile tile1 = new Tile(Assets.BRICK_WALL, true, false, TileType.PLATFORM);
         Tile tile2 = new Tile(Assets.GRASSY_SOIL, true, false, TileType.PLATFORM);
         Tile tile3 = new Tile(Assets.SOIL, true, false, TileType.PLATFORM);
         Tile tile4 = new Tile(Assets.WATER, false, true, TileType.WATER);
         Tile tile5 = new Tile(Assets.WATER_RIPPLES, false, true, TileType.WATER);
-        Tile tile6 = new Tile(Assets.LADDER, false, false, TileType.LADDER);
-        Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, false, false, TileType.TREE);
-        Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, false, false, TileType.TREE);
-        Tile tile9 = new Tile(Assets.TREE_LOG, false, false, TileType.TREE);
-        Tile tile10 = new Tile(Assets.LOWER_ORANGE_PORTAL, false, false, TileType.PORTAL);
-        Tile tile11 = new Tile(Assets.UPPER_ORANGE_PORTAL, false, false, TileType.PORTAL);
-        Tile tile12 = new Tile(Assets.LOWER_PURPLE_PORTAL, false, false, TileType.PORTAL);
-        Tile tile13 = new Tile(Assets.UPPER_PURPLE_PORTAL, false, false, TileType.PORTAL);
+        Tile tile6 = new Tile(Assets.LADDER, TileType.LADDER);
+        Tile tile7 = new Tile(Assets.TOP_TREE_BUSH, TileType.TREE);
+        Tile tile8 = new Tile(Assets.MIDDLE_TREE_BUSH, TileType.TREE);
+        Tile tile9 = new Tile(Assets.TREE_LOG, TileType.TREE);
+        Tile tile10 = new Tile(Assets.LOWER_ORANGE_PORTAL, TileType.PORTAL);
+        Tile tile11 = new Tile(Assets.UPPER_ORANGE_PORTAL, TileType.PORTAL);
+        Tile tile12 = new Tile(Assets.LOWER_PURPLE_PORTAL, TileType.PORTAL);
+        Tile tile13 = new Tile(Assets.UPPER_PURPLE_PORTAL, TileType.PORTAL);
         Tile tile14 = new Tile(Assets.SPIKES, false, true, TileType.SPIKE);
         Tile tile15 = new Tile(Assets.LAVA, false, true, TileType.LAVA);
         Tile tile16 = new Tile(Assets.LAVA_RIPPLES, false, true, TileType.LAVA);
         Tile tile17 = new Tile(Assets.BRIDGE, true, false, TileType.PLATFORM);
-
-        // Background tiles
-        Tile tile18 = new Tile(Assets.DARK_CLOUD, false, false, TileType.VOID);
-        Tile tile19 = new Tile(Assets.DARK_FOGGY_SKY, false, false, TileType.VOID);
-        Tile tile20 = new Tile(Assets.DARK_SKY, false, false, TileType.VOID);
-        Tile tile21 = new Tile(Assets.STONE_SKY, false, false, TileType.VOID);
+        Tile tile18 = new Tile(Assets.ORANGE_BUSH, TileType.VOID);
+        Tile tile19 = new Tile(Assets.SAND, true, false, TileType.PLATFORM);
+        Tile tile20 = new Tile(Assets.SANDY_ROCK, true, false, TileType.PLATFORM);
+        Tile tile21 = new Tile(Assets.SANDY_SOIL, true, false, TileType.PLATFORM);
+        Tile tile22 = new Tile(Assets.CACTUS, false, true, TileType.SPIKE);
+        Tile tile23 = new Tile(Assets.SNOW, true, false, TileType.PLATFORM);
+        Tile tile24 = new Tile(Assets.SNOWY_SOIL, true, false, TileType.PLATFORM);
+        Tile tile25 = new Tile(Assets.ICE_SPIKE_BOTTOM, false, true, TileType.SPIKE);
+        Tile tile26 = new Tile(Assets.ICE_SPIKE_TOP, false, true, TileType.SPIKE);
+        Tile tile27 = new Tile(Assets.SNOWY_ROCK, true, false, TileType.PLATFORM);
 
         this.tileSet = new Tile[] { tile0, tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9,
-                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21 };
+                tile10, tile11, tile12, tile13, tile14, tile15, tile16,  tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27};
+
+        // Background tiles
+        Tile tileBG0 = new Tile(Assets.DARK_CLOUD, TileType.VOID);
+        Tile tileBG1 = new Tile(Assets.DARK_FOGGY_SKY, TileType.VOID);
+        Tile tileBG2 = new Tile(Assets.DARK_SKY, TileType.VOID);
+        Tile tileBG3 = new Tile(Assets.STONE_SKY, TileType.VOID);
+        Tile tileBG4 = new Tile(Assets.SUNNY_CLOUD, TileType.VOID);
+        Tile tileBG5 = new Tile(Assets.SUNNY_FOGGY_SKY, TileType.VOID);
+        Tile tileBG6 = new Tile(Assets.SUNNY_SKY, TileType.VOID);
+        Tile tileBG7 = new Tile(Assets.GREY_CLOUD, TileType.VOID);
+        Tile tileBG8 = new Tile(Assets.GREY_FOGGY_SKY, TileType.VOID);
+        Tile tileBG9 = new Tile(Assets.GREY_SKY, TileType.VOID);
+
+        this.tileSetBackground = new Tile[] { tileBG0, tileBG1, tileBG2, tileBG3, tileBG4, tileBG5, tileBG6, tileBG7, tileBG8, tileBG9};
     }
 
     /**
@@ -140,9 +160,9 @@ public class TileManager {
     }
 
     /**
-     * Get the tile by the player's x and y
+     * Gets the tile by the player's X and Y
      * @param pos Position player. Usefully to check collisions
-     * @return tileSet[index] is the kind of tile at the position x and y
+     * @return tileSet[index] is the kind of tile at position X and Y
      */
     public Tile getTileAtPosition(PositionImpl pos) {
         int row = (int) pos.getY() / TILE_SIZE;
@@ -151,7 +171,7 @@ public class TileManager {
         if(row < 0 || row >= ROWS
                 || col < 0 || col >= COLS){ return this.tileSet[0]; }
 
-        int index = gameMap[row][col];
+        int index = this.gameMap[row][col];
         return tileSet[index];
     }
 }

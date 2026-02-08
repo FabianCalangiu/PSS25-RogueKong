@@ -9,8 +9,10 @@ import it.unibo.roguekong.model.value.impl.VelocityImpl;
  */
 public class ChangePlayerSpeed implements PowerUp {
     private final double multiplier;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
+
+    private static double ORIGINAL_SPEED = 1;
 
     /**
      * Creates an instance of a power up
@@ -25,15 +27,15 @@ public class ChangePlayerSpeed implements PowerUp {
     @Override
     public void applyEffect(PlayerImpl player){
         VelocityImpl velocity = player.getVelocity();
-        velocity.setVelocityX(player.getVelocity().getVelocityX() * multiplier);
+
+        velocity.setVelocityX(player.getVelocity().getVelocityX() * this.multiplier);
         player.setVelocity(velocity);
     }
 
-    @Override
-    public void removeEffect(PlayerImpl player){
-        /*
-         * Review effect...
-         */
+    public static void removeEffect(PlayerImpl player){
+        VelocityImpl velocity = player.getVelocity();
+        velocity.setVelocityX(ORIGINAL_SPEED);
+        player.setVelocity(velocity);
     }
 
     @Override

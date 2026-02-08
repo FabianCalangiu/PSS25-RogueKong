@@ -1,24 +1,24 @@
 package it.unibo.roguekong.view.impl;
 
 import it.unibo.roguekong.model.entity.PowerUp;
+import it.unibo.roguekong.model.entity.impl.EnemyImpl;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
-import it.unibo.roguekong.model.game.impl.HitboxImpl;
 import it.unibo.roguekong.model.game.impl.Tile;
 import it.unibo.roguekong.model.game.impl.TileManager;
-import it.unibo.roguekong.model.value.impl.PositionImpl;
 import it.unibo.roguekong.view.RogueKongView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.*;
 
 /**
  * 1. This implementation defines several layers (Panes) and a Scene where
@@ -30,19 +30,26 @@ public class GameView implements RogueKongView {
     private final static int WIDTH = 960;
     private final static int HEIGTH = 640;
     private final static int TILE_SIZE = 32;
+    private String lastSpritePath;
     private final Pane root;
     private final Pane background;
-    private final Pane ui;
+    private final VBox ui;
     private final Pane map;
     private final Pane playerRender;
+    private final Pane enemyRender;
+    private final Map<EnemyImpl, ImageView> enemyViews = new IdentityHashMap<>();
     private Pane powerUpLayer;
     private VBox powerUpBox;
+    private Label livesLabel;
+    private int lastLives = -1;
     private final Scene scene;
 
     private Runnable onKill;
+    private Runnable onHit;
     private final Set<KeyCode> keysPressed = new HashSet<>();
 
     private ImageView playerSpriteView;
+    private ImageView enemySpriteView;
 
     /**
      * GameView prepares the layout, several layers where map and player are loaded, event driven inputs
@@ -51,14 +58,13 @@ public class GameView implements RogueKongView {
         this.root = new Pane();
         this.map = new Pane();
         this.background = new Pane();
-        this.ui = new Pane();
+        this.ui = new VBox();
         this.playerRender = new Pane();
+        this.enemyRender = new Pane();
 
-        Button sampleKill = new Button("Kill");
-        sampleKill.setOnAction(e -> runIfNotNull(onKill));
+        this.createLivesUI();
 
-        root.getChildren().addAll(sampleKill, background, map, playerRender, ui);
-        ui.getChildren().addAll(sampleKill);
+        this.root.getChildren().addAll(background, map, enemyRender, playerRender, ui);
         /*
          * setFocusTraversable makes the user input readable
          */
@@ -98,6 +104,7 @@ public class GameView implements RogueKongView {
         int[][] backgroundMatrix = tileManager.getBackgroundMap();
 
         Tile[] tileSet = tileManager.getTileSet();
+        Tile[] tileSetBackground = tileManager.getTileSetBackground();
 
         map.getChildren().clear();
         background.getChildren().clear();
@@ -108,8 +115,7 @@ public class GameView implements RogueKongView {
                 int backgroundTileIndex = backgroundMatrix[i][j];
 
                 Tile mapTile = tileSet[mapTileIndex];
-                Tile backgroundTile = tileSet[backgroundTileIndex];
-
+                Tile backgroundTile = tileSetBackground[backgroundTileIndex];
 
                 Image mapTileImage = new Image(
                         getClass().getResourceAsStream(mapTile.getImage())
@@ -140,24 +146,65 @@ public class GameView implements RogueKongView {
 
     /**
      * Renders the player. It has to be called each frame in the main game loop.
-     * @param player; gets player as input in order to load its sprite. Size are set manually here.
+     * @param player gets player as input in order to load its sprite. Size are set manually here.
      */
-    public void renderPlayer(PlayerImpl player){
-        if (playerSpriteView == null) {
-            Image playerSprite = new Image(
-                    getClass().getResourceAsStream(player.getSprite())
-            );
+    public void renderPlayer(PlayerImpl player) {
+        String currentSprite = player.getSprite();
 
-            playerSpriteView = new ImageView(playerSprite);
+        if (playerSpriteView == null) {
+            playerSpriteView = new ImageView();
             playerSpriteView.setFitWidth(TILE_SIZE);
             playerSpriteView.setFitHeight(TILE_SIZE);
-
             playerRender.getChildren().add(playerSpriteView);
+        }
+
+        if (!currentSprite.equals(lastSpritePath)) {
+            Image spriteImage = new Image(
+                    getClass().getResourceAsStream(currentSprite)
+            );
+            playerSpriteView.setImage(spriteImage);
+            lastSpritePath = currentSprite;
         }
 
         playerSpriteView.setX(player.getPosition().getX());
         playerSpriteView.setY(player.getPosition().getY());
     }
+
+    public void renderEnemies(List<EnemyImpl> enemies) {
+        enemyViews.entrySet().removeIf(entry -> {
+            EnemyImpl e = entry.getKey();
+            if (e.isDead()) {
+                enemyRender.getChildren().remove(entry.getValue());
+            }
+            return e.isDead();
+        });
+
+        for (EnemyImpl enemy : enemies) {
+            if (enemy.isDead()) {
+                continue;
+            }
+
+            ImageView view = enemyViews.get(enemy);
+            if (view == null) {
+                Image sprite = new Image(getClass().getResourceAsStream(enemy.getSprite()));
+                view = new ImageView(sprite);
+                view.setFitWidth(TILE_SIZE);
+                view.setFitHeight(TILE_SIZE);
+
+                enemyViews.put(enemy, view);
+                enemyRender.getChildren().add(view);
+            }
+
+            view.setX(enemy.getPosition().getX());
+            view.setY(enemy.getPosition().getY());
+        }
+    }
+
+    public void clearEnemies() {
+        enemyRender.getChildren().clear(); // rimuove tutti i ImageView dei nemici
+        enemyViews.clear(); // svuota la mappa
+    }
+
 
 
     /**
@@ -220,6 +267,35 @@ public class GameView implements RogueKongView {
         powerUpLayer.setVisible(true);
     }
 
+    private void createLivesUI(){
+        livesLabel = new Label("Lives: 0");
+        livesLabel.setLayoutX(20);
+        livesLabel.setLayoutY(20);
+
+        livesLabel.setStyle("""
+                -fx-font-size: 40;
+                -fx-font-weight: bold;
+                -fx-padding: 0 0 0 30;
+                -fx-text-fill: red;
+                """);
+
+        ui.getChildren().add(livesLabel);
+    }
+
+    public void renderLives(PlayerImpl player){
+        int currentLives = player.getLives().getLives();
+
+        String heartsLives = "Lives: ";
+
+        for(int i = 0; i < currentLives; i++) {
+            heartsLives += "❤";
+        }
+        if(currentLives != lastLives){
+            livesLabel.setText(heartsLives);
+            lastLives = currentLives;
+        }
+    }
+
     /**
      * Simply hides the power up panel
      */
@@ -234,8 +310,16 @@ public class GameView implements RogueKongView {
         return keysPressed.contains(key);
     }
 
+    public void clearKeyPressed(){
+        keysPressed.clear();
+    }
+
     public void setOnKill(Runnable r){
         this.onKill = r;
+    }
+
+    public void setOnHit(Runnable r) {
+        this.onHit = r;
     }
 
     private void runIfNotNull(Runnable r) {

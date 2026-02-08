@@ -20,6 +20,10 @@ public class SoundManager {
         this.volume = volume;
     }
 
+    public Clip getClip() { return this.clip; }
+
+    public float getVolume() { return this.volume; }
+
     /**
      * Use this to play the music for the first time
      */

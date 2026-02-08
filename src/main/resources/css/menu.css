@@ -14,7 +14,7 @@
     -fx-alignment: center;
 }
 
-.game-over-title{
+.title{
     -fx-font-size: 28px;
     -fx-font-weight: bold;
 }

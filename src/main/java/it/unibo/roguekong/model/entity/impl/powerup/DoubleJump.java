@@ -3,12 +3,12 @@ package it.unibo.roguekong.model.entity.impl.powerup;
 import it.unibo.roguekong.model.entity.PowerUp;
 import it.unibo.roguekong.model.entity.impl.PlayerImpl;
 
-/**
- * Grants player the ability to do a second jump
- */
 public class DoubleJump implements PowerUp {
-    private String name;
-    private String description;
+
+    private final String name;
+    private final String description;
+
+    private static int ORIGINAL_MAX_JUMPS = 1;
 
     public DoubleJump(){
         this.name = "Double Jump";
@@ -17,16 +17,11 @@ public class DoubleJump implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player){
-        /*
-        Add body after player implementation!!
-         */
+        player.setMaxJumps(player.getMaxJumps() + 1);
     }
 
-    @Override
-    public void removeEffect(PlayerImpl player){
-        /*
-        Add body after player implementation!!
-         */
+    public static void removeEffect(PlayerImpl player){
+        player.setMaxJumps(ORIGINAL_MAX_JUMPS);
     }
 
     @Override

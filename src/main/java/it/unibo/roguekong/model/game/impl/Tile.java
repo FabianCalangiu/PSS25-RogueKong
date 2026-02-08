@@ -1,7 +1,6 @@
 package it.unibo.roguekong.model.game.impl;
 
 import it.unibo.roguekong.model.game.GamePlatform;
-import it.unibo.roguekong.model.value.impl.PositionImpl;
 
 /**
  * This class represents the single tile implementation
@@ -24,9 +23,21 @@ public class Tile implements GamePlatform {
      */
     public Tile(String image, boolean isCollidable, boolean canDealDamage, TileType tileType) {
         this.image = image;
-        setIsCollidable(isCollidable);
+        this.isCollidable = isCollidable;
         this.tileType = tileType;
         this.canDealDamage = canDealDamage;
+    }
+
+    /**
+     * Create a new tile, that cannot deals damage and is not collidable. Mostly used for decorative tiles
+     * @param image is the sprite path
+     * @param tileType says what kind of tile is
+     */
+    public Tile(String image, TileType tileType) {
+        this.image = image;
+        this.tileType = tileType;
+        this.canDealDamage = false;
+        this.isCollidable = false;
     }
 
     @Override
@@ -42,8 +53,4 @@ public class Tile implements GamePlatform {
     public boolean isCanDealDamage() { return canDealDamage; }
 
     public TileType getTileType() { return tileType; }
-
-    private void setIsCollidable(boolean isCollidable) {
-        this.isCollidable = isCollidable;
-    }
 }

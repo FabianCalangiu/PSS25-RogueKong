@@ -8,8 +8,8 @@ import it.unibo.roguekong.model.entity.impl.PlayerImpl;
  */
 public class IncreasePlayerLives implements PowerUp {
     private final static int NUMBER_OF_LIVES = 1;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
     public IncreasePlayerLives(){
         this.name = "Life up";
@@ -18,15 +18,13 @@ public class IncreasePlayerLives implements PowerUp {
 
     @Override
     public void applyEffect(PlayerImpl player){
-        /*
-        Add body after player implementation!!
-         */
+        int currentLives = player.getLives().getLives();
+        player.getLives().setLivesByValue(currentLives + NUMBER_OF_LIVES);
     }
 
-    @Override
     public void removeEffect(PlayerImpl player){
         /*
-        Add body after player implementation!!
+        Permanent power up
          */
     }
 

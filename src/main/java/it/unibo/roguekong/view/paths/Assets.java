@@ -24,5 +24,21 @@ public final class Assets {
     public static final String DARK_FOGGY_SKY = ROOT + "backgrounds/dark_foggy_sky.png";
     public static final String DARK_SKY = ROOT + "backgrounds/dark_sky.png";
     public static final String STONE_SKY = ROOT + "backgrounds/stoneBackground.png";
+    public static final String ORANGE_BUSH = ROOT + "sprites/orange_bush.png";
+    public static final String SAND = ROOT + "sprites/sand.png";
+    public static final String SANDY_ROCK = ROOT + "sprites/sandy_rock.png";
+    public static final String SANDY_SOIL = ROOT + "sprites/sandy_soil.png";
+    public static final String CACTUS = ROOT + "sprites/cactus.png";
+    public static final String SUNNY_CLOUD = ROOT + "backgrounds/sunny_cloud.png";
+    public static final String SUNNY_FOGGY_SKY = ROOT + "backgrounds/sunny_foggy_sky.png";
+    public static final String SUNNY_SKY = ROOT + "backgrounds/sunny_sky.png";
+    public static final String SNOW = ROOT + "sprites/snow.png";
+    public static final String SNOWY_SOIL = ROOT + "sprites/snowy_soil.png";
+    public static final String GREY_CLOUD = ROOT + "backgrounds/grey_cloud.png";
+    public static final String GREY_FOGGY_SKY = ROOT + "backgrounds/grey_foggy_sky.png";
+    public static final String GREY_SKY = ROOT + "backgrounds/grey_sky.png";
+    public static final String ICE_SPIKE_BOTTOM = ROOT + "sprites/ice_spike_bottom.png";
+    public static final String ICE_SPIKE_TOP = ROOT + "sprites/ice_spike_top.png";
+    public static final String SNOWY_ROCK = ROOT + "sprites/snowy_rock.png";
 }
 
