@@ -139,10 +139,6 @@ public class GameController {
             if(this.gameView.isKeyPressed(KeyCode.W) && this.player.collidesWithLadder(this.player.getPosition().getX(), this.player.getPosition().getY())) {
                 this.player.setPosition(this.player.getPosition().getX(), this.player.getPosition().getY() - 3);
             }
-
-            if(this.gameView.isKeyPressed(KeyCode.P)){
-                showPowerUpPanel();
-            }
         }
         /* -------------------------------------------------------------*/
     }

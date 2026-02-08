@@ -34,6 +34,9 @@ public class PlayerImpl implements Player {
     private boolean isInvulnerable;
     private Gravity gravity;
 
+    /**
+     * Void constructor that sets the standard values for the player initialization
+     */
     public PlayerImpl() {
         hitbox = new HitboxImpl(getPosition(), 23, 32);
         this.maxJumps = 1;
@@ -45,59 +48,107 @@ public class PlayerImpl implements Player {
         isInvulnerable = false;
     }
 
+    /**
+     * @return LivesImpl value, that shows the remaining lives of the player
+     */
     @Override
     public LivesImpl getLives() {
         return lives;
     }
 
+    /**
+     * set values of player's lives
+     * @param lives lives of player
+     */
     @Override
     public void setLives(LivesImpl lives) {
         this.lives = lives;
     }
 
+    /**
+     * gives the player's sprite
+     * @return String value, gives the path of player image
+     */
     @Override
     public String getSprite() {
         return this.sprite;
     }
 
+    /**
+     * gives the player's position
+     * @return PositionImpl value, gives the cords of player's top-left pixel
+     */
     @Override
     public PositionImpl getPosition() {
         return this.position;
     }
 
+    /**
+     * gives the player's velocity
+     * @return VelocityImpl value, gives the value of player's velocity in both axes
+     */
     @Override
     public VelocityImpl getVelocity() {
         return this.velocity;
     }
 
+    /**
+     * gives the player's active power-ups
+     * @return List<PowerUp>, gives the player's list of active power-ups
+     */
     @Override
     public List<PowerUp> getActivePowerUps() {
         return activePowerUps;
     }
 
+    /**
+     * let to add a powerUp class at player's powerUp list
+     * @param powerUp player power-up
+     */
     @Override
     public void addPowerUp(PowerUp powerUp) {
         this.activePowerUps.add(powerUp);
     }
 
+    /**
+     * can set the player's image sprite
+     * @param sprite image path string
+     */
     public void setSprite(String sprite) {
         this.sprite = sprite;
     }
 
+    /**
+     * can set the player's x position
+     * @param x player's x position
+     */
     @Override
     public void moveX(double x) {
         setPosition(x, getPosition().getY());
     }
 
+    /**
+     * can set the player's y position
+     * @param y player's y position
+     */
     @Override
     public void moveY(double y) {
         setPosition(getPosition().getX(), y);
     }
 
+    /**
+     * can set to the player the actual tileSet of a single level
+     * @param tileManager gives at player the acknowledgement of tileSet
+     */
     public void setTileManager(TileManager tileManager) {
         this.tileManager = tileManager;
     }
 
+    /**
+     * can set player's position in both axes
+     * @param x position x
+     * @param y positions y
+     */
     @Override
     public void setPosition(double x, double y) {
         if(!collidesAt(x, y)){
@@ -106,19 +157,36 @@ public class PlayerImpl implements Player {
         }
     }
 
+    /**
+     * can increment by 1 the number of player's jumps
+     */
     public void incrementMaxJumps(){
         this.maxJumps++;
         this.remainingJumps = this.maxJumps;
     }
 
+    /**
+     * gives the number of player's max jumps
+     * @return int value
+     */
     public int getMaxJumps(){
         return this.maxJumps;
     }
 
+    /**
+     * set a specific number of maxJumps
+     * @param maxJumps value of new jumps the player can do
+     */
     public void setMaxJumps(int maxJumps){
         this.maxJumps = maxJumps;
     }
 
+    /**
+     * check if it is colliding with some tile
+     * @param x value of x position
+     * @param y value of y position
+     * @return boolean value, true if is colliding with a collidable tile, false if is not
+     */
     private boolean collidesAt(double x, double y) {
         double left = x;
         double right = x + 31;
@@ -168,23 +236,41 @@ public class PlayerImpl implements Player {
 
     }
 
+    /**
+     * change position of player by the value of a PositionImpl class
+     * @param position class PositionImpl, set the actual position
+     */
     private void setXandY(PositionImpl position) {
         this.position = position;
     }
 
+    /**
+     * gives the values of player's hitbox
+     * @return HitboxImpl, the player's hitbox
+     */
     public HitboxImpl getHitbox() {
         return hitbox;
     }
 
+    /**
+     * set the player's velocity
+     * @param velocity values of velocity
+     */
     @Override
     public void setVelocity(VelocityImpl velocity) {
         this.velocity = velocity;
     }
 
+    /**
+     * invoke the method for decrementing the lives
+     */
     public void hit(){
         this.lives.decrementLives();
     }
 
+    /**
+     * reset the player status when is necessary
+     */
     public void resetPlayerStatus(){
         setLives(new LivesImpl(LIVES_AT_START));
         ChangePlayerGravity.removeEffect(this);
