@@ -30,25 +30,25 @@ public class SoundManager {
     public void play() {
         try{
             // Check if the sound is already running
-            if (clip != null && clip.isRunning()) {
+            if (this.clip != null && this.clip.isRunning()) {
                 return;
             }
 
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(SoundManager.class.getResource(this.soundPath));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(this.soundPath));
 
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            this.clip = AudioSystem.getClip();
+            this.clip.open(audioInputStream);
 
 
             // This part right below, must be used to change the volume sound
-            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-                FloatControl gain = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            if (this.clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                FloatControl gain = (FloatControl) this.clip.getControl(FloatControl.Type.MASTER_GAIN);
                 gain.setValue(this.volume);
             }
 
-            clip.setFramePosition(0);
+            this.clip.setFramePosition(0);
 
-            clip.start();
+            this.clip.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -7,11 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * RulesView manages the Rules view rendering, that contains the game keybinds and rules
+ */
 public class RulesView implements RogueKongView {
     private final Scene scene;
     private Runnable onReturn;
 
+    /**
+     * Creates the RulesView view
+     */
     public RulesView() {
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
@@ -91,11 +96,7 @@ public class RulesView implements RogueKongView {
     @Override
     public Scene getScene() { return this.scene; }
 
-    public void setOnReturn(Runnable r) {
-        this.onReturn = r;
-    }
+    public void setOnReturn(Runnable r) { this.onReturn = r; }
 
-    private void runIfNotNull(Runnable r) {
-        if (r != null) r.run();
-    }
+    private void runIfNotNull(Runnable r) { if (r != null) r.run(); }
 }
