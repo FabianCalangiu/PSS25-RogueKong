@@ -38,7 +38,7 @@ public class PlayerImpl implements Player {
      * Void constructor that sets the standard values for the player initialization
      */
     public PlayerImpl() {
-        hitbox = new HitboxImpl(getPosition(), 23, 32);
+        hitbox = new HitboxImpl(getPosition(), 32, 32);
         this.maxJumps = 1;
         this.remainingJumps = this.maxJumps;
         this.jumpForce = 3;
